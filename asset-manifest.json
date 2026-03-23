@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.0bef4af7.css",
+    "main.css": "/static/css/main.527afb47.css",
     "main.js": "/main.js",
     "236.js": "/236.js",
     "791.js": "/791.js",
     "661.js": "/661.js",
     "844.js": "/844.js",
-    "gradient-2560.png": "/gradient-2560-a3cf35d4.png",
-    "gradient-1920.png": "/gradient-1920-90557da0.png",
+    "gradient-2560.png": "/gradient-2560-13fdde60.png",
+    "gradient-1920.png": "/gradient-1920-5970ed35.png",
     "gradient-1560.png": "/gradient-1560-1785c140.png",
     "Poppins_100Thin_Italic.ttf": "/Poppins_100Thin_Italic-94e1bc9c.ttf",
     "Poppins_200ExtraLight_Italic.ttf": "/Poppins_200ExtraLight_Italic-7be57366.ttf",
@@ -49,7 +49,7 @@
     "GeistMono_800ExtraBold.ttf": "/GeistMono_800ExtraBold-c03ce710.ttf",
     "GeistMono_400Regular.ttf": "/GeistMono_400Regular-7c623729.ttf",
     "assets/images/rewardsPageBackground.png": "/assets/images/rewardsPageBackground.png",
-    "gradient-780.png": "/gradient-780-d42bbb71.png",
+    "gradient-780.png": "/gradient-780-519148cf.png",
     "favicon.ico": "/favicon.ico",
     "assets/images/xicon_locked@128-dev-build-ONLY.png": "/assets/images/xicon_locked@128-dev-build-ONLY.png",
     "assets/images/xicon@128-dev-build-ONLY.png": "/assets/images/xicon@128-dev-build-ONLY.png",
@@ -85,7 +85,7 @@
     "assets/svg/CopyIcon/index.ts": "/assets/svg/CopyIcon/index.ts",
     "main.css.map": "/main.css.map",
     "main.js.map": "/main.js.map",
-    "main.0bef4af7.css.map": "/static/css/main.0bef4af7.css.map",
+    "main.527afb47.css.map": "/static/css/main.527afb47.css.map",
     "236.js.map": "/236.js.map",
     "791.js.map": "/791.js.map",
     "661.js.map": "/661.js.map",
@@ -94,6 +94,6 @@
   "entrypoints": [
     "main.css",
     "main.js",
-    "static/css/main.0bef4af7.css"
+    "static/css/main.527afb47.css"
   ]
 }
