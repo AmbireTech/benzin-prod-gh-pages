@@ -1,0 +1,60 @@
+.skeleton {
+  animation: pulse 0.7s ease-in-out infinite alternate;
+  animation-timing-function: ease;
+}
+
+.skeleton.low-opacity {
+  animation: pulse-low-opacity 0.7s ease-in-out infinite alternate;
+}
+
+/* Animation keyframes */
+@keyframes pulse {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-low-opacity {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.75;
+  }
+}
+
+.confetti-logo {
+  position: absolute;
+}
+
+.liquidGlass {
+  --glass-blur-amount: 4px;
+
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  isolation: isolate;
+  /* These come from injected styles */
+  background: linear-gradient(135deg, var(--glass-tint-color-2) 0%, var(--glass-tint-color-1) 50%);
+}
+
+.specular-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#modalBackdrop {
+  backdrop-filter: blur(3px);
+}
+
+
+/*# sourceMappingURL=main.1d1290fa.css.map*/
