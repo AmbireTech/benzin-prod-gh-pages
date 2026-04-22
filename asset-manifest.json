@@ -2,10 +2,10 @@
   "files": {
     "main.css": "/static/css/main.1d1290fa.css",
     "main.js": "/main.js",
+    "236.js": "/236.js",
     "791.js": "/791.js",
     "661.js": "/661.js",
     "844.js": "/844.js",
-    "236.js": "/236.js",
     "gradient-2560.png": "/gradient-2560-13fdde60.png",
     "gradient-1920.png": "/gradient-1920-5970ed35.png",
     "gradient-1560.png": "/gradient-1560-1785c140.png",
@@ -86,10 +86,10 @@
     "main.css.map": "/main.css.map",
     "main.js.map": "/main.js.map",
     "main.1d1290fa.css.map": "/static/css/main.1d1290fa.css.map",
+    "236.js.map": "/236.js.map",
     "791.js.map": "/791.js.map",
     "661.js.map": "/661.js.map",
-    "844.js.map": "/844.js.map",
-    "236.js.map": "/236.js.map"
+    "844.js.map": "/844.js.map"
   },
   "entrypoints": [
     "main.css",
