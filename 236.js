@@ -82,8 +82,8 @@ var isAddressEqual = __webpack_require__(73417);
 var concat = __webpack_require__(9012);
 // EXTERNAL MODULE: ./node_modules/viem/_esm/utils/data/isHex.js
 var isHex = __webpack_require__(98766);
-// EXTERNAL MODULE: ./node_modules/viem/_esm/utils/ens/localBatchGatewayRequest.js + 3 modules
-var localBatchGatewayRequest = __webpack_require__(34240);
+// EXTERNAL MODULE: ./node_modules/viem/_esm/utils/ens/localBatchGatewayRequest.js + 2 modules
+var localBatchGatewayRequest = __webpack_require__(3544);
 ;// CONCATENATED MODULE: ./node_modules/viem/_esm/utils/ccip.js
 
 
