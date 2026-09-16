@@ -8433,8 +8433,8 @@ exports.deprecate = function(fn, msg) {
 var debugs = {};
 var debugEnvRegex = /^$/;
 
-if (({"NODE_ENV":"production","PUBLIC_URL":"","APP_MANIFEST":{"name":"Ambire","slug":"ambire-mobile-wallet","version":"6.20.2","runtimeVersion":"11","jsEngine":"hermes","updates":{"enabled":false,"fallbackToCacheTimeout":45000},"extra":{"eas":{"projectId":"e6f855d0-5ac3-40e0-8127-740906e7a593"}},"sdkVersion":"54.0.0","platforms":["ios","android","web"],"androidStatusBar":{"backgroundColor":"#FFFFFF"},"web":{}},"EXPO_DEBUG":false,"PLATFORM":"web","WDS_SOCKET_PATH":"/_expo/ws","CI":"true"}).NODE_DEBUG) {
-  var debugEnv = ({"NODE_ENV":"production","PUBLIC_URL":"","APP_MANIFEST":{"name":"Ambire","slug":"ambire-mobile-wallet","version":"6.20.2","runtimeVersion":"11","jsEngine":"hermes","updates":{"enabled":false,"fallbackToCacheTimeout":45000},"extra":{"eas":{"projectId":"e6f855d0-5ac3-40e0-8127-740906e7a593"}},"sdkVersion":"54.0.0","platforms":["ios","android","web"],"androidStatusBar":{"backgroundColor":"#FFFFFF"},"web":{}},"EXPO_DEBUG":false,"PLATFORM":"web","WDS_SOCKET_PATH":"/_expo/ws","CI":"true"}).NODE_DEBUG;
+if (({"NODE_ENV":"production","PUBLIC_URL":"","APP_MANIFEST":{"name":"Ambire","slug":"ambire-mobile-wallet","version":"6.21.3","runtimeVersion":"11","jsEngine":"hermes","updates":{"enabled":false,"fallbackToCacheTimeout":45000},"extra":{"eas":{"projectId":"e6f855d0-5ac3-40e0-8127-740906e7a593"}},"sdkVersion":"54.0.0","platforms":["ios","android","web"],"androidStatusBar":{"backgroundColor":"#FFFFFF"},"web":{}},"EXPO_DEBUG":false,"PLATFORM":"web","WDS_SOCKET_PATH":"/_expo/ws","CI":"true"}).NODE_DEBUG) {
+  var debugEnv = ({"NODE_ENV":"production","PUBLIC_URL":"","APP_MANIFEST":{"name":"Ambire","slug":"ambire-mobile-wallet","version":"6.21.3","runtimeVersion":"11","jsEngine":"hermes","updates":{"enabled":false,"fallbackToCacheTimeout":45000},"extra":{"eas":{"projectId":"e6f855d0-5ac3-40e0-8127-740906e7a593"}},"sdkVersion":"54.0.0","platforms":["ios","android","web"],"androidStatusBar":{"backgroundColor":"#FFFFFF"},"web":{}},"EXPO_DEBUG":false,"PLATFORM":"web","WDS_SOCKET_PATH":"/_expo/ws","CI":"true"}).NODE_DEBUG;
   debugEnv = debugEnv.replace(/[|\\{}()[\]^$+?.]/g, '\\$&')
     .replace(/\*/g, '.*')
     .replace(/,/g, '$|^')
@@ -56244,7 +56244,7 @@ var debugs = {};
 var debugEnviron;
 exports.debuglog = function(set) {
   if (isUndefined(debugEnviron))
-    debugEnviron = ({"NODE_ENV":"production","PUBLIC_URL":"","APP_MANIFEST":{"name":"Ambire","slug":"ambire-mobile-wallet","version":"6.20.2","runtimeVersion":"11","jsEngine":"hermes","updates":{"enabled":false,"fallbackToCacheTimeout":45000},"extra":{"eas":{"projectId":"e6f855d0-5ac3-40e0-8127-740906e7a593"}},"sdkVersion":"54.0.0","platforms":["ios","android","web"],"androidStatusBar":{"backgroundColor":"#FFFFFF"},"web":{}},"EXPO_DEBUG":false,"PLATFORM":"web","WDS_SOCKET_PATH":"/_expo/ws","CI":"true"}).NODE_DEBUG || '';
+    debugEnviron = ({"NODE_ENV":"production","PUBLIC_URL":"","APP_MANIFEST":{"name":"Ambire","slug":"ambire-mobile-wallet","version":"6.21.3","runtimeVersion":"11","jsEngine":"hermes","updates":{"enabled":false,"fallbackToCacheTimeout":45000},"extra":{"eas":{"projectId":"e6f855d0-5ac3-40e0-8127-740906e7a593"}},"sdkVersion":"54.0.0","platforms":["ios","android","web"],"androidStatusBar":{"backgroundColor":"#FFFFFF"},"web":{}},"EXPO_DEBUG":false,"PLATFORM":"web","WDS_SOCKET_PATH":"/_expo/ws","CI":"true"}).NODE_DEBUG || '';
   set = set.toUpperCase();
   if (!debugs[set]) {
     if (new RegExp('\\b' + set + '\\b', 'i').test(debugEnviron)) {
@@ -80942,14 +80942,14 @@ function errors_stringify(value) {
  *      }
  *    }
  */
-function errors_isError(error, code) {
+function isError(error, code) {
     return (error && error.code === code);
 }
 /**
  *  Returns true if %%error%% is a [[CallExceptionError].
  */
 function isCallException(error) {
-    return errors_isError(error, "CALL_EXCEPTION");
+    return isError(error, "CALL_EXCEPTION");
 }
 /**
  *  Returns a new Error configured to the format ethers emits errors, with
@@ -83353,7 +83353,7 @@ function unpack(reader, coders) {
             }
             catch (error) {
                 // Cannot recover from this
-                if (errors_isError(error, "BUFFER_OVERRUN")) {
+                if (isError(error, "BUFFER_OVERRUN")) {
                     throw error;
                 }
                 value = error;
@@ -83368,7 +83368,7 @@ function unpack(reader, coders) {
             }
             catch (error) {
                 // Cannot recover from this
-                if (errors_isError(error, "BUFFER_OVERRUN")) {
+                if (isError(error, "BUFFER_OVERRUN")) {
                     throw error;
                 }
                 value = error;
@@ -89686,7 +89686,7 @@ class TransactionResponse {
                     }
                     catch (error) {
                         // We were replaced (with enough confirms); re-throw the error
-                        if (errors_isError(error, "TRANSACTION_REPLACED")) {
+                        if (isError(error, "TRANSACTION_REPLACED")) {
                             cancel();
                             reject(error);
                             return;
@@ -90633,7 +90633,7 @@ class BaseContract {
                     return this.getEvent(prop);
                 }
                 catch (error) {
-                    if (!errors_isError(error, "INVALID_ARGUMENT") || error.argument !== "key") {
+                    if (!isError(error, "INVALID_ARGUMENT") || error.argument !== "key") {
                         throw error;
                     }
                 }
@@ -90662,7 +90662,7 @@ class BaseContract {
                     return target.getFunction(prop);
                 }
                 catch (error) {
-                    if (!errors_isError(error, "INVALID_ARGUMENT") || error.argument !== "key") {
+                    if (!isError(error, "INVALID_ARGUMENT") || error.argument !== "key") {
                         throw error;
                     }
                 }
@@ -96902,7 +96902,7 @@ class EnsResolver {
                 catch (error) {
                     // Wildcard resolvers must understand supportsInterface
                     // and return true.
-                    if (errors_isError(error, "CALL_EXCEPTION")) {
+                    if (isError(error, "CALL_EXCEPTION")) {
                         return false;
                     }
                     // Let future attempts try again...
@@ -96941,7 +96941,7 @@ class EnsResolver {
             return result;
         }
         catch (error) {
-            if (!errors_isError(error, "CALL_EXCEPTION")) {
+            if (!isError(error, "CALL_EXCEPTION")) {
                 throw error;
             }
         }
@@ -96965,7 +96965,7 @@ class EnsResolver {
                 return result;
             }
             catch (error) {
-                if (errors_isError(error, "CALL_EXCEPTION")) {
+                if (isError(error, "CALL_EXCEPTION")) {
                     return null;
                 }
                 throw error;
@@ -99373,11 +99373,11 @@ class AbstractProvider {
         }
         catch (error) {
             // No data was returned from the resolver
-            if (errors_isError(error, "BAD_DATA") && error.value === "0x") {
+            if (isError(error, "BAD_DATA") && error.value === "0x") {
                 return null;
             }
             // Something reerted
-            if (errors_isError(error, "CALL_EXCEPTION")) {
+            if (isError(error, "CALL_EXCEPTION")) {
                 return null;
             }
             throw error;
@@ -100210,7 +100210,7 @@ class FilterIdSubscriber {
                 filterId = await this.#filterIdPromise;
             }
             catch (error) {
-                if (!errors_isError(error, "UNSUPPORTED_OPERATION") || error.operation !== "eth_newFilter") {
+                if (!isError(error, "UNSUPPORTED_OPERATION") || error.operation !== "eth_newFilter") {
                     throw error;
                 }
             }
@@ -100471,8 +100471,8 @@ class JsonRpcSigner extends AbstractSigner {
                     // If the data is bad: the node returns bad transactions
                     // If the network changed: calling again will also fail
                     // If unsupported: likely destroyed
-                    if (errors_isError(error, "CANCELLED") || errors_isError(error, "BAD_DATA") ||
-                        errors_isError(error, "NETWORK_ERROR") || errors_isError(error, "UNSUPPORTED_OPERATION")) {
+                    if (isError(error, "CANCELLED") || isError(error, "BAD_DATA") ||
+                        isError(error, "NETWORK_ERROR") || isError(error, "UNSUPPORTED_OPERATION")) {
                         if (error.info == null) {
                             error.info = {};
                         }
@@ -100481,7 +100481,7 @@ class JsonRpcSigner extends AbstractSigner {
                         return;
                     }
                     // Stop-gap for misbehaving backends; see #4513
-                    if (errors_isError(error, "INVALID_ARGUMENT")) {
+                    if (isError(error, "INVALID_ARGUMENT")) {
                         invalids++;
                         if (error.info == null) {
                             error.info = {};
@@ -116778,11 +116778,15 @@ function flattenResults(everything){return Promise.all(everything).then(results=
 const LIMITS={deploylessProxyMode:{erc20:66,erc20Simulation:50,erc721:30,erc721TokensInput:20,erc721Tokens:50},deploylessStateOverrideMode:{erc20:230,erc20Simulation:50,erc721:70,erc721TokensInput:70,erc721Tokens:70}};const getEmptyHints=()=>({erc20s:[],erc721s:{},externalApi:undefined});const portfolio_defaultOptions={baseCurrency:'usd',blockTag:'latest',tokenDataRecency:0,fetchPinned:true,tokenDataRecencyOnFailure:1*60*60*1000};class Portfolio{constructor(fetch,provider,network,velcroUrl,customBatcher){this.network=void 0;this.provider=void 0;this.batchedVelcroDiscovery=void 0;this.batchedGecko=void 0;this.deploylessTokens=void 0;this.deploylessNfts=void 0;if(customBatcher){this.batchedVelcroDiscovery=customBatcher;}else{this.batchedVelcroDiscovery=batcher(fetch,queue=>{const baseCurrencies=[...new Set(queue.map(x=>x.data.baseCurrency))];return baseCurrencies.map(baseCurrency=>{const queueSegment=queue.filter(x=>x.data.baseCurrency===baseCurrency);const url=`${velcroUrl}/multi-hints?networks=${queueSegment.map(x=>x.data.chainId).join(',')}&accounts=${queueSegment.map(x=>x.data.accountAddr).join(',')}&baseCurrency=${baseCurrency}`;return{queueSegment,url};});},{timeoutSettings:{timeoutAfter:3000,timeoutErrorMessage:`Velcro discovery timed out on ${network.name}`},dedupeByKeys:['chainId','accountAddr']});}this.batchedGecko=batcher(fetch,geckoRequestBatcher,{timeoutSettings:{timeoutAfter:3000,timeoutErrorMessage:`Cena request timed out on ${network.name}`}});this.provider=provider;this.network=network;this.deploylessTokens=deployless_fromDescriptor(provider,BalanceGetter_namespaceObject,!network.rpcNoStateOverride);this.deploylessNfts=deployless_fromDescriptor(provider,NFTGetter_namespaceObject,!network.rpcNoStateOverride);}async externalHintsAPIDiscovery(options){const{disableAutoDiscovery=false,chainId,accountAddr,baseCurrency}=options||{};let hints=getEmptyHints();try{if(!disableAutoDiscovery){const hintsFromExternalAPI=await this.batchedVelcroDiscovery({chainId,accountAddr,baseCurrency});if(hintsFromExternalAPI){const formatted=formatExternalHintsAPIResponse(hintsFromExternalAPI);if(formatted){hints=formatted;hints.externalApi={lastUpdate:Date.now(),prices:hintsFromExternalAPI.prices,hasHints:!!hintsFromExternalAPI.hasHints};}}}return{hints};}catch(error){portfolio_console.error('Portfolio.externalHintsAPIDiscovery error:',error);return{hints,error:{name:errorNames_PORTFOLIO_LIB_ERROR_NAMES.NoApiHintsError,message:error?.message||'Unknown error',level:'warning'}};}}async get(accountAddr,opts={}){const errors=[];const{simulation,disableAutoDiscovery=false,baseCurrency,fetchPinned,additionalErc20Hints,additionalErc721Hints,specialErc20Hints,specialErc721Hints,blockTag,tokenDataRecencyOnFailure,tokenDataCache:paramsTokenDataCache,tokenDataRecency,blacklist,preventTokenBlacklisting,deployless,knownTokenMetadata,knownCollectionMetadata}=Object.assign({},portfolio_defaultOptions,opts);const toBeLearned={erc20s:[],erc721s:{}};if(simulation&&simulation.baseAccount.getAccount().addr!==accountAddr)throw new Error('wrong account passed');const start=Date.now();const chainId=this.network.chainId;const{hints,error:hintsError}=await this.externalHintsAPIDiscovery({disableAutoDiscovery,chainId,accountAddr,baseCurrency});if(hintsError)errors.push(hintsError);hints.erc20s=[...hints.erc20s,...Object.values(specialErc20Hints||{}).flat(),...(additionalErc20Hints||[]),...(fetchPinned?PINNED_TOKENS.map(x=>x.address):[]),...gasTankFeeTokens.filter(x=>x.chainId===this.network.chainId).map(x=>x.address)];hints.erc721s=mergeERC721s([additionalErc721Hints||{},hints.erc721s,...Object.values(specialErc721Hints||{})]);const seenErc20Hints=new Set();const checksummedErc20Hints=[];hints.erc20s.forEach(address=>{try{const lowercasedAddress=address.toLowerCase();if(seenErc20Hints.has(lowercasedAddress))return;const checksummedAddress=(0,utils_address_getAddress/* getAddress */.K)(address);seenErc20Hints.add(lowercasedAddress);checksummedErc20Hints.push(checksummedAddress);}catch{}});const chainIdStr=this.network.chainId.toString();const staticBlacklistedAddrs=STATIC_BLACKLIST.blacklistAddrs[chainIdStr]||[];const dynamicBlacklistedAddrs=blacklist?.blacklistAddrs[chainIdStr]||[];const allBlacklistedAddrs=new Set([...staticBlacklistedAddrs,...dynamicBlacklistedAddrs]);const filteredChecksummedHints=preventTokenBlacklisting?checksummedErc20Hints:checksummedErc20Hints.filter(addr=>!allBlacklistedAddrs.has(addr));hints.erc20s=[...new Set(filteredChecksummedHints.concat(addresses_ZeroAddress))];const tokenDataCache=paramsTokenDataCache||new Map();for(const addr in hints.externalApi?.prices||{}){const tokenDataHint=convertApiTokenDataToTokenDataCache(hints.externalApi?.prices[addr]||null);if(!tokenDataHint)continue;tokenDataCache.set(addr,[start,tokenDataHint]);}const collectionsHints=Object.entries(hints.erc721s);const metadataPlan=planAssetMetadata(hints.erc20s,knownTokenMetadata,start);const collectionMetadataPlan=planAssetMetadata(Object.keys(hints.erc721s),knownCollectionMetadata,start);const discoveryDone=Date.now();const limits=this.deploylessTokens.isLimitedAt24kbData?LIMITS.deploylessProxyMode:LIMITS.deploylessStateOverrideMode;const[tokensWithErr,collectionsWithErr]=await Promise.all([flattenResults(paginate(hints.erc20s,opts.simulation?limits.erc20Simulation:limits.erc20).map((page,index)=>getTokens(this.network,this.deploylessTokens,{simulation,blockTag,specialErc20Hints,deployless,metadataPlan},accountAddr,page,index))),flattenResults(paginate(collectionsHints,limits.erc721).map(page=>getNFTs(this.network,this.deploylessNfts,{simulation,blockTag,deployless,metadataPlan:collectionMetadataPlan},accountAddr,page,limits)))]);const[tokensWithErrResult,metaData]=tokensWithErr;const{blockNumber,beforeNonce,afterNonce}=metaData;const[collectionsWithErrResult]=collectionsWithErr;const fetchedTokenMetadata=[];const fetchedCollectionMetadata=[];const getTokenDataFromCache=(address,_tokenDataRecency=tokenDataRecency)=>{if(this.network.chainId===4114n){const citreaTokenPrice=getHardcodedCitreaPrices(address);if(citreaTokenPrice)return{marketDataIn:[],priceIn:[citreaTokenPrice]};}const cached=tokenDataCache.get(address);if(!cached)return null;const[timestamp,entry]=cached;const eligible=entry.priceIn.find(p=>p.baseCurrency===baseCurrency);if(!eligible)return null;const isStale=start-timestamp>_tokenDataRecency;return isStale?null:entry;};const nativeToken=tokensWithErrResult.find(([,result])=>result.address===addresses_ZeroAddress)?.[1];const isValidToken=(error,token)=>error==='0x'&&!!token.symbol;const blacklistPatterns=prepareBlacklistPatterns([...STATIC_BLACKLIST.blacklistBySymbols,...(blacklist?.blacklistBySymbols||[])]);const tokensWithoutPrices=tokensWithErrResult.filter(_tokensWithErrResult=>{if(!isValidToken(_tokensWithErrResult[0],_tokensWithErrResult[1]))return false;const token=_tokensWithErrResult[1];if(knownTokenMetadata&&metadataPlan.needsMetadata.has(token.address)){fetchedTokenMetadata.push([token.address,{symbol:token.symbol,name:token.name,decimals:token.decimals,fetchedAt:start}]);}if(isBlacklistedAsset({symbol:token.symbol,name:token.name,isCustom:token.flags?.isCustom,patterns:blacklistPatterns})){portfolioDebugLog('blacklist',`${this.network.chainId.toString()}: Filtered token ${token.symbol}`,{address:token.address,symbol:token.symbol,name:token.name});return false;}if(!specialErc20Hints)return true;const isToBeLearned=specialErc20Hints.learn.includes(_tokensWithErrResult[1].address);return tokenFilter(_tokensWithErrResult[1],this.network,isToBeLearned,!!fetchPinned,nativeToken);}).map(([,result])=>{if(result.amount&&!result.flags.isCustom&&!result.flags.isHidden&&!toBeLearned.erc20s.includes(result.address)){toBeLearned.erc20s.push(result.address);}return result;});const collections=collectionsWithErrResult.reduce((acc,[error,collection])=>{if(!isValidToken(error,collection))return acc;if(knownCollectionMetadata&&collectionMetadataPlan.needsMetadata.has(collection.address)){fetchedCollectionMetadata.push([collection.address,{symbol:collection.symbol,name:collection.name,fetchedAt:start}]);}if(isBlacklistedAsset({symbol:collection.symbol,name:collection.name,isCustom:collection.flags?.isCustom,patterns:blacklistPatterns,checkForEmbeddedDomain:true})){portfolioDebugLog('blacklist',`${this.network.chainId.toString()}: Filtered collection ${collection.name}`,{address:collection.address,symbol:collection.symbol,name:collection.name});return acc;}if(!toBeLearned.erc721s[collection.address]&&collection.collectibles.length>0){toBeLearned.erc721s[collection.address]=collection.collectibles;}acc.push(Object.assign({},collection,{priceIn:getTokenDataFromCache(collection.address)?.priceIn||[]}));return acc;},[]);const oracleCallDone=Date.now();const tokensWithPrices=await Promise.all(tokensWithoutPrices.map(async token=>{let hasPrice=false;const cachedTokenData=getTokenDataFromCache(token.address,tokenDataRecencyOnFailure);if(cachedTokenData&&cachedTokenData.priceIn&&cachedTokenData.priceIn.length>0){hasPrice=true;return Object.assign({},token,cachedTokenData);}if(!this.network.platformId){return Object.assign({},token,{priceIn:[],marketDataIn:[]});}try{const tokenData=await this.batchedGecko(Object.assign({},token,{network:this.network,baseCurrency,responseIdentifier:geckoResponseIdentifier(token.address,this.network)}));const formattedTokenData=convertApiTokenDataToTokenDataCache(tokenData);if(formattedTokenData&&formattedTokenData.priceIn&&formattedTokenData.priceIn.length>0){hasPrice=true;}tokenDataCache.set(token.address,[Date.now(),formattedTokenData]);return Object.assign({},token,formattedTokenData);}catch(error){const errorMessage=error?.message||'Unknown error';const olderCachedTokenData=getTokenDataFromCache(token.address,tokenDataRecencyOnFailure);if(olderCachedTokenData&&olderCachedTokenData.priceIn&&olderCachedTokenData.priceIn.length>0){hasPrice=true;}if(!errors.find(x=>x.name===errorNames_PORTFOLIO_LIB_ERROR_NAMES.PriceFetchError&&x.message===errorMessage)&&!hasPrice){errors.push({name:errorNames_PORTFOLIO_LIB_ERROR_NAMES.PriceFetchError,message:errorMessage,level:'warning'});}return Object.assign({},token,{priceIn:olderCachedTokenData?.priceIn||[],marketDataIn:olderCachedTokenData?.marketDataIn||[]});}}));const priceUpdateDone=Date.now();return{toBeLearned,fetchedTokenMetadata,fetchedCollectionMetadata,errors,updateStarted:start,discoveryTime:discoveryDone-start,oracleCallTime:oracleCallDone-discoveryDone,priceUpdateTime:priceUpdateDone-oracleCallDone,tokenDataCache,tokens:tokensWithPrices,feeTokens:tokensWithPrices.filter(t=>{if(t.address===addresses_ZeroAddress&&t.chainId===this.network.chainId)return true;return getFeeToken(t.address,t.chainId);}),beforeNonce,afterNonce,blockNumber,tokenErrors:tokensWithErrResult.filter(([error,result])=>!isValidToken(error,result)).map(([error,result])=>({error,address:result.address})),collectionErrors:collectionsWithErrResult.filter(([error,result])=>!isValidToken(error,result)).map(([error,result])=>({error,address:result.address})),collections};}async getTokensByAddresses(accountAddr,tokenAddrs,opts){const uniqueTokenAddrs=[...new Set(tokenAddrs)];if(!uniqueTokenAddrs.length)return[];const limits=this.deploylessTokens.isLimitedAt24kbData?LIMITS.deploylessProxyMode:LIMITS.deploylessStateOverrideMode;const metadataPlan={known:new Map(),needsMetadata:new Set(uniqueTokenAddrs)};const[tokensWithErrResult]=await flattenResults(paginate(uniqueTokenAddrs,limits.erc20).map((page,index)=>getTokens(this.network,this.deploylessTokens,Object.assign({},opts,{metadataPlan}),accountAddr,page,index)));return tokensWithErrResult.map(([error,token])=>[error,Object.assign({},token,{priceIn:token.priceIn||[],marketDataIn:token.marketDataIn||[]})]);}async getTokenPrice(address,{baseCurrency='usd',tokenDataCache=new Map(),tokenDataRecency=0}={}){const cachedTokenData=[...tokenDataCache.entries()].find(([cachedAddress])=>cachedAddress.toLowerCase()===address.toLowerCase())?.[1];if(cachedTokenData&&Date.now()-cachedTokenData[0]<=tokenDataRecency){return cachedTokenData[1].priceIn.find(price=>price.baseCurrency===baseCurrency)?.price;}if(!this.network.platformId)return undefined;const tokenData=await this.batchedGecko({address,network:this.network,baseCurrency,responseIdentifier:geckoResponseIdentifier(address,this.network)});const formattedTokenData=convertApiTokenDataToTokenDataCache(tokenData);tokenDataCache.set(address,[Date.now(),formattedTokenData]);return formattedTokenData.priceIn.find(price=>price.baseCurrency===baseCurrency)?.price;}}
 ;// CONCATENATED MODULE: ./src/ambire-common/src/libs/portfolio/index.ts
 
+;// CONCATENATED MODULE: ./src/ambire-common/src/utils/formatDecimals/formatDecimals.ts
+const DECIMAL_RULES={value:{min:2,max:2},price:{min:2,max:2},amount:{min:0,max:2},default:{min:0,max:2},precise:{min:0,max:8},noDecimal:{min:0,max:0}};const TYPES_WITH_DOLLAR_PREFIX=['value','price'];const MAX_SUPPORTED_DECIMALS_BY_FORMATTER=20;const cacheForNumberFormatters={};const getIndexOfFirstNonZeroInDecimals=(value,type)=>{const decimalValue=value.toFixed(value<1?16:2);const valueString=decimalValue.toString();const indexOfDot=valueString.indexOf('.');if(indexOfDot===-1)return 0;const decimals=valueString.slice(indexOfDot+1);const indexOfFirstNonZero=decimals.split('').findIndex(char=>char!=='0');return indexOfFirstNonZero===-1?DECIMAL_RULES[type].min:indexOfFirstNonZero;};const getPrefix=widthDollarPrefix=>widthDollarPrefix?'$':'';const formatDecimals_formatNumber=(value,withDollarPrefix,maxDecimals,sign,type)=>{const minimumFractionDigits=Math.min(DECIMAL_RULES[type].min,maxDecimals);const maximumFractionDigits=Math.min(Math.max(minimumFractionDigits,maxDecimals),MAX_SUPPORTED_DECIMALS_BY_FORMATTER);let keyForCache=`${minimumFractionDigits}:${maximumFractionDigits}`;if(!cacheForNumberFormatters[keyForCache])cacheForNumberFormatters[keyForCache]=new Intl.NumberFormat('en-US',{minimumFractionDigits,maximumFractionDigits,roundingMode:'trunc'});const formatter=cacheForNumberFormatters[keyForCache];const reconstructedStringValue=formatter.format(value);return`${sign}${getPrefix(withDollarPrefix)}${reconstructedStringValue}`;};const formatDecimals_formatDecimals=(value=undefined,type='default')=>{const withDollarPrefix=TYPES_WITH_DOLLAR_PREFIX.includes(type||'');if(value===0){if(type==='amount'||type==='noDecimal')return`${getPrefix(withDollarPrefix)}0`;return`${getPrefix(withDollarPrefix)}0.00`;}if(!value||Number.isNaN(value))return`${getPrefix(withDollarPrefix)}-`;const absoluteValue=Math.abs(value);const sign=value<0?'-':'';if(type==='value'){let decimals=DECIMAL_RULES[type].max;if(absoluteValue<0.01){return`${sign}<$0.01`;}if(absoluteValue>10000){decimals=0;}return formatDecimals_formatNumber(absoluteValue,withDollarPrefix,decimals,sign,type);}if(type==='amount'){if(absoluteValue<0.00001){return`${sign}<0.00001`;}}const indexOfFirstNonZero=getIndexOfFirstNonZeroInDecimals(value,type);const decimals=indexOfFirstNonZero+DECIMAL_RULES[type].max;return formatDecimals_formatNumber(absoluteValue,withDollarPrefix,decimals,sign,type);};/* harmony default export */ const utils_formatDecimals_formatDecimals = (formatDecimals_formatDecimals);
+;// CONCATENATED MODULE: ./src/ambire-common/src/libs/walletStaking/shareValue.ts
+const WALLET_STAKING_CHAIN_ID=1n;const X_WALLET_SHARE_VALUE_CACHE_TTL=60*60*1000;const X_WALLET_SHARE_VALUE_RPC_TIMEOUT_MS=6000;const X_WALLET_SHARE_VALUE_ABI='function shareValue() view returns (uint256)';const X_WALLET_LOCKED_SHARES_ABI='function lockedShares(address) view returns (uint256)';const X_WALLET_LOCKED_SHARES_RPC_TIMEOUT_MS=6000;const normalizeError=error=>error instanceof Error?error:new Error('Unable to load the WALLET staking conversion rate.');const getWalletAmountFromXWallet=(xWalletAmount,shareValue)=>xWalletAmount*shareValue/WeiPerEther;const getXWalletAmountFromWallet=(walletAmount,shareValue)=>shareValue>0n?walletAmount*WeiPerEther/shareValue:0n;const getXWalletLockedShares=async(provider,accountAddr)=>{const contract=new Contract(WALLET_STAKING_ADDR,[X_WALLET_LOCKED_SHARES_ABI],provider);const getLockedShares=contract.lockedShares;if(typeof getLockedShares!=='function'){throw new Error('The locked xWALLET shares are unavailable.');}return BigInt(await withTimeout(()=>getLockedShares(accountAddr),{timeoutMs:X_WALLET_LOCKED_SHARES_RPC_TIMEOUT_MS,message:'The locked xWALLET shares took too long to load.'}));};const getXWalletConversionText=(xWalletAmount,walletAmount)=>{const formattedXWalletAmount=formatDecimals(Number(formatUnits(xWalletAmount,18)),'amount');const formattedWalletAmount=formatDecimals(Number(formatUnits(walletAmount,18)),'amount');return`${formattedXWalletAmount} xWALLET = ${formattedWalletAmount} WALLET`;};var _cachedResult=(0,classPrivateFieldLooseKey/* default */.Z)("cachedResult");var _cachedError=(0,classPrivateFieldLooseKey/* default */.Z)("cachedError");var _expiresAt=(0,classPrivateFieldLooseKey/* default */.Z)("expiresAt");var _refreshPromise=(0,classPrivateFieldLooseKey/* default */.Z)("refreshPromise");var _refresh=(0,classPrivateFieldLooseKey/* default */.Z)("refresh");class XWalletShareValueCache{constructor(){Object.defineProperty(this,_refresh,{value:_refresh2});Object.defineProperty(this,_cachedResult,{writable:true,value:void 0});Object.defineProperty(this,_cachedError,{writable:true,value:void 0});Object.defineProperty(this,_expiresAt,{writable:true,value:0});Object.defineProperty(this,_refreshPromise,{writable:true,value:void 0});}async get(provider){if(Date.now()<(0,classPrivateFieldLooseBase/* default */.Z)(this,_expiresAt)[_expiresAt]){if((0,classPrivateFieldLooseBase/* default */.Z)(this,_cachedResult)[_cachedResult])return (0,classPrivateFieldLooseBase/* default */.Z)(this,_cachedResult)[_cachedResult];throw (0,classPrivateFieldLooseBase/* default */.Z)(this,_cachedError)[_cachedError]||new Error('Unable to load the WALLET staking conversion rate.');}if((0,classPrivateFieldLooseBase/* default */.Z)(this,_refreshPromise)[_refreshPromise])return (0,classPrivateFieldLooseBase/* default */.Z)(this,_refreshPromise)[_refreshPromise];const refreshPromise=(0,classPrivateFieldLooseBase/* default */.Z)(this,_refresh)[_refresh](provider);(0,classPrivateFieldLooseBase/* default */.Z)(this,_refreshPromise)[_refreshPromise]=refreshPromise;try{return await refreshPromise;}finally{if((0,classPrivateFieldLooseBase/* default */.Z)(this,_refreshPromise)[_refreshPromise]===refreshPromise)(0,classPrivateFieldLooseBase/* default */.Z)(this,_refreshPromise)[_refreshPromise]=undefined;}}}async function _refresh2(provider){try{const contract=new contract_Contract(addresses_WALLET_STAKING_ADDR,[X_WALLET_SHARE_VALUE_ABI],provider);const getShareValue=contract.shareValue;if(typeof getShareValue!=='function'){throw new Error('The WALLET staking conversion rate is unavailable.');}const shareValue=BigInt(await with_timeout_withTimeout(()=>getShareValue(),{timeoutMs:X_WALLET_SHARE_VALUE_RPC_TIMEOUT_MS,message:'The WALLET staking conversion rate took too long to load.'}));if(shareValue<=0n){throw new Error('The WALLET staking conversion rate is unavailable.');}const updatedAt=Date.now();(0,classPrivateFieldLooseBase/* default */.Z)(this,_cachedResult)[_cachedResult]={shareValue,updatedAt};(0,classPrivateFieldLooseBase/* default */.Z)(this,_cachedError)[_cachedError]=undefined;(0,classPrivateFieldLooseBase/* default */.Z)(this,_expiresAt)[_expiresAt]=updatedAt+X_WALLET_SHARE_VALUE_CACHE_TTL;return (0,classPrivateFieldLooseBase/* default */.Z)(this,_cachedResult)[_cachedResult];}catch(error){const refreshError=normalizeError(error);(0,classPrivateFieldLooseBase/* default */.Z)(this,_cachedError)[_cachedError]=refreshError;(0,classPrivateFieldLooseBase/* default */.Z)(this,_expiresAt)[_expiresAt]=Date.now()+X_WALLET_SHARE_VALUE_CACHE_TTL;if((0,classPrivateFieldLooseBase/* default */.Z)(this,_cachedResult)[_cachedResult])return Object.assign({},(0,classPrivateFieldLooseBase/* default */.Z)(this,_cachedResult)[_cachedResult],{refreshError});throw refreshError;}}const xWalletShareValueCache=new XWalletShareValueCache();
 ;// CONCATENATED MODULE: ./src/ambire-common/src/utils/debugTransaction.ts
 const getDebugTraceTransaction=(chainId,provider)=>txnHash=>chainId===HYPER_EVM_CHAIN_ID&&provider?provider.send('debug_traceTransaction',[txnHash,{tracer:'callTracer'}]):Promise.resolve(null);
 ;// CONCATENATED MODULE: ./src/ambire-common/src/controllers/providers/providers.ts
 /* provided dependency */ var providers_console = __webpack_require__(1293);
-const STATUS_WRAPPED_METHODS={toggleBatching:'INITIAL'};const RANDOM_ADDRESS='0x0000000000000000000000000000000000000001';const batchMaxSize=24576;var providers_storage=(0,classPrivateFieldLooseKey/* default */.Z)("storage");var _getNetworks=(0,classPrivateFieldLooseKey/* default */.Z)("getNetworks");var _sendUiMessage=(0,classPrivateFieldLooseKey/* default */.Z)("sendUiMessage");var providers_providers=(0,classPrivateFieldLooseKey/* default */.Z)("providers");var _providersProxy=(0,classPrivateFieldLooseKey/* default */.Z)("providersProxy");var _providerInitPromises=(0,classPrivateFieldLooseKey/* default */.Z)("providerInitPromises");var _scheduledResolveAssetInfoActions=(0,classPrivateFieldLooseKey/* default */.Z)("scheduledResolveAssetInfoActions");var _load=(0,classPrivateFieldLooseKey/* default */.Z)("load");var _autoInitProvider=(0,classPrivateFieldLooseKey/* default */.Z)("autoInitProvider");var _executeBatchedFetch=(0,classPrivateFieldLooseKey/* default */.Z)("executeBatchedFetch");class ProvidersController extends EventEmitter{constructor({storage,getNetworks,sendUiMessage,eventEmitterRegistry}){super(eventEmitterRegistry);Object.defineProperty(this,_executeBatchedFetch,{value:_executeBatchedFetch2});Object.defineProperty(this,_autoInitProvider,{value:_autoInitProvider2});Object.defineProperty(this,_load,{value:_load2});Object.defineProperty(this,providers_storage,{writable:true,value:void 0});Object.defineProperty(this,_getNetworks,{writable:true,value:void 0});Object.defineProperty(this,_sendUiMessage,{writable:true,value:void 0});Object.defineProperty(this,providers_providers,{writable:true,value:{}});Object.defineProperty(this,_providersProxy,{writable:true,value:void 0});Object.defineProperty(this,_providerInitPromises,{writable:true,value:{}});Object.defineProperty(this,_scheduledResolveAssetInfoActions,{writable:true,value:{}});this.initialLoadPromise=void 0;this.isBatchingEnabled=true;this.statuses=STATUS_WRAPPED_METHODS;(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_storage)[providers_storage]=storage;(0,classPrivateFieldLooseBase/* default */.Z)(this,_getNetworks)[_getNetworks]=getNetworks;(0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]=sendUiMessage;(0,classPrivateFieldLooseBase/* default */.Z)(this,_providersProxy)[_providersProxy]=new Proxy((0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers],{get:(target,prop,receiver)=>{try{if(isNaN(Number(prop)))return Reflect.get(target,prop,receiver);if(!!this.initialLoadPromise)return Reflect.get(target,prop,receiver);if(prop in target){return Reflect.get(target,prop,receiver);}const chainId=BigInt(prop.toString());const network=getNetworks().find(n=>n.chainId===chainId);if(network)void (0,classPrivateFieldLooseBase/* default */.Z)(this,_autoInitProvider)[_autoInitProvider](chainId);}catch(error){providers_console.error(`Failed to auto set provider for chainId: ${prop.toString()}`,error);}return Reflect.get(target,prop,receiver);},set:(target,prop,value,receiver)=>{return Reflect.set(target,prop,value,receiver);},deleteProperty:(target,prop)=>{return Reflect.deleteProperty(target,prop);},has:(target,prop)=>{return Reflect.has(target,prop);},ownKeys:target=>{return Reflect.ownKeys(target);},getOwnPropertyDescriptor:(target,prop)=>{return Reflect.getOwnPropertyDescriptor(target,prop);}});this.initialLoadPromise=(0,classPrivateFieldLooseBase/* default */.Z)(this,_load)[_load]().finally(()=>{this.initialLoadPromise=undefined;});}get providers(){return (0,classPrivateFieldLooseBase/* default */.Z)(this,_providersProxy)[_providersProxy];}async init({networks}){await this.initialLoadPromise;await Promise.all(networks.map(n=>this.setProvider(n)));this.emitUpdate();}async setProvider(network,opts){const{forceUpdate=false}=opts||{};const stringChainId=network.chainId.toString();const provider=(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][stringChainId];const providerConnectionUrl=getProviderConnectionUrl(network);const isRpcUrlChanged=provider?._getConnection().url!==providerConnectionUrl;if(provider&&!isRpcUrlChanged&&!forceUpdate)return;const initPromise=(0,classPrivateFieldLooseBase/* default */.Z)(this,_providerInitPromises)[_providerInitPromises][stringChainId];if(initPromise){await initPromise.promise.catch(()=>{});const initializedProvider=(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][stringChainId];if(initializedProvider&&initializedProvider._getConnection().url===providerConnectionUrl&&!forceUpdate){return;}}const nextInitPromise=(async()=>{const oldRPC=(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][stringChainId];const batchMaxCount=this.isBatchingEnabled?getProviderBatchMaxCount(network,network.selectedRpcUrl):1;let nextProvider;try{if(oldRPC)oldRPC.destroy();delete (0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][stringChainId];}catch(error){if(error?.message!=='provider destroyed; cancelled request'){this.emitError({error,message:error.message,level:'silent',sendCrashReport:true});}}try{nextProvider=getRpcProvider_getRpcProvider(network.rpcUrls,network.chainId,network.selectedRpcUrl,{batchMaxCount,batchMaxSize:network.rpcNoStateOverride?batchMaxSize:undefined});}catch(error){this.emitError({error,message:`Failed to initialize provider for ${network.name}`,level:'major',sendCrashReport:true});nextProvider=getRpcProvider_getRpcProvider(network.rpcUrls,network.chainId,network.selectedRpcUrl,{batchMaxCount,batchMaxSize:network.rpcNoStateOverride?batchMaxSize:undefined});}(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][stringChainId]=nextProvider;(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][stringChainId].isWorking=true;(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][stringChainId].batchMaxCount=batchMaxCount;})();(0,classPrivateFieldLooseBase/* default */.Z)(this,_providerInitPromises)[_providerInitPromises][stringChainId]={connectionUrl:providerConnectionUrl,promise:nextInitPromise};try{await nextInitPromise;}finally{if((0,classPrivateFieldLooseBase/* default */.Z)(this,_providerInitPromises)[_providerInitPromises][stringChainId]?.promise===nextInitPromise){delete (0,classPrivateFieldLooseBase/* default */.Z)(this,_providerInitPromises)[_providerInitPromises][stringChainId];}}}updateProviderIsWorking(chainId,isWorking){const provider=this.providers[chainId.toString()];if(!provider)return;if(provider.isWorking===isWorking)return;provider.isWorking=isWorking;this.emitUpdate();}removeProvider(chainId){if(!(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][chainId.toString()])return;(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][chainId.toString()]?.destroy();delete (0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][chainId.toString()];this.emitUpdate();}toggleBatching(){return this.withStatus('toggleBatching',async()=>{this.isBatchingEnabled=!this.isBatchingEnabled;await (0,classPrivateFieldLooseBase/* default */.Z)(this,providers_storage)[providers_storage].set('isBatchingEnabled',this.isBatchingEnabled);await Promise.all((0,classPrivateFieldLooseBase/* default */.Z)(this,_getNetworks)[_getNetworks]().map(n=>this.setProvider(n,{forceUpdate:true})));this.emitUpdate();});}async useTempProvider({rpcUrl,chainId},callback){const network=(0,classPrivateFieldLooseBase/* default */.Z)(this,_getNetworks)[_getNetworks]().find(n=>n.chainId===chainId);const batchMaxCount=this.isBatchingEnabled&&network?getProviderBatchMaxCount(network,network.selectedRpcUrl):1;const provider=getRpcProvider_getRpcProvider([rpcUrl],chainId,rpcUrl,{batchMaxCount,batchMaxSize:network?.rpcNoStateOverride?batchMaxSize:undefined});provider.isWorking=true;provider.batchMaxCount=batchMaxCount;await callback(provider);try{provider.destroy();}catch(error){}}async callProviderAndSendResToUi({chainId,method,args},requestId){const provider=this.providers[chainId.toString()];if(!provider){this.emitError({error:new Error('callProviderAndSendResToUi: provider not found'),message:'Provider not found',level:'silent'});return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:'Provider not found'});}const fn=provider[method];if(typeof fn!=='function'){this.emitError({error:new Error('callProviderAndSendResToUi: not a valid provider method'),message:`${method} is not a valid JsonRpcProvider method`,level:'silent'});return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:`${method} is not a valid JsonRpcProvider method`});}try{const result=await fn.apply(provider,args);(0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:true,res:result});}catch(error){this.emitError({error,message:error.message,level:'major'});(0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:error.message});}}async callContractAndSendResToUi({chainId,address,abi,method,args},requestId){const network=(0,classPrivateFieldLooseBase/* default */.Z)(this,_getNetworks)[_getNetworks]().find(n=>n.chainId===chainId);if(!network){this.emitError({error:new Error('callContractAndSendResToUi: network not found'),message:`Network with chainId: ${chainId} not found`,level:'silent'});return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:`Network with chainId: ${chainId} not found`});}const provider=this.providers[network.chainId.toString()];const contract=new contract_Contract(address,[abi],provider);if(typeof contract[method]!=='function'){this.emitError({error:new Error('callContractAndSendResToUi: not a valid Contract method'),message:`${method.toString()} is not a valid Contract method`,level:'silent'});return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:`${method.toString()} is not a valid Contract method`});}try{const result=await contract[method](...args);(0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:true,res:result??undefined});}catch(error){this.emitError({error,message:error.message,level:'silent'});(0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:error.message});}}async getTokenBalancesOnBlockAndSendResToUi({accountId,chainId,tokenAddrs,blockTag,accountAddr,receipts},requestId){const network=(0,classPrivateFieldLooseBase/* default */.Z)(this,_getNetworks)[_getNetworks]().find(n=>n.chainId===chainId);if(!network){return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:`Network with chainId: ${chainId} not found`});}const provider=this.providers[network.chainId.toString()];if(!provider){return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:`Provider for chainId: ${chainId} not found`});}try{const portfolio=new Portfolio(fetch,provider,network);const getTokenBalancesOnBlock=(portfolioAccountId,_chainId,portfolioTokenAddrs,portfolioBlockTag,portfolioAccountAddr)=>portfolio.getTokensByAddresses(portfolioAccountAddr||portfolioAccountId,portfolioTokenAddrs,{blockTag:portfolioBlockTag});const result=await getAccountOpBalanceChanges({accountAddr:accountAddr||accountId,chainId,tokenAddrs,receiptBlockNumber:blockTag,getTokenBalancesOnBlock,receipts,debugTraceTransaction:getDebugTraceTransaction(chainId,provider)});return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:true,res:result});}catch(error){return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:error?.message||'Failed to get token balances on block'});}}async resolveAssetInfo(address,network,callback){if(!(0,classPrivateFieldLooseBase/* default */.Z)(this,_scheduledResolveAssetInfoActions)[_scheduledResolveAssetInfoActions][network.chainId.toString()]?.data?.length){(0,classPrivateFieldLooseBase/* default */.Z)(this,_scheduledResolveAssetInfoActions)[_scheduledResolveAssetInfoActions][network.chainId.toString()]={promise:new Promise((resolve,reject)=>{setTimeout(async()=>{await (0,classPrivateFieldLooseBase/* default */.Z)(this,_executeBatchedFetch)[_executeBatchedFetch](network).catch(reject);(0,classPrivateFieldLooseBase/* default */.Z)(this,_scheduledResolveAssetInfoActions)[_scheduledResolveAssetInfoActions][network.chainId.toString()]=undefined;resolve(0);},500);}),data:[{address,callback}]};}else{(0,classPrivateFieldLooseBase/* default */.Z)(this,_scheduledResolveAssetInfoActions)[_scheduledResolveAssetInfoActions][network.chainId.toString()]?.data.push({address,callback});}return (0,classPrivateFieldLooseBase/* default */.Z)(this,_scheduledResolveAssetInfoActions)[_scheduledResolveAssetInfoActions][network.chainId.toString()]?.promise;}async resolveAssetInfoAndSendResToUi({requestId,address,network}){this.resolveAssetInfo(address,network,_assetInfo=>{(0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({type:'ResolveAssetInfo',requestId,ok:true,res:_assetInfo??undefined});}).catch(e=>{(0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({type:'ResolveAssetInfo',requestId,ok:false,error:e.message});});}toJSON(){return Object.assign({},this,super.toJSON(),{providers:this.providers});}}async function _load2(){const storageIsBatchingEnabled=await (0,classPrivateFieldLooseBase/* default */.Z)(this,providers_storage)[providers_storage].get('isBatchingEnabled',this.isBatchingEnabled);this.isBatchingEnabled=storageIsBatchingEnabled;this.emitUpdate();}async function _autoInitProvider2(chainId,rpcUrl){const network=(0,classPrivateFieldLooseBase/* default */.Z)(this,_getNetworks)[_getNetworks]().find(n=>n.chainId===chainId);if(network){await this.setProvider(network);}else if(rpcUrl){(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][chainId.toString()]=getRpcProvider_getRpcProvider([rpcUrl],chainId,rpcUrl);}this.emitUpdate();}async function _executeBatchedFetch2(network){const allAddresses=Array.from(new Set((0,classPrivateFieldLooseBase/* default */.Z)(this,_scheduledResolveAssetInfoActions)[_scheduledResolveAssetInfoActions][network.chainId.toString()]?.data.map(i=>i.address)))||[];const portfolio=new Portfolio(fetch,this.providers[network.chainId.toString()],network);const options={disableAutoDiscovery:true,additionalErc20Hints:allAddresses,additionalErc721Hints:Object.fromEntries(allAddresses.map(i=>[i,[1n]]))};const portfolioResponse=await portfolio.get(RANDOM_ADDRESS,options);(0,classPrivateFieldLooseBase/* default */.Z)(this,_scheduledResolveAssetInfoActions)[_scheduledResolveAssetInfoActions][network.chainId.toString()]?.data.forEach(i=>{const tokenInfo=(i.address,portfolioResponse.tokens.find(t=>t.address.toLocaleLowerCase()===i.address.toLowerCase()));const nftInfo=(i.address,portfolioResponse.collections.find(t=>t.address.toLocaleLowerCase()===i.address.toLowerCase()));i.callback({tokenInfo,nftInfo});});}
+const STATUS_WRAPPED_METHODS={toggleBatching:'INITIAL'};const RANDOM_ADDRESS='0x0000000000000000000000000000000000000001';const batchMaxSize=24576;var providers_storage=(0,classPrivateFieldLooseKey/* default */.Z)("storage");var _getNetworks=(0,classPrivateFieldLooseKey/* default */.Z)("getNetworks");var _sendUiMessage=(0,classPrivateFieldLooseKey/* default */.Z)("sendUiMessage");var providers_providers=(0,classPrivateFieldLooseKey/* default */.Z)("providers");var _providersProxy=(0,classPrivateFieldLooseKey/* default */.Z)("providersProxy");var _providerInitPromises=(0,classPrivateFieldLooseKey/* default */.Z)("providerInitPromises");var _scheduledResolveAssetInfoActions=(0,classPrivateFieldLooseKey/* default */.Z)("scheduledResolveAssetInfoActions");var _load=(0,classPrivateFieldLooseKey/* default */.Z)("load");var _autoInitProvider=(0,classPrivateFieldLooseKey/* default */.Z)("autoInitProvider");var _executeBatchedFetch=(0,classPrivateFieldLooseKey/* default */.Z)("executeBatchedFetch");class ProvidersController extends EventEmitter{constructor({storage,getNetworks,sendUiMessage,eventEmitterRegistry}){super(eventEmitterRegistry);Object.defineProperty(this,_executeBatchedFetch,{value:_executeBatchedFetch2});Object.defineProperty(this,_autoInitProvider,{value:_autoInitProvider2});Object.defineProperty(this,_load,{value:_load2});Object.defineProperty(this,providers_storage,{writable:true,value:void 0});Object.defineProperty(this,_getNetworks,{writable:true,value:void 0});Object.defineProperty(this,_sendUiMessage,{writable:true,value:void 0});Object.defineProperty(this,providers_providers,{writable:true,value:{}});Object.defineProperty(this,_providersProxy,{writable:true,value:void 0});Object.defineProperty(this,_providerInitPromises,{writable:true,value:{}});Object.defineProperty(this,_scheduledResolveAssetInfoActions,{writable:true,value:{}});this.initialLoadPromise=void 0;this.isBatchingEnabled=true;this.statuses=STATUS_WRAPPED_METHODS;(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_storage)[providers_storage]=storage;(0,classPrivateFieldLooseBase/* default */.Z)(this,_getNetworks)[_getNetworks]=getNetworks;(0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]=sendUiMessage;(0,classPrivateFieldLooseBase/* default */.Z)(this,_providersProxy)[_providersProxy]=new Proxy((0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers],{get:(target,prop,receiver)=>{try{if(isNaN(Number(prop)))return Reflect.get(target,prop,receiver);if(!!this.initialLoadPromise)return Reflect.get(target,prop,receiver);if(prop in target){return Reflect.get(target,prop,receiver);}const chainId=BigInt(prop.toString());const network=getNetworks().find(n=>n.chainId===chainId);if(network)void (0,classPrivateFieldLooseBase/* default */.Z)(this,_autoInitProvider)[_autoInitProvider](chainId);}catch(error){providers_console.error(`Failed to auto set provider for chainId: ${prop.toString()}`,error);}return Reflect.get(target,prop,receiver);},set:(target,prop,value,receiver)=>{return Reflect.set(target,prop,value,receiver);},deleteProperty:(target,prop)=>{return Reflect.deleteProperty(target,prop);},has:(target,prop)=>{return Reflect.has(target,prop);},ownKeys:target=>{return Reflect.ownKeys(target);},getOwnPropertyDescriptor:(target,prop)=>{return Reflect.getOwnPropertyDescriptor(target,prop);}});this.initialLoadPromise=(0,classPrivateFieldLooseBase/* default */.Z)(this,_load)[_load]().finally(()=>{this.initialLoadPromise=undefined;});}get providers(){return (0,classPrivateFieldLooseBase/* default */.Z)(this,_providersProxy)[_providersProxy];}async init({networks}){await this.initialLoadPromise;await Promise.all(networks.map(n=>this.setProvider(n)));this.emitUpdate();}async setProvider(network,opts){const{forceUpdate=false}=opts||{};const stringChainId=network.chainId.toString();const provider=(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][stringChainId];const providerConnectionUrl=getProviderConnectionUrl(network);const isRpcUrlChanged=provider?._getConnection().url!==providerConnectionUrl;if(provider&&!isRpcUrlChanged&&!forceUpdate)return;const initPromise=(0,classPrivateFieldLooseBase/* default */.Z)(this,_providerInitPromises)[_providerInitPromises][stringChainId];if(initPromise){await initPromise.promise.catch(()=>{});const initializedProvider=(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][stringChainId];if(initializedProvider&&initializedProvider._getConnection().url===providerConnectionUrl&&!forceUpdate){return;}}const nextInitPromise=(async()=>{const oldRPC=(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][stringChainId];const batchMaxCount=this.isBatchingEnabled?getProviderBatchMaxCount(network,network.selectedRpcUrl):1;let nextProvider;try{if(oldRPC)oldRPC.destroy();delete (0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][stringChainId];}catch(error){if(error?.message!=='provider destroyed; cancelled request'){this.emitError({error,message:error.message,level:'silent',sendCrashReport:true});}}try{nextProvider=getRpcProvider_getRpcProvider(network.rpcUrls,network.chainId,network.selectedRpcUrl,{batchMaxCount,batchMaxSize:network.rpcNoStateOverride?batchMaxSize:undefined});}catch(error){this.emitError({error,message:`Failed to initialize provider for ${network.name}`,level:'major',sendCrashReport:true});nextProvider=getRpcProvider_getRpcProvider(network.rpcUrls,network.chainId,network.selectedRpcUrl,{batchMaxCount,batchMaxSize:network.rpcNoStateOverride?batchMaxSize:undefined});}(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][stringChainId]=nextProvider;(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][stringChainId].isWorking=true;(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][stringChainId].batchMaxCount=batchMaxCount;})();(0,classPrivateFieldLooseBase/* default */.Z)(this,_providerInitPromises)[_providerInitPromises][stringChainId]={connectionUrl:providerConnectionUrl,promise:nextInitPromise};try{await nextInitPromise;}finally{if((0,classPrivateFieldLooseBase/* default */.Z)(this,_providerInitPromises)[_providerInitPromises][stringChainId]?.promise===nextInitPromise){delete (0,classPrivateFieldLooseBase/* default */.Z)(this,_providerInitPromises)[_providerInitPromises][stringChainId];}}}updateProviderIsWorking(chainId,isWorking){const provider=this.providers[chainId.toString()];if(!provider)return;if(provider.isWorking===isWorking)return;provider.isWorking=isWorking;this.emitUpdate();}removeProvider(chainId){if(!(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][chainId.toString()])return;(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][chainId.toString()]?.destroy();delete (0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][chainId.toString()];this.emitUpdate();}toggleBatching(){return this.withStatus('toggleBatching',async()=>{this.isBatchingEnabled=!this.isBatchingEnabled;await (0,classPrivateFieldLooseBase/* default */.Z)(this,providers_storage)[providers_storage].set('isBatchingEnabled',this.isBatchingEnabled);await Promise.all((0,classPrivateFieldLooseBase/* default */.Z)(this,_getNetworks)[_getNetworks]().map(n=>this.setProvider(n,{forceUpdate:true})));this.emitUpdate();});}async useTempProvider({rpcUrl,chainId},callback){const network=(0,classPrivateFieldLooseBase/* default */.Z)(this,_getNetworks)[_getNetworks]().find(n=>n.chainId===chainId);const batchMaxCount=this.isBatchingEnabled&&network?getProviderBatchMaxCount(network,network.selectedRpcUrl):1;const provider=getRpcProvider_getRpcProvider([rpcUrl],chainId,rpcUrl,{batchMaxCount,batchMaxSize:network?.rpcNoStateOverride?batchMaxSize:undefined});provider.isWorking=true;provider.batchMaxCount=batchMaxCount;await callback(provider);try{provider.destroy();}catch(error){}}async callProviderAndSendResToUi({chainId,method,args},requestId){const provider=this.providers[chainId.toString()];if(!provider){this.emitError({error:new Error('callProviderAndSendResToUi: provider not found'),message:'Provider not found',level:'silent'});return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:'Provider not found'});}const fn=provider[method];if(typeof fn!=='function'){this.emitError({error:new Error('callProviderAndSendResToUi: not a valid provider method'),message:`${method} is not a valid JsonRpcProvider method`,level:'silent'});return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:`${method} is not a valid JsonRpcProvider method`});}try{const result=await fn.apply(provider,args);(0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:true,res:result});}catch(error){this.emitError({error,message:error.message,level:'major'});(0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:error.message});}}async callContractAndSendResToUi({chainId,address,abi,method,args},requestId){const network=(0,classPrivateFieldLooseBase/* default */.Z)(this,_getNetworks)[_getNetworks]().find(n=>n.chainId===chainId);if(!network){this.emitError({error:new Error('callContractAndSendResToUi: network not found'),message:`Network with chainId: ${chainId} not found`,level:'silent'});return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:`Network with chainId: ${chainId} not found`});}const provider=this.providers[network.chainId.toString()];const contract=new contract_Contract(address,[abi],provider);if(typeof contract[method]!=='function'){this.emitError({error:new Error('callContractAndSendResToUi: not a valid Contract method'),message:`${method.toString()} is not a valid Contract method`,level:'silent'});return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:`${method.toString()} is not a valid Contract method`});}try{const result=await contract[method](...args);(0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:true,res:result??undefined});}catch(error){this.emitError({error,message:error.message,level:'silent'});(0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:error.message});}}async getXWalletShareValueAndSendResToUi(requestId){const provider=this.providers[WALLET_STAKING_CHAIN_ID.toString()];if(!provider){const error=new Error('The Ethereum provider is unavailable.');this.emitError({error,message:error.message,level:'silent'});return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:error.message});}try{const{shareValue,refreshError}=await xWalletShareValueCache.get(provider);if(refreshError){this.emitError({error:refreshError,message:'Unable to refresh the WALLET staking conversion rate.',level:'silent'});}(0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:true,res:shareValue});}catch(error){const shareValueError=error instanceof Error?error:new Error('Unable to load the WALLET staking conversion rate.');this.emitError({error:shareValueError,message:shareValueError.message,level:'silent'});(0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:shareValueError.message});}}async getTokenBalancesOnBlockAndSendResToUi({accountId,chainId,tokenAddrs,blockTag,accountAddr,receipts},requestId){const network=(0,classPrivateFieldLooseBase/* default */.Z)(this,_getNetworks)[_getNetworks]().find(n=>n.chainId===chainId);if(!network){return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:`Network with chainId: ${chainId} not found`});}const provider=this.providers[network.chainId.toString()];if(!provider){return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:`Provider for chainId: ${chainId} not found`});}try{const portfolio=new Portfolio(fetch,provider,network);const getTokenBalancesOnBlock=(portfolioAccountId,_chainId,portfolioTokenAddrs,portfolioBlockTag,portfolioAccountAddr)=>portfolio.getTokensByAddresses(portfolioAccountAddr||portfolioAccountId,portfolioTokenAddrs,{blockTag:portfolioBlockTag});const result=await getAccountOpBalanceChanges({accountAddr:accountAddr||accountId,chainId,tokenAddrs,receiptBlockNumber:blockTag,getTokenBalancesOnBlock,receipts,debugTraceTransaction:getDebugTraceTransaction(chainId,provider)});return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:true,res:result});}catch(error){return (0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({requestId,ok:false,error:error?.message||'Failed to get token balances on block'});}}async resolveAssetInfo(address,network,callback){if(!(0,classPrivateFieldLooseBase/* default */.Z)(this,_scheduledResolveAssetInfoActions)[_scheduledResolveAssetInfoActions][network.chainId.toString()]?.data?.length){(0,classPrivateFieldLooseBase/* default */.Z)(this,_scheduledResolveAssetInfoActions)[_scheduledResolveAssetInfoActions][network.chainId.toString()]={promise:new Promise((resolve,reject)=>{setTimeout(async()=>{await (0,classPrivateFieldLooseBase/* default */.Z)(this,_executeBatchedFetch)[_executeBatchedFetch](network).catch(reject);(0,classPrivateFieldLooseBase/* default */.Z)(this,_scheduledResolveAssetInfoActions)[_scheduledResolveAssetInfoActions][network.chainId.toString()]=undefined;resolve(0);},500);}),data:[{address,callback}]};}else{(0,classPrivateFieldLooseBase/* default */.Z)(this,_scheduledResolveAssetInfoActions)[_scheduledResolveAssetInfoActions][network.chainId.toString()]?.data.push({address,callback});}return (0,classPrivateFieldLooseBase/* default */.Z)(this,_scheduledResolveAssetInfoActions)[_scheduledResolveAssetInfoActions][network.chainId.toString()]?.promise;}async resolveAssetInfoAndSendResToUi({requestId,address,network}){this.resolveAssetInfo(address,network,_assetInfo=>{(0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({type:'ResolveAssetInfo',requestId,ok:true,res:_assetInfo??undefined});}).catch(e=>{(0,classPrivateFieldLooseBase/* default */.Z)(this,_sendUiMessage)[_sendUiMessage]({type:'ResolveAssetInfo',requestId,ok:false,error:e.message});});}toJSON(){return Object.assign({},this,super.toJSON(),{providers:this.providers});}}async function _load2(){const storageIsBatchingEnabled=await (0,classPrivateFieldLooseBase/* default */.Z)(this,providers_storage)[providers_storage].get('isBatchingEnabled',this.isBatchingEnabled);this.isBatchingEnabled=storageIsBatchingEnabled;this.emitUpdate();}async function _autoInitProvider2(chainId,rpcUrl){const network=(0,classPrivateFieldLooseBase/* default */.Z)(this,_getNetworks)[_getNetworks]().find(n=>n.chainId===chainId);if(network){await this.setProvider(network);}else if(rpcUrl){(0,classPrivateFieldLooseBase/* default */.Z)(this,providers_providers)[providers_providers][chainId.toString()]=getRpcProvider_getRpcProvider([rpcUrl],chainId,rpcUrl);}this.emitUpdate();}async function _executeBatchedFetch2(network){const allAddresses=Array.from(new Set((0,classPrivateFieldLooseBase/* default */.Z)(this,_scheduledResolveAssetInfoActions)[_scheduledResolveAssetInfoActions][network.chainId.toString()]?.data.map(i=>i.address)))||[];const portfolio=new Portfolio(fetch,this.providers[network.chainId.toString()],network);const options={disableAutoDiscovery:true,additionalErc20Hints:allAddresses,additionalErc721Hints:Object.fromEntries(allAddresses.map(i=>[i,[1n]]))};const portfolioResponse=await portfolio.get(RANDOM_ADDRESS,options);(0,classPrivateFieldLooseBase/* default */.Z)(this,_scheduledResolveAssetInfoActions)[_scheduledResolveAssetInfoActions][network.chainId.toString()]?.data.forEach(i=>{const tokenInfo=(i.address,portfolioResponse.tokens.find(t=>t.address.toLocaleLowerCase()===i.address.toLowerCase()));const nftInfo=(i.address,portfolioResponse.collections.find(t=>t.address.toLocaleLowerCase()===i.address.toLowerCase()));i.callback({tokenInfo,nftInfo});});}
 ;// CONCATENATED MODULE: ./src/ambire-common/src/consts/account.ts
 const account_DEFAULT_ACCOUNT_LABEL='Account';
 ;// CONCATENATED MODULE: ./src/ambire-common/src/consts/dapps/dapps.ts
@@ -119768,9 +119772,9 @@ var ApplicationReleaseType;(function(ApplicationReleaseType){ApplicationReleaseT
 ;// CONCATENATED MODULE: ./node_modules/expo-application/build/Application.js
 const nativeApplicationVersion=ExpoApplication_web?ExpoApplication_web.nativeApplicationVersion||null:null;const nativeBuildVersion=ExpoApplication_web?ExpoApplication_web.nativeBuildVersion||null:null;const applicationName=ExpoApplication_web?ExpoApplication_web.applicationName||null:null;const applicationId=ExpoApplication_web?ExpoApplication_web.applicationId||null:null;function getAndroidId(){if(true){throw new UnavailabilityError('expo-application','androidId');}return ExpoApplication.androidId;}async function getInstallReferrerAsync(){if(!ExpoApplication.getInstallReferrerAsync){throw new UnavailabilityError('expo-application','getInstallReferrerAsync');}return await ExpoApplication.getInstallReferrerAsync();}async function getIosIdForVendorAsync(){if(!ExpoApplication.getIosIdForVendorAsync){throw new UnavailabilityError('expo-application','getIosIdForVendorAsync');}return await ExpoApplication.getIosIdForVendorAsync();}async function getIosApplicationReleaseTypeAsync(){if(!ExpoApplication.getApplicationReleaseTypeAsync){throw new UnavailabilityError('expo-application','getApplicationReleaseTypeAsync');}return await ExpoApplication.getApplicationReleaseTypeAsync();}async function getIosPushNotificationServiceEnvironmentAsync(){if(!ExpoApplication.getPushNotificationServiceEnvironmentAsync){throw new UnavailabilityError('expo-application','getPushNotificationServiceEnvironmentAsync');}return await ExpoApplication.getPushNotificationServiceEnvironmentAsync();}async function getInstallationTimeAsync(){if(!ExpoApplication.getInstallationTimeAsync){throw new UnavailabilityError('expo-application','getInstallationTimeAsync');}const installationTime=await ExpoApplication.getInstallationTimeAsync();return new Date(installationTime);}async function getLastUpdateTimeAsync(){if(!ExpoApplication.getLastUpdateTimeAsync){throw new UnavailabilityError('expo-application','getLastUpdateTimeAsync');}const lastUpdateTime=await ExpoApplication.getLastUpdateTimeAsync();return new Date(lastUpdateTime);}
 ;// CONCATENATED MODULE: ./app.json
-const app_namespaceObject = {"i8":"6.20.2"};
+const app_namespaceObject = {"i8":"6.21.3"};
 ;// CONCATENATED MODULE: ./src/common/config/env/env.ts
-const isTesting=(/* unused pure expression or super */ null && (undefined==='true'));const runtimeAppEnv="production"||(0);const env_isDev=runtimeAppEnv==='development';const isProd=runtimeAppEnv==='production';const isStaging=runtimeAppEnv==='staging';const isBenzin="true"==='true';const isLegends=undefined==='true';const isLedgerEmulator=(/* unused pure expression or super */ null && (undefined==='true'));const isAmbireNext=(/* unused pure expression or super */ null && (undefined==='true'));const APP_ID=applicationId;const APP_VERSION=app_namespaceObject.i8;const BUILD_NUMBER=nativeBuildVersion||'N/A';const env_isMobile= false||false;const isiOS=false;const isAndroid=false;const env_isWeb=true;var APP_ENV=function(APP_ENV){APP_ENV["PROD"]="production";APP_ENV["STAGING"]="staging";APP_ENV["DEV"]="development";return APP_ENV;}(APP_ENV||{});const CONFIG={APP_ENV:APP_ENV.DEV,RELAYER_URL:"https://relayer.ambire.com",VELCRO_URL:undefined,SENTRY_DSN:undefined,NFT_CDN_URL: false||'https://nftcdn.ambire.com',ENVIRONMENT: false||'development',DEFAULT_KEYSTORE_PASSWORD_DEV: false||'',LEGENDS_NFT_ADDRESS: false||'0xF51dF52d0a9BEeB7b6E4B6451e729108a115B863',SENTRY_DSN_LEGENDS: false||'',SENTRY_DSN_BROWSER_EXTENSION: false||'',BUNGEE_API_KEY:undefined,LI_FI_API_KEY:undefined,UNISWAP_API_KEY: false||'',WALLETCONNECT_PROJECT_ID:undefined};if(isProd){CONFIG.APP_ENV=APP_ENV.PROD;}else if(isStaging){CONFIG.APP_ENV=APP_ENV.STAGING;}const LEDGER_EMULATOR_HTTP_URL=(/* unused pure expression or super */ null && (undefined));/* harmony default export */ const env = (CONFIG);
+const isTesting=(/* unused pure expression or super */ null && (undefined==='true'));const runtimeAppEnv="production"||(0);const env_isDev=runtimeAppEnv==='development';const isProd=runtimeAppEnv==='production';const isStaging=runtimeAppEnv==='staging';const isBenzin="true"==='true';const isLegends=undefined==='true';const isLedgerEmulator=(/* unused pure expression or super */ null && (undefined==='true'));const isAmbireNext=undefined==='true';const APP_ID=applicationId;const APP_VERSION=app_namespaceObject.i8;const BUILD_NUMBER=nativeBuildVersion||'N/A';const env_isMobile= false||false;const isiOS=false;const isAndroid=false;const env_isWeb=true;var APP_ENV=function(APP_ENV){APP_ENV["PROD"]="production";APP_ENV["STAGING"]="staging";APP_ENV["DEV"]="development";return APP_ENV;}(APP_ENV||{});const CONFIG={APP_ENV:APP_ENV.DEV,RELAYER_URL:"https://relayer.ambire.com",VELCRO_URL:undefined,SENTRY_DSN:undefined,NFT_CDN_URL: false||'https://nftcdn.ambire.com',ENVIRONMENT: false||'development',DEFAULT_KEYSTORE_PASSWORD_DEV: false||'',DEFAULT_INVITE_CODE_DEV: false||'',LEGENDS_NFT_ADDRESS: false||'0xF51dF52d0a9BEeB7b6E4B6451e729108a115B863',SENTRY_DSN_LEGENDS: false||'',SENTRY_DSN_BROWSER_EXTENSION: false||'',BUNGEE_API_KEY:undefined,LI_FI_API_KEY:undefined,UNISWAP_API_KEY: false||'',WALLETCONNECT_PROJECT_ID:undefined};if(isProd){CONFIG.APP_ENV=APP_ENV.PROD;}else if(isStaging){CONFIG.APP_ENV=APP_ENV.STAGING;}const LEDGER_EMULATOR_HTTP_URL=(/* unused pure expression or super */ null && (undefined));/* harmony default export */ const env = (CONFIG);
 ;// CONCATENATED MODULE: ./src/common/config/env/index.ts
 /* harmony default export */ const config_env = (env);
 ;// CONCATENATED MODULE: ./src/common/contexts/screenFocusContext/screenFocusContext.tsx
@@ -119925,7 +119929,7 @@ const pathToUiType=pathname=>{try{let uiType=pathname.replace(/^\//,'').replace(
 ;// CONCATENATED MODULE: ./src/common/utils/uiType/index.ts
 
 ;// CONCATENATED MODULE: ./src/common/hooks/useHover/useMultiHover.ts
-const INTERPOLATE_PROPERTIES=['backgroundColor','color','borderColor'];const PRESSED_OPACITY=0.7;const useMultiHover=({values,forceHoveredStyle=false})=>{const memoizedValues=hooks_useDeepMemo(values);const isInitialAnimationDone=(0,react.useRef)(false);const prevForceHoveredStyle=hooks_usePrevious(forceHoveredStyle);const[isHovered,setIsHovered]=(0,react.useState)(false);const isMobileApp=uiType_web_getUiType().isMobileApp;const animatedValues=(0,react.useMemo)(()=>{const opacity=memoizedValues.find(({property})=>property==='opacity');const newValues=memoizedValues.map(({property,from,to,duration:valueDuration})=>{const shouldInterpolate=INTERPOLATE_PROPERTIES.includes(property);let value=null;value=new Animated/* default.Value */.Z.Value(shouldInterpolate?0:from);return{value,property,from,to,duration:valueDuration||durations.FAST};});if(opacity)return newValues;newValues.push({value:new Animated/* default.Value */.Z.Value(1),property:'opacity',from:1,to:1,duration:durations.FAST});return newValues;},[memoizedValues]);const animate=(0,react.useCallback)((reversed,customDuration,skipStateUpdate)=>{if(uiType_web_getUiType().isMobileApp)return;if(!animatedValues)return;animatedValues.forEach(({property,value,to,from,duration:valueDuration})=>{let toValue=!INTERPOLATE_PROPERTIES.includes(property)?to:1;if(reversed)toValue=!INTERPOLATE_PROPERTIES.includes(property)?from:0;Animated/* default.timing */.Z.timing(value,{toValue,duration:customDuration??valueDuration,useNativeDriver:!env_isWeb}).start();});if(!skipStateUpdate){requestAnimationFrame(()=>{setIsHovered(!reversed);});}},[animatedValues]);(0,react.useEffect)(()=>{if(uiType_web_getUiType().isMobileApp)return;if(!animatedValues||!!isInitialAnimationDone.current||forceHoveredStyle)return;animate(true,0,true);isInitialAnimationDone.current=true;},[animate,animatedValues,forceHoveredStyle]);(0,react.useEffect)(()=>{if(uiType_web_getUiType().isMobileApp)return;if(isHovered)return;if(forceHoveredStyle&&!prevForceHoveredStyle){animate(false,undefined,true);}else if(!forceHoveredStyle&&prevForceHoveredStyle){animate(true,0,true);}},[forceHoveredStyle,animate,prevForceHoveredStyle,isHovered]);const setPressOpacity=(0,react.useCallback)(value=>{const opacity=animatedValues.find(({property})=>property==='opacity');if(!opacity)return;opacity.value.setValue(value);},[animatedValues]);const onHoverIn=(0,react.useCallback)(()=>{if(forceHoveredStyle)return;animate();},[animate,forceHoveredStyle]);const bind=(0,react.useMemo)(()=>({onHoverIn,onHoverOut:()=>{if(forceHoveredStyle)return;animate(true);},onPressIn:()=>{setPressOpacity(PRESSED_OPACITY);},onPressOut:_event=>{setPressOpacity(1);}}),[animate,setPressOpacity,forceHoveredStyle,onHoverIn]);const style=(0,react.useMemo)(()=>{if(isMobileApp){const staticStyle=memoizedValues.reduce((acc,{property,from})=>Object.assign({},acc,{[property]:from}),{});const opacity=animatedValues.find(({property})=>property==='opacity');return Object.assign({},staticStyle,{opacity:opacity?.value});}if(animatedValues)return animatedValues?.reduce((acc,{property,value,from,to})=>{const shouldInterpolate=INTERPOLATE_PROPERTIES.includes(property);return Object.assign({},acc,{[property]:shouldInterpolate?value.interpolate({inputRange:[0,1],outputRange:[from,to]}):value});},{});return memoizedValues.reduce((acc,{property,from})=>Object.assign({},acc,{[property]:from}),{});},[animatedValues,isMobileApp,memoizedValues]);return[bind,style,isHovered||forceHoveredStyle,onHoverIn,animatedValues];};/* harmony default export */ const useHover_useMultiHover = (useMultiHover);
+const INTERPOLATE_PROPERTIES=['backgroundColor','color','borderColor'];const PRESSED_OPACITY=0.7;const useMultiHover=({values,forceHoveredStyle=false})=>{const memoizedValues=hooks_useDeepMemo(values);const isInitialAnimationDone=(0,react.useRef)(false);const prevForceHoveredStyle=hooks_usePrevious(forceHoveredStyle);const[isHovered,setIsHovered]=(0,react.useState)(false);const isMobileApp=uiType_web_getUiType().isMobileApp;const animatedValues=(0,react.useMemo)(()=>{const opacity=memoizedValues.find(({property})=>property==='opacity');const newValues=memoizedValues.map(({property,from,to,duration:valueDuration})=>{const shouldInterpolate=INTERPOLATE_PROPERTIES.includes(property);let value=null;value=new Animated/* default.Value */.Z.Value(shouldInterpolate?0:from);return{value,property,from,to,duration:valueDuration||durations.FAST};});if(opacity)return newValues;newValues.push({value:new Animated/* default.Value */.Z.Value(1),property:'opacity',from:1,to:1,duration:durations.FAST});return newValues;},[memoizedValues]);const animate=(0,react.useCallback)((reversed,customDuration,skipStateUpdate)=>{if(uiType_web_getUiType().isMobileApp)return;if(!animatedValues)return;animatedValues.forEach(({property,value,to,from,duration:valueDuration})=>{let toValue=!INTERPOLATE_PROPERTIES.includes(property)?to:1;if(reversed)toValue=!INTERPOLATE_PROPERTIES.includes(property)?from:0;Animated/* default.timing */.Z.timing(value,{toValue,duration:customDuration??valueDuration,useNativeDriver:!env_isWeb}).start();});if(!skipStateUpdate){requestAnimationFrame(()=>{setIsHovered(!reversed);});}},[animatedValues]);(0,react.useEffect)(()=>{if(uiType_web_getUiType().isMobileApp)return;if(!animatedValues||!!isInitialAnimationDone.current||forceHoveredStyle)return;animate(true,0,true);isInitialAnimationDone.current=true;},[animate,animatedValues,forceHoveredStyle]);(0,react.useEffect)(()=>{if(uiType_web_getUiType().isMobileApp)return;if(isHovered)return;if(forceHoveredStyle&&!prevForceHoveredStyle){animate(false,undefined,true);}else if(!forceHoveredStyle&&prevForceHoveredStyle){animate(true,0,true);}},[forceHoveredStyle,animate,prevForceHoveredStyle,isHovered]);const setPressOpacity=(0,react.useCallback)(value=>{const opacity=animatedValues.find(({property})=>property==='opacity');if(!opacity)return;opacity.value.setValue(value);},[animatedValues]);const onHoverIn=(0,react.useCallback)(()=>{if(forceHoveredStyle)return;animate();},[animate,forceHoveredStyle]);const bind=(0,react.useMemo)(()=>({onHoverIn,onHoverOut:()=>{if(forceHoveredStyle)return;animate(true);},onPressIn:()=>{setPressOpacity(PRESSED_OPACITY);},onPressOut:_event=>{setPressOpacity(1);}}),[animate,setPressOpacity,forceHoveredStyle,onHoverIn]);const style=(0,react.useMemo)(()=>{if(isMobileApp){const staticStyle=memoizedValues.reduce((acc,{property,from,to})=>Object.assign({},acc,{[property]:forceHoveredStyle?to:from}),{});const opacity=animatedValues.find(({property})=>property==='opacity');return Object.assign({},staticStyle,{opacity:opacity?.value});}if(animatedValues)return animatedValues?.reduce((acc,{property,value,from,to})=>{const shouldInterpolate=INTERPOLATE_PROPERTIES.includes(property);return Object.assign({},acc,{[property]:shouldInterpolate?value.interpolate({inputRange:[0,1],outputRange:[from,to]}):value});},{});return memoizedValues.reduce((acc,{property,from})=>Object.assign({},acc,{[property]:from}),{});},[animatedValues,isMobileApp,memoizedValues,forceHoveredStyle]);return[bind,style,isHovered||forceHoveredStyle,onHoverIn,animatedValues];};/* harmony default export */ const useHover_useMultiHover = (useMultiHover);
 ;// CONCATENATED MODULE: ./src/common/hooks/useHover/useCustomHover.ts
 const useCustomHover=({property,values,duration,forceHoveredStyle})=>{return useHover_useMultiHover({values:[Object.assign({property},values,{duration})],forceHoveredStyle});};/* harmony default export */ const useHover_useCustomHover = (useCustomHover);
 // EXTERNAL MODULE: ./node_modules/react-native-web/dist/exports/Pressable/index.js + 4 modules
@@ -119946,6 +119950,16 @@ const wordlists = {
 
 ;// CONCATENATED MODULE: ./src/common/config/analytics/sentryDataScrubbing.ts
 const englishWordlist=wordlists.en;const SEED_PHRASE_MIN_WORDS=12;const SEED_PHRASE_MAX_WORDS=24;const areAllValidBip39Words=words=>{if(!englishWordlist)return false;return words.every(word=>englishWordlist.getWordIndex(word.toLowerCase())!==-1);};const redactSeedPhraseWithinWordRun=wordRun=>{const words=wordRun.split(/\s+/);if(words.length<SEED_PHRASE_MIN_WORDS)return wordRun;for(let start=0;start<=words.length-SEED_PHRASE_MIN_WORDS;start+=1){const maxLen=Math.min(SEED_PHRASE_MAX_WORDS,words.length-start);for(let len=maxLen;len>=SEED_PHRASE_MIN_WORDS;len-=1){const candidate=words.slice(start,start+len);if(areAllValidBip39Words(candidate)){const before=words.slice(0,start);const after=words.slice(start+len);return[...before,'[REDACTED_SEED_PHRASE]',...after].join(' ');}}}return wordRun;};const wordRunPattern=/[a-z]+(?:\s+[a-z]+)*/gi;const REDACTION_RULES=[{pattern:/\b(private\s*key|privatekey|priv\s*key|privkey|secret\s*key|wallet\s*key)\b(?:["'])?\s*[:=]\s*(["']?)(0x[a-fA-F0-9]{64}|[a-fA-F0-9]{64})\2/gi,replacement:'$1=[REDACTED_PRIVATE_KEY]'},{pattern:/\b0x[a-fA-F0-9]{64}\b|\b[a-fA-F0-9]{64}\b/g,replacement:'[REDACTED_PRIVATE_KEY]'},{pattern:/\b(seed\s*phrase|recovery\s*phrase|mnemonic|secret\s*phrase)\b(?:["'])?\s*[:=]\s*(["']?)([a-z]+(?:\s+[a-z]+)*)\2/gi,replacement:(match,label,_quote,words)=>{const redacted=redactSeedPhraseWithinWordRun(words);return redacted===words?match:`${label}=${redacted}`;}},{pattern:wordRunPattern,replacement:match=>redactSeedPhraseWithinWordRun(match)}];const scrubString=value=>{return REDACTION_RULES.reduce((result,{pattern,replacement})=>{return result.replace(pattern,replacement);},value);};const SENSITIVE_KEY_SUBSTRINGS=['pass','pwd','secret','mnemonic','seed','privatekey','privkey','entropy'];const isSensitiveKey=key=>{const normalizedKey=key.toLowerCase();return SENSITIVE_KEY_SUBSTRINGS.some(term=>normalizedKey.includes(term));};const NON_SECRET_KEY_SUBSTRINGS=['hash','txid','txnid','requestid','routeid','quoteid','signature','salt','nonce','calldata','blocknumber','address','addr'];const isNonSecretKey=key=>{const normalizedKey=key.toLowerCase();return NON_SECRET_KEY_SUBSTRINGS.some(term=>normalizedKey.includes(term));};const isErrorLike=value=>Object.prototype.toString.call(value)==='[object Error]';const tryScrubJsonString=(value,seen)=>{const trimmed=value.trim();if(!trimmed.startsWith('{')&&!trimmed.startsWith('['))return undefined;let parsed;try{parsed=JSON.parse(trimmed);}catch{return undefined;}if(!parsed||typeof parsed!=='object')return undefined;return JSON.stringify(scrubUnknown(parsed,seen));};const scrubUnknown=(value,seen)=>{if(typeof value==='string'){return tryScrubJsonString(value,seen)??scrubString(value);}if(typeof value==='function'||typeof value==='symbol'){return undefined;}if(!value||typeof value!=='object'){return value;}if(seen.has(value)){return seen.get(value);}if(value instanceof Date){return new Date(value.getTime());}if(isErrorLike(value)){const rawMessage=value.message;const clonedError=new Error(typeof rawMessage==='string'?scrubString(rawMessage):'');seen.set(value,clonedError);Object.getOwnPropertyNames(value).forEach(propName=>{if(propName==='message')return;clonedError[propName]=scrubUnknown(value[propName],seen);});return clonedError;}if(Array.isArray(value)){const clonedArray=[];seen.set(value,clonedArray);value.forEach(item=>{const scrubbed=scrubUnknown(item,seen);clonedArray.push(scrubbed===undefined?null:scrubbed);});return clonedArray;}const objectValue=value;const clonedObject={};seen.set(value,clonedObject);Object.keys(objectValue).forEach(key=>{if(isSensitiveKey(key)){clonedObject[key]='[REDACTED]';return;}if(isNonSecretKey(key)&&typeof objectValue[key]==='string'){clonedObject[key]=objectValue[key];return;}const scrubbed=scrubUnknown(objectValue[key],seen);if(scrubbed!==undefined){clonedObject[key]=scrubbed;}});return clonedObject;};const scrubSentryEventSecrets=event=>{return scrubUnknown(event,new Map());};
+;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/debug-build.js
+/**
+ * This serves as a build time flag that will be true by default, but false in non-debug builds or if users replace `__SENTRY_DEBUG__` in their generated code.
+ *
+ * ATTENTION: This constant must never cross package boundaries (i.e. be exported) to guarantee that it can be used for tree shaking.
+ */
+const debug_build_DEBUG_BUILD = (typeof __SENTRY_DEBUG__ === 'undefined' || __SENTRY_DEBUG__);
+
+
+
 ;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/utils/version.js
 // This is a magic string replaced by rollup
 
@@ -120019,13 +120033,1821 @@ function carrier_getGlobalSingleton(
 
 
 
-;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/debug-build.js
+;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/utils/debug-logger.js
+
+
+
+
+const CONSOLE_LEVELS = (/* unused pure expression or super */ null && ([
+  'debug',
+  'info',
+  'warn',
+  'error',
+  'log',
+  'assert',
+  'trace',
+])) ;
+
+/** Prefix for logging strings */
+const PREFIX = 'Sentry Logger ';
+
+/** This may be mutated by the console instrumentation. */
+const originalConsoleMethods
+
+ = {};
+
 /**
- * This serves as a build time flag that will be true by default, but false in non-debug builds or if users replace `__SENTRY_DEBUG__` in their generated code.
+ * Temporarily disable sentry console instrumentations.
  *
- * ATTENTION: This constant must never cross package boundaries (i.e. be exported) to guarantee that it can be used for tree shaking.
+ * @param callback The function to run against the original `console` messages
+ * @returns The results of the callback
  */
-const debug_build_DEBUG_BUILD = (typeof __SENTRY_DEBUG__ === 'undefined' || __SENTRY_DEBUG__);
+function consoleSandbox(callback) {
+  if (!("console" in worldwide_GLOBAL_OBJ)) {
+    return callback();
+  }
+
+  const console = worldwide_GLOBAL_OBJ.console;
+  const wrappedFuncs = {};
+
+  const wrappedLevels = Object.keys(originalConsoleMethods) ;
+
+  // Restore all wrapped console methods
+  wrappedLevels.forEach(level => {
+    const originalConsoleMethod = originalConsoleMethods[level];
+    wrappedFuncs[level] = console[level] ;
+    console[level] = originalConsoleMethod ;
+  });
+
+  try {
+    return callback();
+  } finally {
+    // Revert restoration to wrapped state
+    wrappedLevels.forEach(level => {
+      console[level] = wrappedFuncs[level] ;
+    });
+  }
+}
+
+function enable() {
+  _getLoggerSettings().enabled = true;
+}
+
+function disable() {
+  _getLoggerSettings().enabled = false;
+}
+
+function isEnabled() {
+  return _getLoggerSettings().enabled;
+}
+
+function log(...args) {
+  _maybeLog('log', ...args);
+}
+
+function warn(...args) {
+  _maybeLog('warn', ...args);
+}
+
+function error(...args) {
+  _maybeLog('error', ...args);
+}
+
+function _maybeLog(level, ...args) {
+  if (!debug_build_DEBUG_BUILD) {
+    return;
+  }
+
+  if (isEnabled()) {
+    consoleSandbox(() => {
+      worldwide_GLOBAL_OBJ.console[level](`${PREFIX}[${level}]:`, ...args);
+    });
+  }
+}
+
+function _getLoggerSettings() {
+  if (!debug_build_DEBUG_BUILD) {
+    return { enabled: false };
+  }
+
+  return carrier_getGlobalSingleton('loggerSettings', () => ({ enabled: false }));
+}
+
+/**
+ * This is a logger singleton which either logs things or no-ops if logging is not enabled.
+ */
+const debug_logger_debug = {
+  /** Enable logging. */
+  enable,
+  /** Disable logging. */
+  disable,
+  /** Check if logging is enabled. */
+  isEnabled,
+  /** Log a message. */
+  log,
+  /** Log a warning. */
+  warn,
+  /** Log an error. */
+  error,
+} ;
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/utils/is.js
+// eslint-disable-next-line @typescript-eslint/unbound-method
+const objectToString = Object.prototype.toString;
+
+/**
+ * Checks whether given value's type is one of a few Error or Error-like
+ * {@link isError}.
+ *
+ * @param wat A value to be checked.
+ * @returns A boolean representing the result.
+ */
+function is_isError(wat) {
+  switch (objectToString.call(wat)) {
+    case '[object Error]':
+    case '[object Exception]':
+    case '[object DOMException]':
+    case '[object WebAssembly.Exception]':
+      return true;
+    default:
+      return isInstanceOf(wat, Error);
+  }
+}
+/**
+ * Checks whether given value is an instance of the given built-in class.
+ *
+ * @param wat The value to be checked
+ * @param className
+ * @returns A boolean representing the result.
+ */
+function isBuiltin(wat, className) {
+  return objectToString.call(wat) === `[object ${className}]`;
+}
+
+/**
+ * Checks whether given value's type is ErrorEvent
+ * {@link isErrorEvent}.
+ *
+ * @param wat A value to be checked.
+ * @returns A boolean representing the result.
+ */
+function isErrorEvent(wat) {
+  return isBuiltin(wat, 'ErrorEvent');
+}
+
+/**
+ * Checks whether given value's type is DOMError
+ * {@link isDOMError}.
+ *
+ * @param wat A value to be checked.
+ * @returns A boolean representing the result.
+ */
+function isDOMError(wat) {
+  return isBuiltin(wat, 'DOMError');
+}
+
+/**
+ * Checks whether given value's type is DOMException
+ * {@link isDOMException}.
+ *
+ * @param wat A value to be checked.
+ * @returns A boolean representing the result.
+ */
+function isDOMException(wat) {
+  return isBuiltin(wat, 'DOMException');
+}
+
+/**
+ * Checks whether given value's type is a string
+ * {@link isString}.
+ *
+ * @param wat A value to be checked.
+ * @returns A boolean representing the result.
+ */
+function is_isString(wat) {
+  return isBuiltin(wat, 'String');
+}
+
+/**
+ * Checks whether given string is parameterized
+ * {@link isParameterizedString}.
+ *
+ * @param wat A value to be checked.
+ * @returns A boolean representing the result.
+ */
+function isParameterizedString(wat) {
+  return (
+    typeof wat === 'object' &&
+    wat !== null &&
+    '__sentry_template_string__' in wat &&
+    '__sentry_template_values__' in wat
+  );
+}
+
+/**
+ * Checks whether given value is a primitive (undefined, null, number, boolean, string, bigint, symbol)
+ * {@link isPrimitive}.
+ *
+ * @param wat A value to be checked.
+ * @returns A boolean representing the result.
+ */
+function is_isPrimitive(wat) {
+  return wat === null || isParameterizedString(wat) || (typeof wat !== 'object' && typeof wat !== 'function');
+}
+
+/**
+ * Checks whether given value's type is an object literal, or a class instance.
+ * {@link isPlainObject}.
+ *
+ * @param wat A value to be checked.
+ * @returns A boolean representing the result.
+ */
+function is_isPlainObject(wat) {
+  return isBuiltin(wat, 'Object');
+}
+
+/**
+ * Checks whether given value's type is an Event instance
+ * {@link isEvent}.
+ *
+ * @param wat A value to be checked.
+ * @returns A boolean representing the result.
+ */
+function isEvent(wat) {
+  return typeof Event !== 'undefined' && isInstanceOf(wat, Event);
+}
+
+/**
+ * Checks whether given value's type is an Element instance
+ * {@link isElement}.
+ *
+ * @param wat A value to be checked.
+ * @returns A boolean representing the result.
+ */
+function isElement(wat) {
+  return typeof Element !== 'undefined' && isInstanceOf(wat, Element);
+}
+
+/**
+ * Checks whether given value's type is an regexp
+ * {@link isRegExp}.
+ *
+ * @param wat A value to be checked.
+ * @returns A boolean representing the result.
+ */
+function is_isRegExp(wat) {
+  return isBuiltin(wat, 'RegExp');
+}
+
+/**
+ * Checks whether given value has a then function.
+ * @param wat A value to be checked.
+ */
+function is_isThenable(wat) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  return Boolean(wat?.then && typeof wat.then === 'function');
+}
+
+/**
+ * Checks whether given value's type is a SyntheticEvent
+ * {@link isSyntheticEvent}.
+ *
+ * @param wat A value to be checked.
+ * @returns A boolean representing the result.
+ */
+function isSyntheticEvent(wat) {
+  return is_isPlainObject(wat) && 'nativeEvent' in wat && 'preventDefault' in wat && 'stopPropagation' in wat;
+}
+
+/**
+ * Checks whether given value's type is an instance of provided constructor.
+ * {@link isInstanceOf}.
+ *
+ * @param wat A value to be checked.
+ * @param base A constructor to be used in a check.
+ * @returns A boolean representing the result.
+ */
+// TODO: fix in v11, convert any to unknown
+// export function isInstanceOf<T>(wat: unknown, base: { new (...args: any[]): T }): wat is T {
+function isInstanceOf(wat, base) {
+  try {
+    return wat instanceof base;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Checks whether given value's type is a Vue ViewModel or a VNode.
+ *
+ * @param wat A value to be checked.
+ * @returns A boolean representing the result.
+ */
+function is_isVueViewModel(wat) {
+  // Not using Object.prototype.toString because in Vue 3 it would read the instance's Symbol(Symbol.toStringTag) property.
+  // We also need to check for __v_isVNode because Vue 3 component render instances have an internal __v_isVNode property.
+  return !!(
+    typeof wat === 'object' &&
+    wat !== null &&
+    ((wat ).__isVue || (wat )._isVue || (wat ).__v_isVNode)
+  );
+}
+
+/**
+ * Checks whether the given parameter is a Standard Web API Request instance.
+ *
+ * Returns false if Request is not available in the current runtime.
+ */
+function isRequest(request) {
+  return typeof Request !== 'undefined' && isInstanceOf(request, Request);
+}
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/utils/browser.js
+
+
+
+const WINDOW = worldwide_GLOBAL_OBJ ;
+
+const DEFAULT_MAX_STRING_LENGTH = 80;
+
+/**
+ * Given a child DOM element, returns a query-selector statement describing that
+ * and its ancestors
+ * e.g. [HTMLElement] => body > div > input#foo.btn[name=baz]
+ * @returns generated DOM path
+ */
+function htmlTreeAsString(
+  elem,
+  options = {},
+) {
+  if (!elem) {
+    return '<unknown>';
+  }
+
+  // try/catch both:
+  // - accessing event.target (see getsentry/raven-js#838, #768)
+  // - `htmlTreeAsString` because it's complex, and just accessing the DOM incorrectly
+  // - can throw an exception in some circumstances.
+  try {
+    let currentElem = elem ;
+    const MAX_TRAVERSE_HEIGHT = 5;
+    const out = [];
+    let height = 0;
+    let len = 0;
+    const separator = ' > ';
+    const sepLength = separator.length;
+    let nextStr;
+    const keyAttrs = Array.isArray(options) ? options : options.keyAttrs;
+    const maxStringLength = (!Array.isArray(options) && options.maxStringLength) || DEFAULT_MAX_STRING_LENGTH;
+
+    while (currentElem && height++ < MAX_TRAVERSE_HEIGHT) {
+      nextStr = _htmlElementAsString(currentElem, keyAttrs);
+      // bail out if
+      // - nextStr is the 'html' element
+      // - the length of the string that would be created exceeds maxStringLength
+      //   (ignore this limit if we are on the first iteration)
+      if (nextStr === 'html' || (height > 1 && len + out.length * sepLength + nextStr.length >= maxStringLength)) {
+        break;
+      }
+
+      out.push(nextStr);
+
+      len += nextStr.length;
+      currentElem = currentElem.parentNode;
+    }
+
+    return out.reverse().join(separator);
+  } catch {
+    return '<unknown>';
+  }
+}
+
+/**
+ * Returns a simple, query-selector representation of a DOM element
+ * e.g. [HTMLElement] => input#foo.btn[name=baz]
+ * @returns generated DOM path
+ */
+function _htmlElementAsString(el, keyAttrs) {
+  const elem = el
+
+;
+
+  const out = [];
+
+  if (!elem?.tagName) {
+    return '';
+  }
+
+  // @ts-expect-error WINDOW has HTMLElement
+  if (WINDOW.HTMLElement) {
+    // If using the component name annotation plugin, this value may be available on the DOM node
+    if (elem instanceof HTMLElement && elem.dataset) {
+      if (elem.dataset['sentryComponent']) {
+        return elem.dataset['sentryComponent'];
+      }
+      if (elem.dataset['sentryElement']) {
+        return elem.dataset['sentryElement'];
+      }
+    }
+  }
+
+  out.push(elem.tagName.toLowerCase());
+
+  // Pairs of attribute keys defined in `serializeAttribute` and their values on element.
+  const keyAttrPairs = keyAttrs?.length
+    ? keyAttrs.filter(keyAttr => elem.getAttribute(keyAttr)).map(keyAttr => [keyAttr, elem.getAttribute(keyAttr)])
+    : null;
+
+  if (keyAttrPairs?.length) {
+    keyAttrPairs.forEach(keyAttrPair => {
+      out.push(`[${keyAttrPair[0]}="${keyAttrPair[1]}"]`);
+    });
+  } else {
+    if (elem.id) {
+      out.push(`#${elem.id}`);
+    }
+
+    const className = elem.className;
+    if (className && is_isString(className)) {
+      const classes = className.split(/\s+/);
+      for (const c of classes) {
+        out.push(`.${c}`);
+      }
+    }
+  }
+  const allowedAttrs = ['aria-label', 'type', 'name', 'title', 'alt'];
+  for (const k of allowedAttrs) {
+    const attr = elem.getAttribute(k);
+    if (attr) {
+      out.push(`[${k}="${attr}"]`);
+    }
+  }
+
+  return out.join('');
+}
+
+/**
+ * A safe form of location.href
+ */
+function browser_getLocationHref() {
+  try {
+    return WINDOW.document.location.href;
+  } catch {
+    return '';
+  }
+}
+
+/**
+ * Given a DOM element, traverses up the tree until it finds the first ancestor node
+ * that has the `data-sentry-component` or `data-sentry-element` attribute with `data-sentry-component` taking
+ * precedence. This attribute is added at build-time by projects that have the component name annotation plugin installed.
+ *
+ * @returns a string representation of the component for the provided DOM element, or `null` if not found
+ */
+function getComponentName(elem) {
+  // @ts-expect-error WINDOW has HTMLElement
+  if (!WINDOW.HTMLElement) {
+    return null;
+  }
+
+  let currentElem = elem ;
+  const MAX_TRAVERSE_HEIGHT = 5;
+  for (let i = 0; i < MAX_TRAVERSE_HEIGHT; i++) {
+    if (!currentElem) {
+      return null;
+    }
+
+    if (currentElem instanceof HTMLElement) {
+      if (currentElem.dataset['sentryComponent']) {
+        return currentElem.dataset['sentryComponent'];
+      }
+      if (currentElem.dataset['sentryElement']) {
+        return currentElem.dataset['sentryElement'];
+      }
+    }
+
+    currentElem = currentElem.parentNode;
+  }
+
+  return null;
+}
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/utils/object.js
+
+
+
+
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/**
+ * Replace a method in an object with a wrapped version of itself.
+ *
+ * If the method on the passed object is not a function, the wrapper will not be applied.
+ *
+ * @param source An object that contains a method to be wrapped.
+ * @param name The name of the method to be wrapped.
+ * @param replacementFactory A higher-order function that takes the original version of the given method and returns a
+ * wrapped version. Note: The function returned by `replacementFactory` needs to be a non-arrow function, in order to
+ * preserve the correct value of `this`, and the original method must be called using `origMethod.call(this, <other
+ * args>)` or `origMethod.apply(this, [<other args>])` (rather than being called directly), again to preserve `this`.
+ * @returns void
+ */
+function fill(source, name, replacementFactory) {
+  if (!(name in source)) {
+    return;
+  }
+
+  // explicitly casting to unknown because we don't know the type of the method initially at all
+  const original = source[name] ;
+
+  if (typeof original !== 'function') {
+    return;
+  }
+
+  const wrapped = replacementFactory(original) ;
+
+  // Make sure it's a function first, as we need to attach an empty prototype for `defineProperties` to work
+  // otherwise it'll throw "TypeError: Object.defineProperties called on non-object"
+  if (typeof wrapped === 'function') {
+    object_markFunctionWrapped(wrapped, original);
+  }
+
+  try {
+    source[name] = wrapped;
+  } catch {
+    DEBUG_BUILD && debug.log(`Failed to replace method "${name}" in object`, source);
+  }
+}
+
+/**
+ * Defines a non-enumerable property on the given object.
+ *
+ * @param obj The object on which to set the property
+ * @param name The name of the property to be set
+ * @param value The value to which to set the property
+ */
+function object_addNonEnumerableProperty(obj, name, value) {
+  try {
+    Object.defineProperty(obj, name, {
+      // enumerable: false, // the default, so we can save on bundle size by not explicitly setting it
+      value: value,
+      writable: true,
+      configurable: true,
+    });
+  } catch {
+    debug_build_DEBUG_BUILD && debug_logger_debug.log(`Failed to add non-enumerable property "${name}" to object`, obj);
+  }
+}
+
+/**
+ * Remembers the original function on the wrapped function and
+ * patches up the prototype.
+ *
+ * @param wrapped the wrapper function
+ * @param original the original function that gets wrapped
+ */
+function object_markFunctionWrapped(wrapped, original) {
+  try {
+    const proto = original.prototype || {};
+    wrapped.prototype = original.prototype = proto;
+    object_addNonEnumerableProperty(wrapped, '__sentry_original__', original);
+  } catch {} // eslint-disable-line no-empty
+}
+
+/**
+ * This extracts the original function if available.  See
+ * `markFunctionWrapped` for more information.
+ *
+ * @param func the function to unwrap
+ * @returns the unwrapped version of the function if available.
+ */
+// eslint-disable-next-line @typescript-eslint/ban-types
+function object_getOriginalFunction(func) {
+  return func.__sentry_original__;
+}
+
+/**
+ * Transforms any `Error` or `Event` into a plain object with all of their enumerable properties, and some of their
+ * non-enumerable properties attached.
+ *
+ * @param value Initial source that we have to transform in order for it to be usable by the serializer
+ * @returns An Event or Error turned into an object - or the value argument itself, when value is neither an Event nor
+ *  an Error.
+ */
+function convertToPlainObject(value)
+
+ {
+  if (is_isError(value)) {
+    return {
+      message: value.message,
+      name: value.name,
+      stack: value.stack,
+      ...getOwnProperties(value),
+    };
+  } else if (isEvent(value)) {
+    const newObj
+
+ = {
+      type: value.type,
+      target: serializeEventTarget(value.target),
+      currentTarget: serializeEventTarget(value.currentTarget),
+      ...getOwnProperties(value),
+    };
+
+    if (typeof CustomEvent !== 'undefined' && isInstanceOf(value, CustomEvent)) {
+      newObj.detail = value.detail;
+    }
+
+    return newObj;
+  } else {
+    return value;
+  }
+}
+
+/** Creates a string representation of the target of an `Event` object */
+function serializeEventTarget(target) {
+  try {
+    return isElement(target) ? htmlTreeAsString(target) : Object.prototype.toString.call(target);
+  } catch {
+    return '<unknown>';
+  }
+}
+
+/** Filters out all but an object's own properties */
+function getOwnProperties(obj) {
+  if (typeof obj === 'object' && obj !== null) {
+    const extractedProps = {};
+    for (const property in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, property)) {
+        extractedProps[property] = (obj )[property];
+      }
+    }
+    return extractedProps;
+  } else {
+    return {};
+  }
+}
+
+/**
+ * Given any captured exception, extract its keys and create a sorted
+ * and truncated list that will be used inside the event message.
+ * eg. `Non-error exception captured with keys: foo, bar, baz`
+ */
+function extractExceptionKeysForMessage(exception) {
+  const keys = Object.keys(convertToPlainObject(exception));
+  keys.sort();
+
+  return !keys[0] ? '[object has no keys]' : keys.join(', ');
+}
+
+/**
+ * Given any object, return a new object having removed all fields whose value was `undefined`.
+ * Works recursively on objects and arrays.
+ *
+ * Attention: This function keeps circular references in the returned object.
+ *
+ * @deprecated This function is no longer used by the SDK and will be removed in a future major version.
+ */
+function dropUndefinedKeys(inputValue) {
+  // This map keeps track of what already visited nodes map to.
+  // Our Set - based memoBuilder doesn't work here because we want to the output object to have the same circular
+  // references as the input object.
+  const memoizationMap = new Map();
+
+  // This function just proxies `_dropUndefinedKeys` to keep the `memoBuilder` out of this function's API
+  return _dropUndefinedKeys(inputValue, memoizationMap);
+}
+
+function _dropUndefinedKeys(inputValue, memoizationMap) {
+  // Early return for primitive values
+  if (inputValue === null || typeof inputValue !== 'object') {
+    return inputValue;
+  }
+
+  // Check memo map first for all object types
+  const memoVal = memoizationMap.get(inputValue);
+  if (memoVal !== undefined) {
+    return memoVal ;
+  }
+
+  // handle arrays
+  if (Array.isArray(inputValue)) {
+    const returnValue = [];
+    // Store mapping to handle circular references
+    memoizationMap.set(inputValue, returnValue);
+
+    inputValue.forEach(value => {
+      returnValue.push(_dropUndefinedKeys(value, memoizationMap));
+    });
+
+    return returnValue ;
+  }
+
+  if (isPojo(inputValue)) {
+    const returnValue = {};
+    // Store mapping to handle circular references
+    memoizationMap.set(inputValue, returnValue);
+
+    const keys = Object.keys(inputValue);
+
+    keys.forEach(key => {
+      const val = inputValue[key];
+      if (val !== undefined) {
+        returnValue[key] = _dropUndefinedKeys(val, memoizationMap);
+      }
+    });
+
+    return returnValue ;
+  }
+
+  // For other object types, return as is
+  return inputValue;
+}
+
+function isPojo(input) {
+  // Plain objects have Object as constructor or no constructor
+  const constructor = (input ).constructor;
+  return constructor === Object || constructor === undefined;
+}
+
+/**
+ * Ensure that something is an object.
+ *
+ * Turns `undefined` and `null` into `String`s and all other primitives into instances of their respective wrapper
+ * classes (String, Boolean, Number, etc.). Acts as the identity function on non-primitives.
+ *
+ * @param wat The subject of the objectification
+ * @returns A version of `wat` which can safely be used with `Object` class methods
+ */
+function objectify(wat) {
+  let objectified;
+  switch (true) {
+    // this will catch both undefined and null
+    case wat == undefined:
+      objectified = new String(wat);
+      break;
+
+    // Though symbols and bigints do have wrapper classes (`Symbol` and `BigInt`, respectively), for whatever reason
+    // those classes don't have constructors which can be used with the `new` keyword. We therefore need to cast each as
+    // an object in order to wrap it.
+    case typeof wat === 'symbol' || typeof wat === 'bigint':
+      objectified = Object(wat);
+      break;
+
+    // this will catch the remaining primitives: `String`, `Number`, and `Boolean`
+    case isPrimitive(wat):
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      objectified = new (wat ).constructor(wat);
+      break;
+
+    // by process of elimination, at this point we know that `wat` must already be an object
+    default:
+      objectified = wat;
+      break;
+  }
+  return objectified;
+}
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/utils/stacktrace.js
+const STACKTRACE_FRAME_LIMIT = 50;
+const UNKNOWN_FUNCTION = '?';
+// Used to sanitize webpack (error: *) wrapped stack errors
+const WEBPACK_ERROR_REGEXP = /\(error: (.*)\)/;
+const STRIP_FRAME_REGEXP = /captureMessage|captureException/;
+
+/**
+ * Creates a stack parser with the supplied line parsers
+ *
+ * StackFrames are returned in the correct order for Sentry Exception
+ * frames and with Sentry SDK internal frames removed from the top and bottom
+ *
+ */
+function createStackParser(...parsers) {
+  const sortedParsers = parsers.sort((a, b) => a[0] - b[0]).map(p => p[1]);
+
+  return (stack, skipFirstLines = 0, framesToPop = 0) => {
+    const frames = [];
+    const lines = stack.split('\n');
+
+    for (let i = skipFirstLines; i < lines.length; i++) {
+      let line = lines[i] ;
+      // Truncate lines over 1kb because many of the regular expressions use
+      // backtracking which results in run time that increases exponentially
+      // with input size. Huge strings can result in hangs/Denial of Service:
+      // https://github.com/getsentry/sentry-javascript/issues/2286
+      if (line.length > 1024) {
+        line = line.slice(0, 1024);
+      }
+
+      // https://github.com/getsentry/sentry-javascript/issues/5459
+      // Remove webpack (error: *) wrappers
+      const cleanedLine = WEBPACK_ERROR_REGEXP.test(line) ? line.replace(WEBPACK_ERROR_REGEXP, '$1') : line;
+
+      // https://github.com/getsentry/sentry-javascript/issues/7813
+      // Skip Error: lines
+      if (cleanedLine.match(/\S*Error: /)) {
+        continue;
+      }
+
+      for (const parser of sortedParsers) {
+        const frame = parser(cleanedLine);
+
+        if (frame) {
+          frames.push(frame);
+          break;
+        }
+      }
+
+      if (frames.length >= STACKTRACE_FRAME_LIMIT + framesToPop) {
+        break;
+      }
+    }
+
+    return stripSentryFramesAndReverse(frames.slice(framesToPop));
+  };
+}
+
+/**
+ * Gets a stack parser implementation from Options.stackParser
+ * @see Options
+ *
+ * If options contains an array of line parsers, it is converted into a parser
+ */
+function stackParserFromStackParserOptions(stackParser) {
+  if (Array.isArray(stackParser)) {
+    return createStackParser(...stackParser);
+  }
+  return stackParser;
+}
+
+/**
+ * Removes Sentry frames from the top and bottom of the stack if present and enforces a limit of max number of frames.
+ * Assumes stack input is ordered from top to bottom and returns the reverse representation so call site of the
+ * function that caused the crash is the last frame in the array.
+ * @hidden
+ */
+function stripSentryFramesAndReverse(stack) {
+  if (!stack.length) {
+    return [];
+  }
+
+  const localStack = Array.from(stack);
+
+  // If stack starts with one of our API calls, remove it (starts, meaning it's the top of the stack - aka last call)
+  if (/sentryWrapped/.test(getLastStackFrame(localStack).function || '')) {
+    localStack.pop();
+  }
+
+  // Reversing in the middle of the procedure allows us to just pop the values off the stack
+  localStack.reverse();
+
+  // If stack ends with one of our internal API calls, remove it (ends, meaning it's the bottom of the stack - aka top-most call)
+  if (STRIP_FRAME_REGEXP.test(getLastStackFrame(localStack).function || '')) {
+    localStack.pop();
+
+    // When using synthetic events, we will have a 2 levels deep stack, as `new Error('Sentry syntheticException')`
+    // is produced within the scope itself, making it:
+    //
+    //   Sentry.captureException()
+    //   scope.captureException()
+    //
+    // instead of just the top `Sentry` call itself.
+    // This forces us to possibly strip an additional frame in the exact same was as above.
+    if (STRIP_FRAME_REGEXP.test(getLastStackFrame(localStack).function || '')) {
+      localStack.pop();
+    }
+  }
+
+  return localStack.slice(0, STACKTRACE_FRAME_LIMIT).map(frame => ({
+    ...frame,
+    filename: frame.filename || getLastStackFrame(localStack).filename,
+    function: frame.function || UNKNOWN_FUNCTION,
+  }));
+}
+
+function getLastStackFrame(arr) {
+  return arr[arr.length - 1] || {};
+}
+
+const defaultFunctionName = '<anonymous>';
+
+/**
+ * Safely extract function name from itself
+ */
+function getFunctionName(fn) {
+  try {
+    if (!fn || typeof fn !== 'function') {
+      return defaultFunctionName;
+    }
+    return fn.name || defaultFunctionName;
+  } catch {
+    // Just accessing custom props in some Selenium environments
+    // can cause a "Permission denied" exception (see raven-js#495).
+    return defaultFunctionName;
+  }
+}
+
+/**
+ * Get's stack frames from an event without needing to check for undefined properties.
+ */
+function getFramesFromEvent(event) {
+  const exception = event.exception;
+
+  if (exception) {
+    const frames = [];
+    try {
+      // @ts-expect-error Object could be undefined
+      exception.values.forEach(value => {
+        // @ts-expect-error Value could be undefined
+        if (value.stacktrace.frames) {
+          // @ts-expect-error Value could be undefined
+          frames.push(...value.stacktrace.frames);
+        }
+      });
+      return frames;
+    } catch {
+      return undefined;
+    }
+  }
+  return undefined;
+}
+
+/**
+ * Get the internal name of an internal Vue value, to represent it in a stacktrace.
+ *
+ * @param value The value to get the internal name of.
+ */
+function stacktrace_getVueInternalName(value) {
+  // Check if it's a VNode (has __v_isVNode) or a component instance (has _isVue/__isVue)
+  const isVNode = '__v_isVNode' in value && value.__v_isVNode;
+
+  return isVNode ? '[VueVNode]' : '[VueViewModel]';
+}
+
+/**
+ * Normalizes stack line paths by removing file:// prefix and leading slashes for Windows paths
+ */
+function normalizeStackTracePath(path) {
+  let filename = path?.startsWith('file://') ? path.slice(7) : path;
+  // If it's a Windows path, trim the leading slash so that `/C:/foo` becomes `C:/foo`
+  if (filename?.match(/\/[A-Z]:/)) {
+    filename = filename.slice(1);
+  }
+  return filename;
+}
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/utils/normalize.js
+
+
+
+
+/**
+ * Recursively normalizes the given object.
+ *
+ * - Creates a copy to prevent original input mutation
+ * - Skips non-enumerable properties
+ * - When stringifying, calls `toJSON` if implemented
+ * - Removes circular references
+ * - Translates non-serializable values (`undefined`/`NaN`/functions) to serializable format
+ * - Translates known global objects/classes to a string representations
+ * - Takes care of `Error` object serialization
+ * - Optionally limits depth of final output
+ * - Optionally limits number of properties/elements included in any single object/array
+ *
+ * @param input The object to be normalized.
+ * @param depth The max depth to which to normalize the object. (Anything deeper stringified whole.)
+ * @param maxProperties The max number of elements or properties to be included in any single array or
+ * object in the normalized output.
+ * @returns A normalized version of the object, or `"**non-serializable**"` if any errors are thrown during normalization.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function utils_normalize_normalize(input, depth = 100, maxProperties = +Infinity) {
+  try {
+    // since we're at the outermost level, we don't provide a key
+    return visit('', input, depth, maxProperties);
+  } catch (err) {
+    return { ERROR: `**non-serializable** (${err})` };
+  }
+}
+
+/** JSDoc */
+function normalizeToSize(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  object,
+  // Default Node.js REPL depth
+  depth = 3,
+  // 100kB, as 200kB is max payload size, so half sounds reasonable
+  maxSize = 100 * 1024,
+) {
+  const normalized = utils_normalize_normalize(object, depth);
+
+  if (jsonSize(normalized) > maxSize) {
+    return normalizeToSize(object, depth - 1, maxSize);
+  }
+
+  return normalized ;
+}
+
+/**
+ * Visits a node to perform normalization on it
+ *
+ * @param key The key corresponding to the given node
+ * @param value The node to be visited
+ * @param depth Optional number indicating the maximum recursion depth
+ * @param maxProperties Optional maximum number of properties/elements included in any single object/array
+ * @param memo Optional Memo class handling decycling
+ */
+function visit(
+  key,
+  value,
+  depth = +Infinity,
+  maxProperties = +Infinity,
+  memo = memoBuilder(),
+) {
+  const [memoize, unmemoize] = memo;
+
+  // Get the simple cases out of the way first
+  if (
+    value == null || // this matches null and undefined -> eqeq not eqeqeq
+    ['boolean', 'string'].includes(typeof value) ||
+    (typeof value === 'number' && Number.isFinite(value))
+  ) {
+    return value ;
+  }
+
+  const stringified = stringifyValue(key, value);
+
+  // Anything we could potentially dig into more (objects or arrays) will have come back as `"[object XXXX]"`.
+  // Everything else will have already been serialized, so if we don't see that pattern, we're done.
+  if (!stringified.startsWith('[object ')) {
+    return stringified;
+  }
+
+  // From here on, we can assert that `value` is either an object or an array.
+
+  // Do not normalize objects that we know have already been normalized. As a general rule, the
+  // "__sentry_skip_normalization__" property should only be used sparingly and only should only be set on objects that
+  // have already been normalized.
+  if ((value )['__sentry_skip_normalization__']) {
+    return value ;
+  }
+
+  // We can set `__sentry_override_normalization_depth__` on an object to ensure that from there
+  // We keep a certain amount of depth.
+  // This should be used sparingly, e.g. we use it for the redux integration to ensure we get a certain amount of state.
+  const remainingDepth =
+    typeof (value )['__sentry_override_normalization_depth__'] === 'number'
+      ? ((value )['__sentry_override_normalization_depth__'] )
+      : depth;
+
+  // We're also done if we've reached the max depth
+  if (remainingDepth === 0) {
+    // At this point we know `serialized` is a string of the form `"[object XXXX]"`. Clean it up so it's just `"[XXXX]"`.
+    return stringified.replace('object ', '');
+  }
+
+  // If we've already visited this branch, bail out, as it's circular reference. If not, note that we're seeing it now.
+  if (memoize(value)) {
+    return '[Circular ~]';
+  }
+
+  // If the value has a `toJSON` method, we call it to extract more information
+  const valueWithToJSON = value ;
+  if (valueWithToJSON && typeof valueWithToJSON.toJSON === 'function') {
+    try {
+      const jsonValue = valueWithToJSON.toJSON();
+      // We need to normalize the return value of `.toJSON()` in case it has circular references
+      return visit('', jsonValue, remainingDepth - 1, maxProperties, memo);
+    } catch {
+      // pass (The built-in `toJSON` failed, but we can still try to do it ourselves)
+    }
+  }
+
+  // At this point we know we either have an object or an array, we haven't seen it before, and we're going to recurse
+  // because we haven't yet reached the max depth. Create an accumulator to hold the results of visiting each
+  // property/entry, and keep track of the number of items we add to it.
+  const normalized = (Array.isArray(value) ? [] : {}) ;
+  let numAdded = 0;
+
+  // Before we begin, convert`Error` and`Event` instances into plain objects, since some of each of their relevant
+  // properties are non-enumerable and otherwise would get missed.
+  const visitable = convertToPlainObject(value );
+
+  for (const visitKey in visitable) {
+    // Avoid iterating over fields in the prototype if they've somehow been exposed to enumeration.
+    if (!Object.prototype.hasOwnProperty.call(visitable, visitKey)) {
+      continue;
+    }
+
+    if (numAdded >= maxProperties) {
+      normalized[visitKey] = '[MaxProperties ~]';
+      break;
+    }
+
+    // Recursively visit all the child nodes
+    const visitValue = visitable[visitKey];
+    normalized[visitKey] = visit(visitKey, visitValue, remainingDepth - 1, maxProperties, memo);
+
+    numAdded++;
+  }
+
+  // Once we've visited all the branches, remove the parent from memo storage
+  unmemoize(value);
+
+  // Return accumulated values
+  return normalized;
+}
+
+/* eslint-disable complexity */
+/**
+ * Stringify the given value. Handles various known special values and types.
+ *
+ * Not meant to be used on simple primitives which already have a string representation, as it will, for example, turn
+ * the number 1231 into "[Object Number]", nor on `null`, as it will throw.
+ *
+ * @param value The value to stringify
+ * @returns A stringified representation of the given value
+ */
+function stringifyValue(
+  key,
+  // this type is a tiny bit of a cheat, since this function does handle NaN (which is technically a number), but for
+  // our internal use, it'll do
+  value,
+) {
+  try {
+    if (key === 'domain' && value && typeof value === 'object' && (value )._events) {
+      return '[Domain]';
+    }
+
+    if (key === 'domainEmitter') {
+      return '[DomainEmitter]';
+    }
+
+    // It's safe to use `global`, `window`, and `document` here in this manner, as we are asserting using `typeof` first
+    // which won't throw if they are not present.
+
+    if (typeof global !== 'undefined' && value === global) {
+      return '[Global]';
+    }
+
+    // eslint-disable-next-line no-restricted-globals
+    if (typeof window !== 'undefined' && value === window) {
+      return '[Window]';
+    }
+
+    // eslint-disable-next-line no-restricted-globals
+    if (typeof document !== 'undefined' && value === document) {
+      return '[Document]';
+    }
+
+    if (is_isVueViewModel(value)) {
+      return stacktrace_getVueInternalName(value);
+    }
+
+    // React's SyntheticEvent thingy
+    if (isSyntheticEvent(value)) {
+      return '[SyntheticEvent]';
+    }
+
+    if (typeof value === 'number' && !Number.isFinite(value)) {
+      return `[${value}]`;
+    }
+
+    if (typeof value === 'function') {
+      return `[Function: ${getFunctionName(value)}]`;
+    }
+
+    if (typeof value === 'symbol') {
+      return `[${String(value)}]`;
+    }
+
+    // stringified BigInts are indistinguishable from regular numbers, so we need to label them to avoid confusion
+    if (typeof value === 'bigint') {
+      return `[BigInt: ${String(value)}]`;
+    }
+
+    // Now that we've knocked out all the special cases and the primitives, all we have left are objects. Simply casting
+    // them to strings means that instances of classes which haven't defined their `toStringTag` will just come out as
+    // `"[object Object]"`. If we instead look at the constructor's name (which is the same as the name of the class),
+    // we can make sure that only plain objects come out that way.
+    const objName = getConstructorName(value);
+
+    // Handle HTML Elements
+    if (/^HTML(\w*)Element$/.test(objName)) {
+      return `[HTMLElement: ${objName}]`;
+    }
+
+    return `[object ${objName}]`;
+  } catch (err) {
+    return `**non-serializable** (${err})`;
+  }
+}
+/* eslint-enable complexity */
+
+function getConstructorName(value) {
+  const prototype = Object.getPrototypeOf(value);
+
+  return prototype?.constructor ? prototype.constructor.name : 'null prototype';
+}
+
+/** Calculates bytes size of input string */
+function utf8Length(value) {
+  // eslint-disable-next-line no-bitwise
+  return ~-encodeURI(value).split(/%..|./).length;
+}
+
+/** Calculates bytes size of input object */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function jsonSize(value) {
+  return utf8Length(JSON.stringify(value));
+}
+
+/**
+ * Normalizes URLs in exceptions and stacktraces to a base path so Sentry can fingerprint
+ * across platforms and working directory.
+ *
+ * @param url The URL to be normalized.
+ * @param basePath The application base path.
+ * @returns The normalized URL.
+ */
+function normalizeUrlToBase(url, basePath) {
+  const escapedBase = basePath
+    // Backslash to forward
+    .replace(/\\/g, '/')
+    // Escape RegExp special characters
+    .replace(/[|\\{}()[\]^$+*?.]/g, '\\$&');
+
+  let newUrl = url;
+  try {
+    newUrl = decodeURI(url);
+  } catch {
+    // Sometime this breaks
+  }
+  return (
+    newUrl
+      .replace(/\\/g, '/')
+      .replace(/webpack:\/?/g, '') // Remove intermediate base path
+      // eslint-disable-next-line @sentry-internal/sdk/no-regexp-constructor
+      .replace(new RegExp(`(file://)?/*${escapedBase}/*`, 'ig'), 'app:///')
+  );
+}
+
+/**
+ * Helper to decycle json objects
+ */
+function memoBuilder() {
+  const inner = new WeakSet();
+  function memoize(obj) {
+    if (inner.has(obj)) {
+      return true;
+    }
+    inner.add(obj);
+    return false;
+  }
+
+  function unmemoize(obj) {
+    inner.delete(obj);
+  }
+  return [memoize, unmemoize];
+}
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/utils/envelope.js
+
+
+
+
+
+/**
+ * Creates an envelope.
+ * Make sure to always explicitly provide the generic to this function
+ * so that the envelope types resolve correctly.
+ */
+function createEnvelope(headers, items = []) {
+  return [headers, items] ;
+}
+
+/**
+ * Add an item to an envelope.
+ * Make sure to always explicitly provide the generic to this function
+ * so that the envelope types resolve correctly.
+ */
+function addItemToEnvelope(envelope, newItem) {
+  const [headers, items] = envelope;
+  return [headers, [...items, newItem]] ;
+}
+
+/**
+ * Convenience function to loop through the items and item types of an envelope.
+ * (This function was mostly created because working with envelope types is painful at the moment)
+ *
+ * If the callback returns true, the rest of the items will be skipped.
+ */
+function forEachEnvelopeItem(
+  envelope,
+  callback,
+) {
+  const envelopeItems = envelope[1];
+
+  for (const envelopeItem of envelopeItems) {
+    const envelopeItemType = envelopeItem[0].type;
+    const result = callback(envelopeItem, envelopeItemType);
+
+    if (result) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+/**
+ * Returns true if the envelope contains any of the given envelope item types
+ */
+function envelopeContainsItemType(envelope, types) {
+  return forEachEnvelopeItem(envelope, (_, type) => types.includes(type));
+}
+
+/**
+ * Encode a string to UTF8 array.
+ */
+function encodeUTF8(input) {
+  const carrier = carrier_getSentryCarrier(worldwide_GLOBAL_OBJ);
+  return carrier.encodePolyfill ? carrier.encodePolyfill(input) : new TextEncoder().encode(input);
+}
+
+/**
+ * Decode a UTF8 array to string.
+ */
+function decodeUTF8(input) {
+  const carrier = getSentryCarrier(GLOBAL_OBJ);
+  return carrier.decodePolyfill ? carrier.decodePolyfill(input) : new TextDecoder().decode(input);
+}
+
+/**
+ * Serializes an envelope.
+ */
+function serializeEnvelope(envelope) {
+  const [envHeaders, items] = envelope;
+  // Initially we construct our envelope as a string and only convert to binary chunks if we encounter binary data
+  let parts = JSON.stringify(envHeaders);
+
+  function append(next) {
+    if (typeof parts === 'string') {
+      parts = typeof next === 'string' ? parts + next : [encodeUTF8(parts), next];
+    } else {
+      parts.push(typeof next === 'string' ? encodeUTF8(next) : next);
+    }
+  }
+
+  for (const item of items) {
+    const [itemHeaders, payload] = item;
+
+    append(`\n${JSON.stringify(itemHeaders)}\n`);
+
+    if (typeof payload === 'string' || payload instanceof Uint8Array) {
+      append(payload);
+    } else {
+      let stringifiedPayload;
+      try {
+        stringifiedPayload = JSON.stringify(payload);
+      } catch {
+        // In case, despite all our efforts to keep `payload` circular-dependency-free, `JSON.stringify()` still
+        // fails, we try again after normalizing it again with infinite normalization depth. This of course has a
+        // performance impact but in this case a performance hit is better than throwing.
+        stringifiedPayload = JSON.stringify(utils_normalize_normalize(payload));
+      }
+      append(stringifiedPayload);
+    }
+  }
+
+  return typeof parts === 'string' ? parts : concatBuffers(parts);
+}
+
+function concatBuffers(buffers) {
+  const totalLength = buffers.reduce((acc, buf) => acc + buf.length, 0);
+
+  const merged = new Uint8Array(totalLength);
+  let offset = 0;
+  for (const buffer of buffers) {
+    merged.set(buffer, offset);
+    offset += buffer.length;
+  }
+
+  return merged;
+}
+
+/**
+ * Parses an envelope
+ */
+function parseEnvelope(env) {
+  let buffer = typeof env === 'string' ? encodeUTF8(env) : env;
+
+  function readBinary(length) {
+    const bin = buffer.subarray(0, length);
+    // Replace the buffer with the remaining data excluding trailing newline
+    buffer = buffer.subarray(length + 1);
+    return bin;
+  }
+
+  function readJson() {
+    let i = buffer.indexOf(0xa);
+    // If we couldn't find a newline, we must have found the end of the buffer
+    if (i < 0) {
+      i = buffer.length;
+    }
+
+    return JSON.parse(decodeUTF8(readBinary(i))) ;
+  }
+
+  const envelopeHeader = readJson();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const items = [];
+
+  while (buffer.length) {
+    const itemHeader = readJson();
+    const binaryLength = typeof itemHeader.length === 'number' ? itemHeader.length : undefined;
+
+    items.push([itemHeader, binaryLength ? readBinary(binaryLength) : readJson()]);
+  }
+
+  return [envelopeHeader, items];
+}
+
+/**
+ * Creates envelope item for a single span
+ */
+function createSpanEnvelopeItem(spanJson) {
+  const spanHeaders = {
+    type: 'span',
+  };
+
+  return [spanHeaders, spanJson];
+}
+
+/**
+ * Creates attachment envelope items
+ */
+function createAttachmentEnvelopeItem(attachment) {
+  const buffer = typeof attachment.data === 'string' ? encodeUTF8(attachment.data) : attachment.data;
+
+  return [
+    {
+      type: 'attachment',
+      length: buffer.length,
+      filename: attachment.filename,
+      content_type: attachment.contentType,
+      attachment_type: attachment.attachmentType,
+    },
+    buffer,
+  ];
+}
+
+const ITEM_TYPE_TO_DATA_CATEGORY_MAP = {
+  session: 'session',
+  sessions: 'session',
+  attachment: 'attachment',
+  transaction: 'transaction',
+  event: 'error',
+  client_report: 'internal',
+  user_report: 'default',
+  profile: 'profile',
+  profile_chunk: 'profile',
+  replay_event: 'replay',
+  replay_recording: 'replay',
+  check_in: 'monitor',
+  feedback: 'feedback',
+  span: 'span',
+  raw_security: 'security',
+  log: 'log_item',
+  metric: 'metric',
+  trace_metric: 'metric',
+};
+
+/**
+ * Maps the type of an envelope item to a data category.
+ */
+function envelopeItemTypeToDataCategory(type) {
+  return ITEM_TYPE_TO_DATA_CATEGORY_MAP[type];
+}
+
+/** Extracts the minimal SDK info from the metadata or an events */
+function getSdkMetadataForEnvelopeHeader(metadataOrEvent) {
+  if (!metadataOrEvent?.sdk) {
+    return;
+  }
+  const { name, version } = metadataOrEvent.sdk;
+  return { name, version };
+}
+
+/**
+ * Creates event envelope headers, based on event, sdk info and tunnel
+ * Note: This function was extracted from the core package to make it available in Replay
+ */
+function createEventEnvelopeHeaders(
+  event,
+  sdkInfo,
+  tunnel,
+  dsn,
+) {
+  const dynamicSamplingContext = event.sdkProcessingMetadata?.dynamicSamplingContext;
+  return {
+    event_id: event.event_id ,
+    sent_at: new Date().toISOString(),
+    ...(sdkInfo && { sdk: sdkInfo }),
+    ...(!!tunnel && dsn && { dsn: dsnToString(dsn) }),
+    ...(dynamicSamplingContext && {
+      trace: dynamicSamplingContext,
+    }),
+  };
+}
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/utils/syncpromise.js
+
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/** SyncPromise internal states */
+const STATE_PENDING = 0;
+const STATE_RESOLVED = 1;
+const STATE_REJECTED = 2;
+
+/**
+ * Creates a resolved sync promise.
+ *
+ * @param value the value to resolve the promise with
+ * @returns the resolved sync promise
+ */
+function resolvedSyncPromise(value) {
+  return new SyncPromise(resolve => {
+    resolve(value);
+  });
+}
+
+/**
+ * Creates a rejected sync promise.
+ *
+ * @param value the value to reject the promise with
+ * @returns the rejected sync promise
+ */
+function rejectedSyncPromise(reason) {
+  return new SyncPromise((_, reject) => {
+    reject(reason);
+  });
+}
+
+/**
+ * Thenable class that behaves like a Promise and follows it's interface
+ * but is not async internally
+ */
+class SyncPromise {
+
+   constructor(executor) {
+    this._state = STATE_PENDING;
+    this._handlers = [];
+
+    this._runExecutor(executor);
+  }
+
+  /** @inheritdoc */
+   then(
+    onfulfilled,
+    onrejected,
+  ) {
+    return new SyncPromise((resolve, reject) => {
+      this._handlers.push([
+        false,
+        result => {
+          if (!onfulfilled) {
+            // TODO: ¯\_(ツ)_/¯
+            // TODO: FIXME
+            resolve(result );
+          } else {
+            try {
+              resolve(onfulfilled(result));
+            } catch (e) {
+              reject(e);
+            }
+          }
+        },
+        reason => {
+          if (!onrejected) {
+            reject(reason);
+          } else {
+            try {
+              resolve(onrejected(reason));
+            } catch (e) {
+              reject(e);
+            }
+          }
+        },
+      ]);
+      this._executeHandlers();
+    });
+  }
+
+  /** @inheritdoc */
+   catch(
+    onrejected,
+  ) {
+    return this.then(val => val, onrejected);
+  }
+
+  /** @inheritdoc */
+   finally(onfinally) {
+    return new SyncPromise((resolve, reject) => {
+      let val;
+      let isRejected;
+
+      return this.then(
+        value => {
+          isRejected = false;
+          val = value;
+          if (onfinally) {
+            onfinally();
+          }
+        },
+        reason => {
+          isRejected = true;
+          val = reason;
+          if (onfinally) {
+            onfinally();
+          }
+        },
+      ).then(() => {
+        if (isRejected) {
+          reject(val);
+          return;
+        }
+
+        resolve(val );
+      });
+    });
+  }
+
+  /** Excute the resolve/reject handlers. */
+   _executeHandlers() {
+    if (this._state === STATE_PENDING) {
+      return;
+    }
+
+    const cachedHandlers = this._handlers.slice();
+    this._handlers = [];
+
+    cachedHandlers.forEach(handler => {
+      if (handler[0]) {
+        return;
+      }
+
+      if (this._state === STATE_RESOLVED) {
+        handler[1](this._value );
+      }
+
+      if (this._state === STATE_REJECTED) {
+        handler[2](this._value);
+      }
+
+      handler[0] = true;
+    });
+  }
+
+  /** Run the executor for the SyncPromise. */
+   _runExecutor(executor) {
+    const setResult = (state, value) => {
+      if (this._state !== STATE_PENDING) {
+        return;
+      }
+
+      if (is_isThenable(value)) {
+        void (value ).then(resolve, reject);
+        return;
+      }
+
+      this._state = state;
+      this._value = value;
+
+      this._executeHandlers();
+    };
+
+    const resolve = (value) => {
+      setResult(STATE_RESOLVED, value);
+    };
+
+    const reject = (reason) => {
+      setResult(STATE_REJECTED, reason);
+    };
+
+    try {
+      executor(resolve, reject);
+    } catch (e) {
+      reject(e);
+    }
+  }
+}
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/utils/promisebuffer.js
+
+
+const SENTRY_BUFFER_FULL_ERROR = Symbol.for('SentryBufferFullError');
+
+/**
+ * Creates an new PromiseBuffer object with the specified limit
+ * @param limit max number of promises that can be stored in the buffer
+ */
+function makePromiseBuffer(limit = 100) {
+  const buffer = new Set();
+
+  function isReady() {
+    return buffer.size < limit;
+  }
+
+  /**
+   * Remove a promise from the queue.
+   *
+   * @param task Can be any PromiseLike<T>
+   * @returns Removed promise.
+   */
+  function remove(task) {
+    buffer.delete(task);
+  }
+
+  /**
+   * Add a promise (representing an in-flight action) to the queue, and set it to remove itself on fulfillment.
+   *
+   * @param taskProducer A function producing any PromiseLike<T>; In previous versions this used to be `task:
+   *        PromiseLike<T>`, but under that model, Promises were instantly created on the call-site and their executor
+   *        functions therefore ran immediately. Thus, even if the buffer was full, the action still happened. By
+   *        requiring the promise to be wrapped in a function, we can defer promise creation until after the buffer
+   *        limit check.
+   * @returns The original promise.
+   */
+  function add(taskProducer) {
+    if (!isReady()) {
+      return rejectedSyncPromise(SENTRY_BUFFER_FULL_ERROR);
+    }
+
+    // start the task and add its promise to the queue
+    const task = taskProducer();
+    buffer.add(task);
+    void task.then(
+      () => remove(task),
+      () => remove(task),
+    );
+    return task;
+  }
+
+  /**
+   * Wait for all promises in the queue to resolve or for timeout to expire, whichever comes first.
+   *
+   * @param timeout The time, in ms, after which to resolve to `false` if the queue is still non-empty. Passing `0` (or
+   * not passing anything) will make the promise wait as long as it takes for the queue to drain before resolving to
+   * `true`.
+   * @returns A promise which will resolve to `true` if the queue is already empty or drains before the timeout, and
+   * `false` otherwise
+   */
+  function drain(timeout) {
+    if (!buffer.size) {
+      return resolvedSyncPromise(true);
+    }
+
+    // We want to resolve even if one of the promises rejects
+    const drainPromise = Promise.allSettled(Array.from(buffer)).then(() => true);
+
+    if (!timeout) {
+      return drainPromise;
+    }
+
+    const promises = [drainPromise, new Promise(resolve => setTimeout(() => resolve(false), timeout))];
+
+    // Promise.race will resolve to the first promise that resolves or rejects
+    // So if the drainPromise resolves, the timeout promise will be ignored
+    return Promise.race(promises);
+  }
+
+  return {
+    get $() {
+      return Array.from(buffer);
+    },
+    add,
+    drain,
+  };
+}
 
 
 
@@ -120070,6 +121892,604 @@ function safeMathRandom() {
  */
 function randomSafeContext_safeDateNow() {
   return randomSafeContext_withRandomSafeContext(() => Date.now());
+}
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/utils/ratelimit.js
+
+
+// Intentionally keeping the key broad, as we don't know for sure what rate limit headers get returned from backend
+
+const DEFAULT_RETRY_AFTER = 60 * 1000; // 60 seconds
+
+/**
+ * Extracts Retry-After value from the request header or returns default value
+ * @param header string representation of 'Retry-After' header
+ * @param now current unix timestamp
+ *
+ */
+function parseRetryAfterHeader(header, now = randomSafeContext_safeDateNow()) {
+  const headerDelay = parseInt(`${header}`, 10);
+  if (!isNaN(headerDelay)) {
+    return headerDelay * 1000;
+  }
+
+  const headerDate = Date.parse(`${header}`);
+  if (!isNaN(headerDate)) {
+    return headerDate - now;
+  }
+
+  return DEFAULT_RETRY_AFTER;
+}
+
+/**
+ * Gets the time that the given category is disabled until for rate limiting.
+ * In case no category-specific limit is set but a general rate limit across all categories is active,
+ * that time is returned.
+ *
+ * @return the time in ms that the category is disabled until or 0 if there's no active rate limit.
+ */
+function disabledUntil(limits, dataCategory) {
+  return limits[dataCategory] || limits.all || 0;
+}
+
+/**
+ * Checks if a category is rate limited
+ */
+function isRateLimited(limits, dataCategory, now = randomSafeContext_safeDateNow()) {
+  return disabledUntil(limits, dataCategory) > now;
+}
+
+/**
+ * Update ratelimits from incoming headers.
+ *
+ * @return the updated RateLimits object.
+ */
+function updateRateLimits(
+  limits,
+  { statusCode, headers },
+  now = randomSafeContext_safeDateNow(),
+) {
+  const updatedRateLimits = {
+    ...limits,
+  };
+
+  // "The name is case-insensitive."
+  // https://developer.mozilla.org/en-US/docs/Web/API/Headers/get
+  const rateLimitHeader = headers?.['x-sentry-rate-limits'];
+  const retryAfterHeader = headers?.['retry-after'];
+
+  if (rateLimitHeader) {
+    /**
+     * rate limit headers are of the form
+     *     <header>,<header>,..
+     * where each <header> is of the form
+     *     <retry_after>: <categories>: <scope>: <reason_code>: <namespaces>
+     * where
+     *     <retry_after> is a delay in seconds
+     *     <categories> is the event type(s) (error, transaction, etc) being rate limited and is of the form
+     *         <category>;<category>;...
+     *     <scope> is what's being limited (org, project, or key) - ignored by SDK
+     *     <reason_code> is an arbitrary string like "org_quota" - ignored by SDK
+     *     <namespaces> Semicolon-separated list of metric namespace identifiers. Defines which namespace(s) will be affected.
+     *         Only present if rate limit applies to the metric_bucket data category.
+     */
+    for (const limit of rateLimitHeader.trim().split(',')) {
+      const [retryAfter, categories, , , namespaces] = limit.split(':', 5) ;
+      const headerDelay = parseInt(retryAfter, 10);
+      const delay = (!isNaN(headerDelay) ? headerDelay : 60) * 1000; // 60sec default
+      if (!categories) {
+        updatedRateLimits.all = now + delay;
+      } else {
+        for (const category of categories.split(';')) {
+          if (category === 'metric_bucket') {
+            // namespaces will be present when category === 'metric_bucket'
+            if (!namespaces || namespaces.split(';').includes('custom')) {
+              updatedRateLimits[category] = now + delay;
+            }
+          } else {
+            updatedRateLimits[category] = now + delay;
+          }
+        }
+      }
+    }
+  } else if (retryAfterHeader) {
+    updatedRateLimits.all = now + parseRetryAfterHeader(retryAfterHeader, now);
+  } else if (statusCode === 429) {
+    updatedRateLimits.all = now + 60 * 1000;
+  }
+
+  return updatedRateLimits;
+}
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/transports/base.js
+
+
+
+
+
+
+const DEFAULT_TRANSPORT_BUFFER_SIZE = 64;
+
+/**
+ * Creates an instance of a Sentry `Transport`
+ *
+ * @param options
+ * @param makeRequest
+ */
+function base_createTransport(
+  options,
+  makeRequest,
+  buffer = makePromiseBuffer(
+    options.bufferSize || DEFAULT_TRANSPORT_BUFFER_SIZE,
+  ),
+) {
+  let rateLimits = {};
+  const flush = (timeout) => buffer.drain(timeout);
+
+  function send(envelope) {
+    const filteredEnvelopeItems = [];
+
+    // Drop rate limited items from envelope
+    forEachEnvelopeItem(envelope, (item, type) => {
+      const dataCategory = envelopeItemTypeToDataCategory(type);
+      if (isRateLimited(rateLimits, dataCategory)) {
+        options.recordDroppedEvent('ratelimit_backoff', dataCategory);
+      } else {
+        filteredEnvelopeItems.push(item);
+      }
+    });
+
+    // Skip sending if envelope is empty after filtering out rate limited events
+    if (filteredEnvelopeItems.length === 0) {
+      return Promise.resolve({});
+    }
+
+    const filteredEnvelope = createEnvelope(envelope[0], filteredEnvelopeItems );
+
+    // Creates client report for each item in an envelope
+    const recordEnvelopeLoss = (reason) => {
+      // Don't record outcomes for client reports - we don't want to create a feedback loop if client reports themselves fail to send
+      if (envelopeContainsItemType(filteredEnvelope, ['client_report'])) {
+        debug_build_DEBUG_BUILD && debug_logger_debug.warn(`Dropping client report. Will not send outcomes (reason: ${reason}).`);
+        return;
+      }
+      forEachEnvelopeItem(filteredEnvelope, (item, type) => {
+        options.recordDroppedEvent(reason, envelopeItemTypeToDataCategory(type));
+      });
+    };
+
+    const requestTask = () =>
+      makeRequest({ body: serializeEnvelope(filteredEnvelope) }).then(
+        response => {
+          // We don't want to throw on NOK responses, but we want to at least log them
+          if (response.statusCode !== undefined && (response.statusCode < 200 || response.statusCode >= 300)) {
+            debug_build_DEBUG_BUILD && debug_logger_debug.warn(`Sentry responded with status code ${response.statusCode} to sent event.`);
+          }
+
+          rateLimits = updateRateLimits(rateLimits, response);
+          return response;
+        },
+        error => {
+          recordEnvelopeLoss('network_error');
+          debug_build_DEBUG_BUILD && debug_logger_debug.error('Encountered error running transport request:', error);
+          throw error;
+        },
+      );
+
+    return buffer.add(requestTask).then(
+      result => result,
+      error => {
+        if (error === SENTRY_BUFFER_FULL_ERROR) {
+          debug_build_DEBUG_BUILD && debug_logger_debug.error('Skipped sending event because buffer is full.');
+          recordEnvelopeLoss('queue_overflow');
+          return Promise.resolve({});
+        } else {
+          throw error;
+        }
+      },
+    );
+  }
+
+  return {
+    send,
+    flush,
+  };
+}
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/utils/supports.js
+
+
+
+
+const supports_WINDOW = (/* unused pure expression or super */ null && (GLOBAL_OBJ)) ;
+
+/**
+ * Tells whether current environment supports ErrorEvent objects
+ * {@link supportsErrorEvent}.
+ *
+ * @returns Answer to the given question.
+ */
+function supportsErrorEvent() {
+  try {
+    new ErrorEvent('');
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Tells whether current environment supports DOMError objects
+ * {@link supportsDOMError}.
+ *
+ * @returns Answer to the given question.
+ */
+function supportsDOMError() {
+  try {
+    // Chrome: VM89:1 Uncaught TypeError: Failed to construct 'DOMError':
+    // 1 argument required, but only 0 present.
+    // @ts-expect-error It really needs 1 argument, not 0.
+    new DOMError('');
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Tells whether current environment supports DOMException objects
+ * {@link supportsDOMException}.
+ *
+ * @returns Answer to the given question.
+ */
+function supportsDOMException() {
+  try {
+    new DOMException('');
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Tells whether current environment supports History API
+ * {@link supportsHistory}.
+ *
+ * @returns Answer to the given question.
+ */
+function supportsHistory() {
+  return 'history' in supports_WINDOW && !!supports_WINDOW.history;
+}
+
+/**
+ * Tells whether current environment supports Fetch API
+ * {@link supportsFetch}.
+ *
+ * @returns Answer to the given question.
+ * @deprecated This is no longer used and will be removed in a future major version.
+ */
+const supportsFetch = (/* unused pure expression or super */ null && (_isFetchSupported));
+
+function _isFetchSupported() {
+  if (!('fetch' in supports_WINDOW)) {
+    return false;
+  }
+
+  try {
+    new Headers();
+    // Deno requires a valid URL so '' cannot be used as an argument
+    new Request('data:,');
+    new Response();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * isNative checks if the given function is a native implementation
+ */
+// eslint-disable-next-line @typescript-eslint/ban-types
+function isNativeFunction(func) {
+  return func && /^function\s+\w+\(\)\s+\{\s+\[native code\]\s+\}$/.test(func.toString());
+}
+
+/**
+ * Tells whether current environment supports Fetch API natively
+ * {@link supportsNativeFetch}.
+ *
+ * @returns true if `window.fetch` is natively implemented, false otherwise
+ */
+function supportsNativeFetch() {
+  if (typeof EdgeRuntime === 'string') {
+    return true;
+  }
+
+  if (!_isFetchSupported()) {
+    return false;
+  }
+
+  // Fast path to avoid DOM I/O
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  if (isNativeFunction(supports_WINDOW.fetch)) {
+    return true;
+  }
+
+  // window.fetch is implemented, but is polyfilled or already wrapped (e.g: by a chrome extension)
+  // so create a "pure" iframe to see if that has native fetch
+  let result = false;
+  const doc = supports_WINDOW.document;
+  // eslint-disable-next-line deprecation/deprecation
+  if (doc && typeof (doc.createElement ) === 'function') {
+    try {
+      const sandbox = doc.createElement('iframe');
+      sandbox.hidden = true;
+      doc.head.appendChild(sandbox);
+      if (sandbox.contentWindow?.fetch) {
+        // eslint-disable-next-line @typescript-eslint/unbound-method
+        result = isNativeFunction(sandbox.contentWindow.fetch);
+      }
+      doc.head.removeChild(sandbox);
+    } catch (err) {
+      DEBUG_BUILD && debug.warn('Could not create sandbox iframe for pure fetch check, bailing to window.fetch: ', err);
+    }
+  }
+
+  return result;
+}
+
+/**
+ * Tells whether current environment supports ReportingObserver API
+ * {@link supportsReportingObserver}.
+ *
+ * @returns Answer to the given question.
+ */
+function supportsReportingObserver() {
+  return 'ReportingObserver' in supports_WINDOW;
+}
+
+/**
+ * Tells whether current environment supports Referrer Policy API
+ * {@link supportsReferrerPolicy}.
+ *
+ * @returns Answer to the given question.
+ * @deprecated This is no longer used and will be removed in a future major version.
+ */
+function supportsReferrerPolicy() {
+  // Despite all stars in the sky saying that Edge supports old draft syntax, aka 'never', 'always', 'origin' and 'default'
+  // (see https://caniuse.com/#feat=referrer-policy),
+  // it doesn't. And it throws an exception instead of ignoring this parameter...
+  // REF: https://github.com/getsentry/raven-js/issues/1233
+
+  if (!_isFetchSupported()) {
+    return false;
+  }
+
+  try {
+    new Request('_', {
+      referrerPolicy: 'origin' ,
+    });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@sentry-internal/browser-utils/build/esm/debug-build.js
+/**
+ * This serves as a build time flag that will be true by default, but false in non-debug builds or if users replace `__SENTRY_DEBUG__` in their generated code.
+ *
+ * ATTENTION: This constant must never cross package boundaries (i.e. be exported) to guarantee that it can be used for tree shaking.
+ */
+const esm_debug_build_DEBUG_BUILD = (typeof __SENTRY_DEBUG__ === 'undefined' || __SENTRY_DEBUG__);
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@sentry-internal/browser-utils/build/esm/types.js
+
+
+const types_WINDOW = worldwide_GLOBAL_OBJ
+
+;
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@sentry-internal/browser-utils/build/esm/getNativeImplementation.js
+
+
+
+
+/**
+ * We generally want to use window.fetch / window.setTimeout.
+ * However, in some cases this may be wrapped (e.g. by Zone.js for Angular),
+ * so we try to get an unpatched version of this from a sandboxed iframe.
+ */
+
+const cachedImplementations = {};
+
+/**
+ * Get the native implementation of a browser function.
+ *
+ * This can be used to ensure we get an unwrapped version of a function, in cases where a wrapped function can lead to problems.
+ *
+ * The following methods can be retrieved:
+ * - `setTimeout`: This can be wrapped by e.g. Angular, causing change detection to be triggered.
+ * - `fetch`: This can be wrapped by e.g. ad-blockers, causing an infinite loop when a request is blocked.
+ */
+function getNativeImplementation(
+  name,
+) {
+  const cached = cachedImplementations[name];
+  if (cached) {
+    return cached;
+  }
+
+  let impl = types_WINDOW[name] ;
+
+  // Fast path to avoid DOM I/O
+  if (isNativeFunction(impl)) {
+    return (cachedImplementations[name] = impl.bind(types_WINDOW) );
+  }
+
+  const document = types_WINDOW.document;
+  // eslint-disable-next-line deprecation/deprecation
+  if (document && typeof document.createElement === 'function') {
+    try {
+      const sandbox = document.createElement('iframe');
+      sandbox.hidden = true;
+      document.head.appendChild(sandbox);
+      const contentWindow = sandbox.contentWindow;
+      if (contentWindow?.[name]) {
+        impl = contentWindow[name] ;
+      }
+      document.head.removeChild(sandbox);
+    } catch (e) {
+      // Could not create sandbox iframe, just use window.xxx
+      esm_debug_build_DEBUG_BUILD && debug_logger_debug.warn(`Could not create sandbox iframe for ${name} check, bailing to window.${name}: `, e);
+    }
+  }
+
+  // Sanity check: This _should_ not happen, but if it does, we just skip caching...
+  // This can happen e.g. in tests where fetch may not be available in the env, or similar.
+  if (!impl) {
+    return impl;
+  }
+
+  return (cachedImplementations[name] = impl.bind(types_WINDOW) );
+}
+
+/** Clear a cached implementation. */
+function clearCachedImplementation(name) {
+  cachedImplementations[name] = undefined;
+}
+
+/**
+ * A special usecase for incorrectly wrapped Fetch APIs in conjunction with ad-blockers.
+ * Whenever someone wraps the Fetch API and returns the wrong promise chain,
+ * this chain becomes orphaned and there is no possible way to capture it's rejections
+ * other than allowing it bubble up to this very handler. eg.
+ *
+ * const f = window.fetch;
+ * window.fetch = function () {
+ *   const p = f.apply(this, arguments);
+ *
+ *   p.then(function() {
+ *     console.log('hi.');
+ *   });
+ *
+ *   return p;
+ * }
+ *
+ * `p.then(function () { ... })` is producing a completely separate promise chain,
+ * however, what's returned is `p` - the result of original `fetch` call.
+ *
+ * This mean, that whenever we use the Fetch API to send our own requests, _and_
+ * some ad-blocker blocks it, this orphaned chain will _always_ reject,
+ * effectively causing another event to be captured.
+ * This makes a whole process become an infinite loop, which we need to somehow
+ * deal with, and break it in one way or another.
+ *
+ * To deal with this issue, we are making sure that we _always_ use the real
+ * browser Fetch API, instead of relying on what `window.fetch` exposes.
+ * The only downside to this would be missing our own requests as breadcrumbs,
+ * but because we are already not doing this, it should be just fine.
+ *
+ * Possible failed fetch error messages per-browser:
+ *
+ * Chrome:  Failed to fetch
+ * Edge:    Failed to Fetch
+ * Firefox: NetworkError when attempting to fetch resource
+ * Safari:  resource blocked by content blocker
+ */
+function getNativeImplementation_fetch(...rest) {
+  return getNativeImplementation('fetch')(...rest);
+}
+
+/**
+ * Get an unwrapped `setTimeout` method.
+ * This ensures that even if e.g. Angular wraps `setTimeout`, we get the native implementation,
+ * avoiding triggering change detection.
+ */
+function getNativeImplementation_setTimeout(...rest) {
+  return getNativeImplementation('setTimeout')(...rest);
+}
+
+
+
+;// CONCATENATED MODULE: ./node_modules/@sentry/browser/build/npm/esm/prod/transports/fetch.js
+
+
+
+const DEFAULT_BROWSER_TRANSPORT_BUFFER_SIZE = 40;
+
+/**
+ * Creates a Transport that uses the Fetch API to send events to Sentry.
+ */
+function makeFetchTransport(
+  options,
+  nativeFetch = getNativeImplementation('fetch'),
+) {
+  let pendingBodySize = 0;
+  let pendingCount = 0;
+
+  async function makeRequest(request) {
+    const requestSize = request.body.length;
+    pendingBodySize += requestSize;
+    pendingCount++;
+
+    const requestOptions = {
+      body: request.body,
+      method: 'POST',
+      referrerPolicy: 'strict-origin',
+      headers: options.headers,
+      // Outgoing requests are usually cancelled when navigating to a different page, causing a "TypeError: Failed to
+      // fetch" error and sending a "network_error" client-outcome - in Chrome, the request status shows "(cancelled)".
+      // The `keepalive` flag keeps outgoing requests alive, even when switching pages. We want this since we're
+      // frequently sending events right before the user is switching pages (eg. when finishing navigation transactions).
+      // Gotchas:
+      // - `keepalive` isn't supported by Firefox
+      // - As per spec (https://fetch.spec.whatwg.org/#http-network-or-cache-fetch):
+      //   If the sum of contentLength and inflightKeepaliveBytes is greater than 64 kibibytes, then return a network error.
+      //   We will therefore only activate the flag when we're below that limit.
+      // There is also a limit of requests that can be open at the same time, so we also limit this to 15
+      // See https://github.com/getsentry/sentry-javascript/pull/7553 for details
+      keepalive: pendingBodySize <= 60000 && pendingCount < 15,
+      ...options.fetchOptions,
+    };
+
+    try {
+      // Note: We do not need to suppress tracing here, because we are using the native fetch, instead of our wrapped one.
+      const response = await nativeFetch(options.url, requestOptions);
+
+      return {
+        statusCode: response.status,
+        headers: {
+          'x-sentry-rate-limits': response.headers.get('X-Sentry-Rate-Limits'),
+          'retry-after': response.headers.get('Retry-After'),
+        },
+      };
+    } catch (e) {
+      clearCachedImplementation('fetch');
+      throw e;
+    } finally {
+      pendingBodySize -= requestSize;
+      pendingCount--;
+    }
+  }
+
+  return base_createTransport(
+    options,
+    makeRequest,
+    makePromiseBuffer(options.bufferSize || DEFAULT_BROWSER_TRANSPORT_BUFFER_SIZE),
+  );
 }
 
 
@@ -120587,339 +123007,6 @@ function sessionToJSON(session) {
 
 
 
-;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/utils/debug-logger.js
-
-
-
-
-const CONSOLE_LEVELS = (/* unused pure expression or super */ null && ([
-  'debug',
-  'info',
-  'warn',
-  'error',
-  'log',
-  'assert',
-  'trace',
-])) ;
-
-/** Prefix for logging strings */
-const PREFIX = 'Sentry Logger ';
-
-/** This may be mutated by the console instrumentation. */
-const originalConsoleMethods
-
- = {};
-
-/**
- * Temporarily disable sentry console instrumentations.
- *
- * @param callback The function to run against the original `console` messages
- * @returns The results of the callback
- */
-function consoleSandbox(callback) {
-  if (!("console" in worldwide_GLOBAL_OBJ)) {
-    return callback();
-  }
-
-  const console = worldwide_GLOBAL_OBJ.console;
-  const wrappedFuncs = {};
-
-  const wrappedLevels = Object.keys(originalConsoleMethods) ;
-
-  // Restore all wrapped console methods
-  wrappedLevels.forEach(level => {
-    const originalConsoleMethod = originalConsoleMethods[level];
-    wrappedFuncs[level] = console[level] ;
-    console[level] = originalConsoleMethod ;
-  });
-
-  try {
-    return callback();
-  } finally {
-    // Revert restoration to wrapped state
-    wrappedLevels.forEach(level => {
-      console[level] = wrappedFuncs[level] ;
-    });
-  }
-}
-
-function enable() {
-  _getLoggerSettings().enabled = true;
-}
-
-function disable() {
-  _getLoggerSettings().enabled = false;
-}
-
-function isEnabled() {
-  return _getLoggerSettings().enabled;
-}
-
-function log(...args) {
-  _maybeLog('log', ...args);
-}
-
-function warn(...args) {
-  _maybeLog('warn', ...args);
-}
-
-function error(...args) {
-  _maybeLog('error', ...args);
-}
-
-function _maybeLog(level, ...args) {
-  if (!debug_build_DEBUG_BUILD) {
-    return;
-  }
-
-  if (isEnabled()) {
-    consoleSandbox(() => {
-      worldwide_GLOBAL_OBJ.console[level](`${PREFIX}[${level}]:`, ...args);
-    });
-  }
-}
-
-function _getLoggerSettings() {
-  if (!debug_build_DEBUG_BUILD) {
-    return { enabled: false };
-  }
-
-  return carrier_getGlobalSingleton('loggerSettings', () => ({ enabled: false }));
-}
-
-/**
- * This is a logger singleton which either logs things or no-ops if logging is not enabled.
- */
-const debug_logger_debug = {
-  /** Enable logging. */
-  enable,
-  /** Disable logging. */
-  disable,
-  /** Check if logging is enabled. */
-  isEnabled,
-  /** Log a message. */
-  log,
-  /** Log a warning. */
-  warn,
-  /** Log an error. */
-  error,
-} ;
-
-
-
-;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/utils/is.js
-// eslint-disable-next-line @typescript-eslint/unbound-method
-const objectToString = Object.prototype.toString;
-
-/**
- * Checks whether given value's type is one of a few Error or Error-like
- * {@link isError}.
- *
- * @param wat A value to be checked.
- * @returns A boolean representing the result.
- */
-function is_isError(wat) {
-  switch (objectToString.call(wat)) {
-    case '[object Error]':
-    case '[object Exception]':
-    case '[object DOMException]':
-    case '[object WebAssembly.Exception]':
-      return true;
-    default:
-      return is_isInstanceOf(wat, Error);
-  }
-}
-/**
- * Checks whether given value is an instance of the given built-in class.
- *
- * @param wat The value to be checked
- * @param className
- * @returns A boolean representing the result.
- */
-function isBuiltin(wat, className) {
-  return objectToString.call(wat) === `[object ${className}]`;
-}
-
-/**
- * Checks whether given value's type is ErrorEvent
- * {@link isErrorEvent}.
- *
- * @param wat A value to be checked.
- * @returns A boolean representing the result.
- */
-function isErrorEvent(wat) {
-  return isBuiltin(wat, 'ErrorEvent');
-}
-
-/**
- * Checks whether given value's type is DOMError
- * {@link isDOMError}.
- *
- * @param wat A value to be checked.
- * @returns A boolean representing the result.
- */
-function isDOMError(wat) {
-  return isBuiltin(wat, 'DOMError');
-}
-
-/**
- * Checks whether given value's type is DOMException
- * {@link isDOMException}.
- *
- * @param wat A value to be checked.
- * @returns A boolean representing the result.
- */
-function isDOMException(wat) {
-  return isBuiltin(wat, 'DOMException');
-}
-
-/**
- * Checks whether given value's type is a string
- * {@link isString}.
- *
- * @param wat A value to be checked.
- * @returns A boolean representing the result.
- */
-function is_isString(wat) {
-  return isBuiltin(wat, 'String');
-}
-
-/**
- * Checks whether given string is parameterized
- * {@link isParameterizedString}.
- *
- * @param wat A value to be checked.
- * @returns A boolean representing the result.
- */
-function isParameterizedString(wat) {
-  return (
-    typeof wat === 'object' &&
-    wat !== null &&
-    '__sentry_template_string__' in wat &&
-    '__sentry_template_values__' in wat
-  );
-}
-
-/**
- * Checks whether given value is a primitive (undefined, null, number, boolean, string, bigint, symbol)
- * {@link isPrimitive}.
- *
- * @param wat A value to be checked.
- * @returns A boolean representing the result.
- */
-function is_isPrimitive(wat) {
-  return wat === null || isParameterizedString(wat) || (typeof wat !== 'object' && typeof wat !== 'function');
-}
-
-/**
- * Checks whether given value's type is an object literal, or a class instance.
- * {@link isPlainObject}.
- *
- * @param wat A value to be checked.
- * @returns A boolean representing the result.
- */
-function is_isPlainObject(wat) {
-  return isBuiltin(wat, 'Object');
-}
-
-/**
- * Checks whether given value's type is an Event instance
- * {@link isEvent}.
- *
- * @param wat A value to be checked.
- * @returns A boolean representing the result.
- */
-function is_isEvent(wat) {
-  return typeof Event !== 'undefined' && is_isInstanceOf(wat, Event);
-}
-
-/**
- * Checks whether given value's type is an Element instance
- * {@link isElement}.
- *
- * @param wat A value to be checked.
- * @returns A boolean representing the result.
- */
-function is_isElement(wat) {
-  return typeof Element !== 'undefined' && is_isInstanceOf(wat, Element);
-}
-
-/**
- * Checks whether given value's type is an regexp
- * {@link isRegExp}.
- *
- * @param wat A value to be checked.
- * @returns A boolean representing the result.
- */
-function is_isRegExp(wat) {
-  return isBuiltin(wat, 'RegExp');
-}
-
-/**
- * Checks whether given value has a then function.
- * @param wat A value to be checked.
- */
-function is_isThenable(wat) {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  return Boolean(wat?.then && typeof wat.then === 'function');
-}
-
-/**
- * Checks whether given value's type is a SyntheticEvent
- * {@link isSyntheticEvent}.
- *
- * @param wat A value to be checked.
- * @returns A boolean representing the result.
- */
-function isSyntheticEvent(wat) {
-  return is_isPlainObject(wat) && 'nativeEvent' in wat && 'preventDefault' in wat && 'stopPropagation' in wat;
-}
-
-/**
- * Checks whether given value's type is an instance of provided constructor.
- * {@link isInstanceOf}.
- *
- * @param wat A value to be checked.
- * @param base A constructor to be used in a check.
- * @returns A boolean representing the result.
- */
-// TODO: fix in v11, convert any to unknown
-// export function isInstanceOf<T>(wat: unknown, base: { new (...args: any[]): T }): wat is T {
-function is_isInstanceOf(wat, base) {
-  try {
-    return wat instanceof base;
-  } catch {
-    return false;
-  }
-}
-
-/**
- * Checks whether given value's type is a Vue ViewModel or a VNode.
- *
- * @param wat A value to be checked.
- * @returns A boolean representing the result.
- */
-function is_isVueViewModel(wat) {
-  // Not using Object.prototype.toString because in Vue 3 it would read the instance's Symbol(Symbol.toStringTag) property.
-  // We also need to check for __v_isVNode because Vue 3 component render instances have an internal __v_isVNode property.
-  return !!(
-    typeof wat === 'object' &&
-    wat !== null &&
-    ((wat ).__isVue || (wat )._isVue || (wat ).__v_isVNode)
-  );
-}
-
-/**
- * Checks whether the given parameter is a Standard Web API Request instance.
- *
- * Returns false if Request is not available in the current runtime.
- */
-function isRequest(request) {
-  return typeof Request !== 'undefined' && is_isInstanceOf(request, Request);
-}
-
-
-
 ;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/utils/merge.js
 /**
  * Shallow merge two objects.
@@ -120970,285 +123057,6 @@ function generateTraceId() {
  */
 function propagationContext_generateSpanId() {
   return uuid4().substring(16);
-}
-
-
-
-;// CONCATENATED MODULE: ./node_modules/@sentry/core/build/esm/utils/object.js
-
-
-
-
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-/**
- * Replace a method in an object with a wrapped version of itself.
- *
- * If the method on the passed object is not a function, the wrapper will not be applied.
- *
- * @param source An object that contains a method to be wrapped.
- * @param name The name of the method to be wrapped.
- * @param replacementFactory A higher-order function that takes the original version of the given method and returns a
- * wrapped version. Note: The function returned by `replacementFactory` needs to be a non-arrow function, in order to
- * preserve the correct value of `this`, and the original method must be called using `origMethod.call(this, <other
- * args>)` or `origMethod.apply(this, [<other args>])` (rather than being called directly), again to preserve `this`.
- * @returns void
- */
-function fill(source, name, replacementFactory) {
-  if (!(name in source)) {
-    return;
-  }
-
-  // explicitly casting to unknown because we don't know the type of the method initially at all
-  const original = source[name] ;
-
-  if (typeof original !== 'function') {
-    return;
-  }
-
-  const wrapped = replacementFactory(original) ;
-
-  // Make sure it's a function first, as we need to attach an empty prototype for `defineProperties` to work
-  // otherwise it'll throw "TypeError: Object.defineProperties called on non-object"
-  if (typeof wrapped === 'function') {
-    object_markFunctionWrapped(wrapped, original);
-  }
-
-  try {
-    source[name] = wrapped;
-  } catch {
-    DEBUG_BUILD && debug.log(`Failed to replace method "${name}" in object`, source);
-  }
-}
-
-/**
- * Defines a non-enumerable property on the given object.
- *
- * @param obj The object on which to set the property
- * @param name The name of the property to be set
- * @param value The value to which to set the property
- */
-function object_addNonEnumerableProperty(obj, name, value) {
-  try {
-    Object.defineProperty(obj, name, {
-      // enumerable: false, // the default, so we can save on bundle size by not explicitly setting it
-      value: value,
-      writable: true,
-      configurable: true,
-    });
-  } catch {
-    debug_build_DEBUG_BUILD && debug_logger_debug.log(`Failed to add non-enumerable property "${name}" to object`, obj);
-  }
-}
-
-/**
- * Remembers the original function on the wrapped function and
- * patches up the prototype.
- *
- * @param wrapped the wrapper function
- * @param original the original function that gets wrapped
- */
-function object_markFunctionWrapped(wrapped, original) {
-  try {
-    const proto = original.prototype || {};
-    wrapped.prototype = original.prototype = proto;
-    object_addNonEnumerableProperty(wrapped, '__sentry_original__', original);
-  } catch {} // eslint-disable-line no-empty
-}
-
-/**
- * This extracts the original function if available.  See
- * `markFunctionWrapped` for more information.
- *
- * @param func the function to unwrap
- * @returns the unwrapped version of the function if available.
- */
-// eslint-disable-next-line @typescript-eslint/ban-types
-function object_getOriginalFunction(func) {
-  return func.__sentry_original__;
-}
-
-/**
- * Transforms any `Error` or `Event` into a plain object with all of their enumerable properties, and some of their
- * non-enumerable properties attached.
- *
- * @param value Initial source that we have to transform in order for it to be usable by the serializer
- * @returns An Event or Error turned into an object - or the value argument itself, when value is neither an Event nor
- *  an Error.
- */
-function convertToPlainObject(value)
-
- {
-  if (isError(value)) {
-    return {
-      message: value.message,
-      name: value.name,
-      stack: value.stack,
-      ...getOwnProperties(value),
-    };
-  } else if (isEvent(value)) {
-    const newObj
-
- = {
-      type: value.type,
-      target: serializeEventTarget(value.target),
-      currentTarget: serializeEventTarget(value.currentTarget),
-      ...getOwnProperties(value),
-    };
-
-    if (typeof CustomEvent !== 'undefined' && isInstanceOf(value, CustomEvent)) {
-      newObj.detail = value.detail;
-    }
-
-    return newObj;
-  } else {
-    return value;
-  }
-}
-
-/** Creates a string representation of the target of an `Event` object */
-function serializeEventTarget(target) {
-  try {
-    return isElement(target) ? htmlTreeAsString(target) : Object.prototype.toString.call(target);
-  } catch {
-    return '<unknown>';
-  }
-}
-
-/** Filters out all but an object's own properties */
-function getOwnProperties(obj) {
-  if (typeof obj === 'object' && obj !== null) {
-    const extractedProps = {};
-    for (const property in obj) {
-      if (Object.prototype.hasOwnProperty.call(obj, property)) {
-        extractedProps[property] = (obj )[property];
-      }
-    }
-    return extractedProps;
-  } else {
-    return {};
-  }
-}
-
-/**
- * Given any captured exception, extract its keys and create a sorted
- * and truncated list that will be used inside the event message.
- * eg. `Non-error exception captured with keys: foo, bar, baz`
- */
-function extractExceptionKeysForMessage(exception) {
-  const keys = Object.keys(convertToPlainObject(exception));
-  keys.sort();
-
-  return !keys[0] ? '[object has no keys]' : keys.join(', ');
-}
-
-/**
- * Given any object, return a new object having removed all fields whose value was `undefined`.
- * Works recursively on objects and arrays.
- *
- * Attention: This function keeps circular references in the returned object.
- *
- * @deprecated This function is no longer used by the SDK and will be removed in a future major version.
- */
-function dropUndefinedKeys(inputValue) {
-  // This map keeps track of what already visited nodes map to.
-  // Our Set - based memoBuilder doesn't work here because we want to the output object to have the same circular
-  // references as the input object.
-  const memoizationMap = new Map();
-
-  // This function just proxies `_dropUndefinedKeys` to keep the `memoBuilder` out of this function's API
-  return _dropUndefinedKeys(inputValue, memoizationMap);
-}
-
-function _dropUndefinedKeys(inputValue, memoizationMap) {
-  // Early return for primitive values
-  if (inputValue === null || typeof inputValue !== 'object') {
-    return inputValue;
-  }
-
-  // Check memo map first for all object types
-  const memoVal = memoizationMap.get(inputValue);
-  if (memoVal !== undefined) {
-    return memoVal ;
-  }
-
-  // handle arrays
-  if (Array.isArray(inputValue)) {
-    const returnValue = [];
-    // Store mapping to handle circular references
-    memoizationMap.set(inputValue, returnValue);
-
-    inputValue.forEach(value => {
-      returnValue.push(_dropUndefinedKeys(value, memoizationMap));
-    });
-
-    return returnValue ;
-  }
-
-  if (isPojo(inputValue)) {
-    const returnValue = {};
-    // Store mapping to handle circular references
-    memoizationMap.set(inputValue, returnValue);
-
-    const keys = Object.keys(inputValue);
-
-    keys.forEach(key => {
-      const val = inputValue[key];
-      if (val !== undefined) {
-        returnValue[key] = _dropUndefinedKeys(val, memoizationMap);
-      }
-    });
-
-    return returnValue ;
-  }
-
-  // For other object types, return as is
-  return inputValue;
-}
-
-function isPojo(input) {
-  // Plain objects have Object as constructor or no constructor
-  const constructor = (input ).constructor;
-  return constructor === Object || constructor === undefined;
-}
-
-/**
- * Ensure that something is an object.
- *
- * Turns `undefined` and `null` into `String`s and all other primitives into instances of their respective wrapper
- * classes (String, Boolean, Number, etc.). Acts as the identity function on non-primitives.
- *
- * @param wat The subject of the objectification
- * @returns A version of `wat` which can safely be used with `Object` class methods
- */
-function objectify(wat) {
-  let objectified;
-  switch (true) {
-    // this will catch both undefined and null
-    case wat == undefined:
-      objectified = new String(wat);
-      break;
-
-    // Though symbols and bigints do have wrapper classes (`Symbol` and `BigInt`, respectively), for whatever reason
-    // those classes don't have constructors which can be used with the `new` keyword. We therefore need to cast each as
-    // an object in order to wrap it.
-    case typeof wat === 'symbol' || typeof wat === 'bigint':
-      objectified = Object(wat);
-      break;
-
-    // this will catch the remaining primitives: `String`, `Number`, and `Boolean`
-    case isPrimitive(wat):
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      objectified = new (wat ).constructor(wat);
-      break;
-
-    // by process of elimination, at this point we know that `wat` must already be an object
-    default:
-      objectified = wat;
-      break;
-  }
-  return objectified;
 }
 
 
@@ -123158,7 +124966,7 @@ function isValidProtocol(protocol) {
  *
  * @param withPassword When set to true, the password will be included.
  */
-function dsnToString(dsn, withPassword = false) {
+function dsn_dsnToString(dsn, withPassword = false) {
   const { host, path, pass, port, projectId, protocol, publicKey } = dsn;
   return (
     `${protocol}://${publicKey}${withPassword && pass ? `:${pass}` : ''}` +
@@ -123355,7 +125163,7 @@ function getReportDialogEndpoint(dsnLike, dialogOptions) {
 
   const endpoint = `${getBaseApiEndpoint(dsn)}embed/error-page/`;
 
-  let encodedOptions = `dsn=${dsnToString(dsn)}`;
+  let encodedOptions = `dsn=${dsn_dsnToString(dsn)}`;
   for (const key in dialogOptions) {
     if (key === 'dsn') {
       continue;
@@ -123399,7 +125207,7 @@ const prod_debug_build_DEBUG_BUILD = (typeof __SENTRY_DEBUG__ === 'undefined' ||
 ;// CONCATENATED MODULE: ./node_modules/@sentry/browser/build/npm/esm/prod/helpers.js
 
 
-const WINDOW = worldwide_GLOBAL_OBJ ;
+const helpers_WINDOW = worldwide_GLOBAL_OBJ ;
 
 let ignoreOnError = 0;
 
@@ -123559,8 +125367,8 @@ function helpers_wrap(
 function getHttpRequestData() {
   // grab as much info as exists and add it to the event
   const url = getLocationHref();
-  const { referrer } = WINDOW.document || {};
-  const { userAgent } = WINDOW.navigator || {};
+  const { referrer } = helpers_WINDOW.document || {};
+  const { userAgent } = helpers_WINDOW.navigator || {};
 
   const headers = {
     ...(referrer && { Referer: referrer }),
@@ -123587,7 +125395,7 @@ function getHttpRequestData() {
  * @param options Everything is optional, we try to fetch all info need from the current scope.
  */
 function showReportDialog(options = {}) {
-  const optionalDocument = WINDOW.document ;
+  const optionalDocument = helpers_WINDOW.document ;
   const injectionPoint = optionalDocument?.head || optionalDocument?.body;
 
   // doesn't work without a document (React Native)
@@ -123614,7 +125422,7 @@ function showReportDialog(options = {}) {
     eventId: options.eventId || lastEventId(),
   };
 
-  const script = WINDOW.document.createElement('script');
+  const script = helpers_WINDOW.document.createElement('script');
   script.async = true;
   script.crossOrigin = 'anonymous';
   script.src = getReportDialogEndpoint(dsn, mergedOptions);
@@ -123631,11 +125439,11 @@ function showReportDialog(options = {}) {
         try {
           onClose();
         } finally {
-          WINDOW.removeEventListener('message', reportDialogClosedMessageHandler);
+          helpers_WINDOW.removeEventListener('message', reportDialogClosedMessageHandler);
         }
       }
     };
-    WINDOW.addEventListener('message', reportDialogClosedMessageHandler);
+    helpers_WINDOW.addEventListener('message', reportDialogClosedMessageHandler);
   }
 
   injectionPoint.appendChild(script);
@@ -123649,7 +125457,7 @@ function showReportDialog(options = {}) {
  *
  * ATTENTION: This constant must never cross package boundaries (i.e. be exported) to guarantee that it can be used for tree shaking.
  */
-const esm_debug_build_DEBUG_BUILD = (typeof __SENTRY_DEBUG__ === 'undefined' || __SENTRY_DEBUG__);
+const build_esm_debug_build_DEBUG_BUILD = (typeof __SENTRY_DEBUG__ === 'undefined' || __SENTRY_DEBUG__);
 
 
 
@@ -123898,7 +125706,7 @@ class ErrorBoundary extends react.Component {
     }
 
     if (fallback) {
-      esm_debug_build_DEBUG_BUILD && debug_logger_debug.warn('fallback did not produce a valid ReactElement');
+      build_esm_debug_build_DEBUG_BUILD && debug_logger_debug.warn('fallback did not produce a valid ReactElement');
     }
 
     // Fail gracefully if no fallback provided or is not valid
@@ -123932,7 +125740,7 @@ function withErrorBoundary(
 ;// CONCATENATED MODULE: ./src/web/constants/common.ts
 const IS_CHROME=/Chrome\//i.test(__webpack_require__.g.navigator?.userAgent);const IS_FIREFOX=/Firefox\//i.test(__webpack_require__.g.navigator?.userAgent);const IS_LINUX=/linux/i.test(__webpack_require__.g.navigator?.userAgent);const IS_WINDOWS=/windows/i.test(__webpack_require__.g.navigator?.userAgent);const EVENTS={broadcastToUI:'broadcastToUI',broadcastToBackground:'broadcastToBackground',TX_COMPLETED:'TX_COMPLETED',SIGN_FINISHED:'SIGN_FINISHED'};const INTERNAL_REQUEST_ORIGIN=env_isWeb?location.origin:null;const INTERNAL_REQUEST_SESSION={name:'Ambire',origin:INTERNAL_REQUEST_ORIGIN,icon:'../assets/images/xicon@128.png'};
 ;// CONCATENATED MODULE: ./src/common/config/analytics/CrashAnalytics.web.ts
-const CRASH_ANALYTICS_WEB_CONFIG={dsn:config_env.SENTRY_DSN_BROWSER_EXTENSION,environment:config_env.APP_ENV,release:`extension-${undefined}@${APP_VERSION}`,sendDefaultPii:false,integrations:[],beforeSend(event){return scrubSentryEventSecrets(event);}};const CrashAnalytics_web_captureException=exports_captureException;const CrashAnalytics_web_captureMessage=captureMessage;const setExtraContext=setExtra;const setUserContext=setUser;const CrashAnalytics_web_ErrorBoundary=ErrorBoundary;const CRASH_ANALYTICS_ENABLED_DEFAULT=!env_isDev&&!IS_FIREFOX;const CRASH_ANALYTICS_ENABLED_STORAGE_KEY='crashAnalyticsEnabledV2';
+const CRASH_ANALYTICS_WEB_CONFIG={dsn:config_env.SENTRY_DSN_BROWSER_EXTENSION,environment:config_env.APP_ENV,release:`extension-${isAmbireNext?'next-':''}${undefined}@${APP_VERSION}`,sendDefaultPii:false,integrations:[],transport:options=>makeFetchTransport(options,(...args)=>fetch(...args)),beforeSend(event){return scrubSentryEventSecrets(event);}};const CrashAnalytics_web_captureException=exports_captureException;const CrashAnalytics_web_captureMessage=captureMessage;const setExtraContext=setExtra;const setUserContext=setUser;const CrashAnalytics_web_ErrorBoundary=ErrorBoundary;const CRASH_ANALYTICS_ENABLED_DEFAULT=!env_isDev&&!IS_FIREFOX;const CRASH_ANALYTICS_ENABLED_STORAGE_KEY='crashAnalyticsEnabledV2';
 // EXTERNAL MODULE: ./node_modules/events/events.js
 var events = __webpack_require__(8666);
 ;// CONCATENATED MODULE: ./src/web/constants/spacings.ts
@@ -126437,7 +128245,7 @@ var classnames = __webpack_require__(3298);
 * @copyright ReactTooltip Team
 * @license MIT
 */
-const h="react-tooltip-core-styles",w="react-tooltip-base-styles",react_tooltip_min_b={core:!1,base:!1};function react_tooltip_min_S({css:e,id:t=w,type:o="base",ref:r}){var l,n;if(!e||"undefined"==typeof document||react_tooltip_min_b[o])return;if("core"===o&&"undefined"!=typeof process&&(null===(l=null===process||void 0===process?void 0:({"NODE_ENV":"production","PUBLIC_URL":"","APP_MANIFEST":{"name":"Ambire","slug":"ambire-mobile-wallet","version":"6.20.2","runtimeVersion":"11","jsEngine":"hermes","updates":{"enabled":false,"fallbackToCacheTimeout":45000},"extra":{"eas":{"projectId":"e6f855d0-5ac3-40e0-8127-740906e7a593"}},"sdkVersion":"54.0.0","platforms":["ios","android","web"],"androidStatusBar":{"backgroundColor":"#FFFFFF"},"web":{}},"EXPO_DEBUG":false,"PLATFORM":"web","WDS_SOCKET_PATH":"/_expo/ws","CI":"true"}))||void 0===l?void 0:l.REACT_TOOLTIP_DISABLE_CORE_STYLES))return;if("base"!==o&&"undefined"!=typeof process&&(null===(n=null===process||void 0===process?void 0:({"NODE_ENV":"production","PUBLIC_URL":"","APP_MANIFEST":{"name":"Ambire","slug":"ambire-mobile-wallet","version":"6.20.2","runtimeVersion":"11","jsEngine":"hermes","updates":{"enabled":false,"fallbackToCacheTimeout":45000},"extra":{"eas":{"projectId":"e6f855d0-5ac3-40e0-8127-740906e7a593"}},"sdkVersion":"54.0.0","platforms":["ios","android","web"],"androidStatusBar":{"backgroundColor":"#FFFFFF"},"web":{}},"EXPO_DEBUG":false,"PLATFORM":"web","WDS_SOCKET_PATH":"/_expo/ws","CI":"true"}))||void 0===n?void 0:n.REACT_TOOLTIP_DISABLE_BASE_STYLES))return;"core"===o&&(t=h),r||(r={});const{insertAt:c}=r;if(document.getElementById(t))return void react_tooltip_min_console.warn(`[react-tooltip] Element with id '${t}' already exists. Call \`removeStyle()\` first`);const i=document.head||document.getElementsByTagName("head")[0],s=document.createElement("style");s.id=t,s.type="text/css","top"===c&&i.firstChild?i.insertBefore(s,i.firstChild):i.appendChild(s),s.styleSheet?s.styleSheet.cssText=e:s.appendChild(document.createTextNode(e)),react_tooltip_min_b[o]=!0}function E({type:e="base",id:t=w}={}){if(!react_tooltip_min_b[e])return;"core"===e&&(t=h);const o=document.getElementById(t);"style"===(null==o?void 0:o.tagName)?null==o||o.remove():react_tooltip_min_console.warn(`[react-tooltip] Failed to remove 'style' element with id '${t}'. Call \`injectStyle()\` first`),react_tooltip_min_b[e]=!1}const g=async({elementReference:e=null,tooltipReference:t=null,tooltipArrowReference:o=null,place:r="top",offset:l=10,strategy:n="absolute",middlewares:c=[offset(Number(l)),floating_ui_dom_flip({fallbackAxisSideDirection:"start"}),floating_ui_dom_shift({padding:5})],border:i})=>{if(!e)return{tooltipStyles:{},tooltipArrowStyles:{},place:r};if(null===t)return{tooltipStyles:{},tooltipArrowStyles:{},place:r};const s=c;return o?(s.push(floating_ui_dom_arrow({element:o,padding:5})),floating_ui_dom_computePosition(e,t,{placement:r,strategy:n,middleware:s}).then((({x:e,y:t,placement:o,middlewareData:r})=>{var l,n;const c={left:`${e}px`,top:`${t}px`,border:i},{x:s,y:a}=null!==(l=r.arrow)&&void 0!==l?l:{x:0,y:0},u=null!==(n={top:"bottom",right:"left",bottom:"top",left:"right"}[o.split("-")[0]])&&void 0!==n?n:"bottom",d=i&&{borderBottom:i,borderRight:i};let p=0;if(i){const e=`${i}`.match(/(\d+)px/);p=(null==e?void 0:e[1])?Number(e[1]):1}return{tooltipStyles:c,tooltipArrowStyles:{left:null!=s?`${s}px`:"",top:null!=a?`${a}px`:"",right:"",bottom:"",...d,[u]:`-${4+p}px`},place:o}}))):floating_ui_dom_computePosition(e,t,{placement:"bottom",strategy:n,middleware:s}).then((({x:e,y:t,placement:o})=>({tooltipStyles:{left:`${e}px`,top:`${t}px`},tooltipArrowStyles:{},place:o})))},A=(e,t)=>!("CSS"in window&&"supports"in window.CSS)||window.CSS.supports(e,t),_=(e,t,o)=>{let r=null;const l=function(...l){const n=()=>{r=null,o||e.apply(this,l)};o&&!r&&(e.apply(this,l),r=setTimeout(n,t)),o||(r&&clearTimeout(r),r=setTimeout(n,t))};return l.cancel=()=>{r&&(clearTimeout(r),r=null)},l},O=e=>null!==e&&!Array.isArray(e)&&"object"==typeof e,T=(e,t)=>{if(e===t)return!0;if(Array.isArray(e)&&Array.isArray(t))return e.length===t.length&&e.every(((e,o)=>T(e,t[o])));if(Array.isArray(e)!==Array.isArray(t))return!1;if(!O(e)||!O(t))return e===t;const o=Object.keys(e),r=Object.keys(t);return o.length===r.length&&o.every((o=>T(e[o],t[o])))},k=e=>{if(!(e instanceof HTMLElement||e instanceof SVGElement))return!1;const t=getComputedStyle(e);return["overflow","overflow-x","overflow-y"].some((e=>{const o=t.getPropertyValue(e);return"auto"===o||"scroll"===o}))},C=e=>{if(!e)return null;let t=e.parentElement;for(;t;){if(k(t))return t;t=t.parentElement}return document.scrollingElement||document.documentElement},L="undefined"!=typeof window?react.useLayoutEffect:react.useEffect,R="DEFAULT_TOOLTIP_ID",x={anchorRefs:new Set,activeAnchor:{current:null},attach:()=>{},detach:()=>{},setActiveAnchor:()=>{}},react_tooltip_min_N=(0,react.createContext)({getTooltipData:()=>x}),$=({children:t})=>{const[o,r]=l({[R]:new Set}),[i,s]=l({[R]:{current:null}}),a=(e,...t)=>{r((o=>{var r;const l=null!==(r=o[e])&&void 0!==r?r:new Set;return t.forEach((e=>l.add(e))),{...o,[e]:new Set(l)}}))},u=(e,...t)=>{r((o=>{const r=o[e];return r?(t.forEach((e=>r.delete(e))),{...o}):o}))},d=n(((e=R)=>{var t,r;return{anchorRefs:null!==(t=o[e])&&void 0!==t?t:new Set,activeAnchor:null!==(r=i[e])&&void 0!==r?r:{current:null},attach:(...t)=>a(e,...t),detach:(...t)=>u(e,...t),setActiveAnchor:t=>((e,t)=>{s((o=>{var r;return(null===(r=o[e])||void 0===r?void 0:r.current)===t.current?o:{...o,[e]:t}}))})(e,t)}}),[o,i,a,u]),p=c((()=>({getTooltipData:d})),[d]);return e.createElement(react_tooltip_min_N.Provider,{value:p},t)};function I(e=R){return (0,react.useContext)(react_tooltip_min_N).getTooltipData(e)}const j=({tooltipId:t,children:r,className:l,place:n,content:c,html:i,variant:a,offset:u,wrapper:d,events:p,positionStrategy:v,delayShow:m,delayHide:f})=>{const{attach:h,detach:w}=I(t),b=s(null);return o((()=>(h(b),()=>{w(b)})),[]),e.createElement("span",{ref:b,className:y("react-tooltip-wrapper",l),"data-tooltip-place":n,"data-tooltip-content":c,"data-tooltip-html":i,"data-tooltip-variant":a,"data-tooltip-offset":u,"data-tooltip-wrapper":d,"data-tooltip-events":p,"data-tooltip-position-strategy":v,"data-tooltip-delay-show":m,"data-tooltip-delay-hide":f},r)};var B={tooltip:"core-styles-module_tooltip__3vRRp",fixed:"core-styles-module_fixed__pcSol",arrow:"core-styles-module_arrow__cvMwQ",noArrow:"core-styles-module_noArrow__xock6",clickable:"core-styles-module_clickable__ZuTTB",show:"core-styles-module_show__Nt9eE",closing:"core-styles-module_closing__sGnxF"},z={tooltip:"styles-module_tooltip__mnnfp",arrow:"styles-module_arrow__K0L3T",dark:"styles-module_dark__xNqje",light:"styles-module_light__Z6W-X",success:"styles-module_success__A2AKt",warning:"styles-module_warning__SCK0X",error:"styles-module_error__JvumD",info:"styles-module_info__BWdHW"};const D=({forwardRef:t,id:r,className:c,classNameArrow:i,variant:u="dark",anchorId:d,anchorSelect:p,place:v="top",offset:m=10,events:h=["hover"],openOnClick:w=!1,positionStrategy:b="absolute",middlewares:S,wrapper:E,delayShow:A=0,delayHide:O=0,float:k=!1,hidden:R=!1,noArrow:x=!1,clickable:N=!1,closeOnEsc:$=!1,closeOnScroll:j=!1,closeOnResize:D=!1,openEvents:q,closeEvents:H,globalCloseEvents:M,imperativeModeOnly:W,style:P,position:V,afterShow:F,afterHide:K,content:U,contentWrapperRef:X,isOpen:Y,defaultIsOpen:G=!1,setIsOpen:Z,activeAnchor:J,setActiveAnchor:Q,border:ee,opacity:te,arrowColor:oe,role:re="tooltip"})=>{var le;const ne=(0,react.useRef)(null),ce=(0,react.useRef)(null),ie=(0,react.useRef)(null),se=(0,react.useRef)(null),ae=(0,react.useRef)(null),[ue,de]=(0,react.useState)({tooltipStyles:{},tooltipArrowStyles:{},place:v}),[pe,ve]=(0,react.useState)(!1),[me,fe]=(0,react.useState)(!1),[ye,he]=(0,react.useState)(null),we=(0,react.useRef)(!1),be=(0,react.useRef)(null),{anchorRefs:Se,setActiveAnchor:Ee}=I(r),ge=(0,react.useRef)(!1),[Ae,_e]=(0,react.useState)([]),Oe=(0,react.useRef)(!1),Te=w||h.includes("click"),ke=Te||(null==q?void 0:q.click)||(null==q?void 0:q.dblclick)||(null==q?void 0:q.mousedown),Ce=q?{...q}:{mouseenter:!0,focus:!0,click:!1,dblclick:!1,mousedown:!1};!q&&Te&&Object.assign(Ce,{mouseenter:!1,focus:!1,click:!0});const Le=H?{...H}:{mouseleave:!0,blur:!0,click:!1,dblclick:!1,mouseup:!1};!H&&Te&&Object.assign(Le,{mouseleave:!1,blur:!1});const Re=M?{...M}:{escape:$||!1,scroll:j||!1,resize:D||!1,clickOutsideAnchor:ke||!1};W&&(Object.assign(Ce,{mouseenter:!1,focus:!1,click:!1,dblclick:!1,mousedown:!1}),Object.assign(Le,{mouseleave:!1,blur:!1,click:!1,dblclick:!1,mouseup:!1}),Object.assign(Re,{escape:!1,scroll:!1,resize:!1,clickOutsideAnchor:!1})),L((()=>(Oe.current=!0,()=>{Oe.current=!1})),[]);const xe=e=>{Oe.current&&(e&&fe(!0),setTimeout((()=>{Oe.current&&(null==Z||Z(e),void 0===Y&&ve(e))}),10))};(0,react.useEffect)((()=>{if(void 0===Y)return()=>null;Y&&fe(!0);const e=setTimeout((()=>{ve(Y)}),10);return()=>{clearTimeout(e)}}),[Y]),(0,react.useEffect)((()=>{if(pe!==we.current)if(ae.current&&clearTimeout(ae.current),we.current=pe,pe)null==F||F();else{const e=(e=>{const t=e.match(/^([\d.]+)(ms|s)$/);if(!t)return 0;const[,o,r]=t;return Number(o)*("ms"===r?1:1e3)})(getComputedStyle(document.body).getPropertyValue("--rt-transition-show-delay"));ae.current=setTimeout((()=>{fe(!1),he(null),null==K||K()}),e+25)}}),[pe]);const Ne=e=>{de((t=>T(t,e)?t:e))},$e=(e=A)=>{ie.current&&clearTimeout(ie.current),me?xe(!0):ie.current=setTimeout((()=>{xe(!0)}),e)},Ie=(e=O)=>{se.current&&clearTimeout(se.current),se.current=setTimeout((()=>{ge.current||xe(!1)}),e)},je=e=>{var t;if(!e)return;const o=null!==(t=e.currentTarget)&&void 0!==t?t:e.target;if(!(null==o?void 0:o.isConnected))return Q(null),void Ee({current:null});A?$e():xe(!0),Q(o),Ee({current:o}),se.current&&clearTimeout(se.current)},Be=()=>{N?Ie(O||100):O?Ie():xe(!1),ie.current&&clearTimeout(ie.current)},ze=({x:e,y:t})=>{var o;const r={getBoundingClientRect:()=>({x:e,y:t,width:0,height:0,top:t,left:e,right:e,bottom:t})};g({place:null!==(o=null==ye?void 0:ye.place)&&void 0!==o?o:v,offset:m,elementReference:r,tooltipReference:ne.current,tooltipArrowReference:ce.current,strategy:b,middlewares:S,border:ee}).then((e=>{Ne(e)}))},De=e=>{if(!e)return;const t=e,o={x:t.clientX,y:t.clientY};ze(o),be.current=o},qe=e=>{var t;if(!pe)return;const o=e.target;if(!o.isConnected)return;if(null===(t=ne.current)||void 0===t?void 0:t.contains(o))return;[document.querySelector(`[id='${d}']`),...Ae].some((e=>null==e?void 0:e.contains(o)))||(xe(!1),ie.current&&clearTimeout(ie.current))},He=_(je,50,!0),Me=_(Be,50,!0),We=e=>{Me.cancel(),He(e)},Pe=()=>{He.cancel(),Me()},Ve=(0,react.useCallback)((()=>{var e,t;const o=null!==(e=null==ye?void 0:ye.position)&&void 0!==e?e:V;o?ze(o):k?be.current&&ze(be.current):(null==J?void 0:J.isConnected)&&g({place:null!==(t=null==ye?void 0:ye.place)&&void 0!==t?t:v,offset:m,elementReference:J,tooltipReference:ne.current,tooltipArrowReference:ce.current,strategy:b,middlewares:S,border:ee}).then((e=>{Oe.current&&Ne(e)}))}),[pe,J,U,P,v,null==ye?void 0:ye.place,m,b,V,null==ye?void 0:ye.position,k]);(0,react.useEffect)((()=>{var e,t;const o=new Set(Se);Ae.forEach((e=>{o.add({current:e})}));const r=document.querySelector(`[id='${d}']`);r&&o.add({current:r});const l=()=>{xe(!1)},n=C(J),c=C(ne.current);Re.scroll&&(window.addEventListener("scroll",l),null==n||n.addEventListener("scroll",l),null==c||c.addEventListener("scroll",l));let i=null;Re.resize?window.addEventListener("resize",l):J&&ne.current&&(i=autoUpdate(J,ne.current,Ve,{ancestorResize:!0,elementResize:!0,layoutShift:!0}));const s=e=>{"Escape"===e.key&&xe(!1)};Re.escape&&window.addEventListener("keydown",s),Re.clickOutsideAnchor&&window.addEventListener("click",qe);const a=[],u=e=>{pe&&(null==e?void 0:e.target)===J||je(e)},p=e=>{pe&&(null==e?void 0:e.target)===J&&Be()},v=["mouseenter","mouseleave","focus","blur"],m=["click","dblclick","mousedown","mouseup"];Object.entries(Ce).forEach((([e,t])=>{t&&(v.includes(e)?a.push({event:e,listener:We}):m.includes(e)&&a.push({event:e,listener:u}))})),Object.entries(Le).forEach((([e,t])=>{t&&(v.includes(e)?a.push({event:e,listener:Pe}):m.includes(e)&&a.push({event:e,listener:p}))})),k&&a.push({event:"pointermove",listener:De});const y=()=>{ge.current=!0},h=()=>{ge.current=!1,Be()};return N&&!ke&&(null===(e=ne.current)||void 0===e||e.addEventListener("mouseenter",y),null===(t=ne.current)||void 0===t||t.addEventListener("mouseleave",h)),a.forEach((({event:e,listener:t})=>{o.forEach((o=>{var r;null===(r=o.current)||void 0===r||r.addEventListener(e,t)}))})),()=>{var e,t;Re.scroll&&(window.removeEventListener("scroll",l),null==n||n.removeEventListener("scroll",l),null==c||c.removeEventListener("scroll",l)),Re.resize?window.removeEventListener("resize",l):null==i||i(),Re.clickOutsideAnchor&&window.removeEventListener("click",qe),Re.escape&&window.removeEventListener("keydown",s),N&&!ke&&(null===(e=ne.current)||void 0===e||e.removeEventListener("mouseenter",y),null===(t=ne.current)||void 0===t||t.removeEventListener("mouseleave",h)),a.forEach((({event:e,listener:t})=>{o.forEach((o=>{var r;null===(r=o.current)||void 0===r||r.removeEventListener(e,t)}))}))}}),[J,Ve,me,Se,Ae,q,H,M,Te,A,O]),(0,react.useEffect)((()=>{var e,t;let o=null!==(t=null!==(e=null==ye?void 0:ye.anchorSelect)&&void 0!==e?e:p)&&void 0!==t?t:"";!o&&r&&(o=`[data-tooltip-id='${r}']`);const l=new MutationObserver((e=>{const t=[],l=[];e.forEach((e=>{if("attributes"===e.type&&"data-tooltip-id"===e.attributeName){e.target.getAttribute("data-tooltip-id")===r?t.push(e.target):e.oldValue===r&&l.push(e.target)}if("childList"===e.type){if(J){const t=[...e.removedNodes].filter((e=>1===e.nodeType));if(o)try{l.push(...t.filter((e=>e.matches(o)))),l.push(...t.flatMap((e=>[...e.querySelectorAll(o)])))}catch(e){}t.some((e=>{var t;return!!(null===(t=null==e?void 0:e.contains)||void 0===t?void 0:t.call(e,J))&&(fe(!1),xe(!1),Q(null),ie.current&&clearTimeout(ie.current),se.current&&clearTimeout(se.current),!0)}))}if(o)try{const r=[...e.addedNodes].filter((e=>1===e.nodeType));t.push(...r.filter((e=>e.matches(o)))),t.push(...r.flatMap((e=>[...e.querySelectorAll(o)])))}catch(e){}}})),(t.length||l.length)&&_e((e=>[...e.filter((e=>!l.includes(e))),...t]))}));return l.observe(document.body,{childList:!0,subtree:!0,attributes:!0,attributeFilter:["data-tooltip-id"],attributeOldValue:!0}),()=>{l.disconnect()}}),[r,p,null==ye?void 0:ye.anchorSelect,J]),(0,react.useEffect)((()=>{Ve()}),[Ve]),(0,react.useEffect)((()=>{if(!(null==X?void 0:X.current))return()=>null;const e=new ResizeObserver((()=>{setTimeout((()=>Ve()))}));return e.observe(X.current),()=>{e.disconnect()}}),[U,null==X?void 0:X.current]),(0,react.useEffect)((()=>{var e;const t=document.querySelector(`[id='${d}']`),o=[...Ae,t];J&&o.includes(J)||Q(null!==(e=Ae[0])&&void 0!==e?e:t)}),[d,Ae,J]),(0,react.useEffect)((()=>(G&&xe(!0),()=>{ie.current&&clearTimeout(ie.current),se.current&&clearTimeout(se.current)})),[]),(0,react.useEffect)((()=>{var e;let t=null!==(e=null==ye?void 0:ye.anchorSelect)&&void 0!==e?e:p;if(!t&&r&&(t=`[data-tooltip-id='${r}']`),t)try{const e=Array.from(document.querySelectorAll(t));_e(e)}catch(e){_e([])}}),[r,p,null==ye?void 0:ye.anchorSelect]),(0,react.useEffect)((()=>{ie.current&&(clearTimeout(ie.current),$e(A))}),[A]);const Fe=null!==(le=null==ye?void 0:ye.content)&&void 0!==le?le:U,Ke=pe&&Object.keys(ue.tooltipStyles).length>0;return (0,react.useImperativeHandle)(t,(()=>({open:e=>{if(null==e?void 0:e.anchorSelect)try{document.querySelector(e.anchorSelect)}catch(t){return void react_tooltip_min_console.warn(`[react-tooltip] "${e.anchorSelect}" is not a valid CSS selector`)}he(null!=e?e:null),(null==e?void 0:e.delay)?$e(e.delay):xe(!0)},close:e=>{(null==e?void 0:e.delay)?Ie(e.delay):xe(!1)},activeAnchor:J,place:ue.place,isOpen:Boolean(me&&!R&&Fe&&Ke)}))),me&&!R&&Fe?react.createElement(E,{id:r,role:re,className:classnames("react-tooltip",B.tooltip,z.tooltip,z[u],c,`react-tooltip__place-${ue.place}`,B[Ke?"show":"closing"],Ke?"react-tooltip__show":"react-tooltip__closing","fixed"===b&&B.fixed,N&&B.clickable),onTransitionEnd:e=>{ae.current&&clearTimeout(ae.current),pe||"opacity"!==e.propertyName||(fe(!1),he(null),null==K||K())},style:{...P,...ue.tooltipStyles,opacity:void 0!==te&&Ke?te:void 0},ref:ne},Fe,react.createElement(E,{className:classnames("react-tooltip-arrow",B.arrow,z.arrow,i,x&&B.noArrow),style:{...ue.tooltipArrowStyles,background:oe?`linear-gradient(to right bottom, transparent 50%, ${oe} 50%)`:void 0},ref:ce})):null},q=({content:t})=>react.createElement("span",{dangerouslySetInnerHTML:{__html:t}}),H=react.forwardRef((({id:t,anchorId:r,anchorSelect:n,content:c,html:i,render:a,className:u,classNameArrow:d,variant:p="dark",place:v="top",offset:m=10,wrapper:f="div",children:h=null,events:w=["hover"],openOnClick:b=!1,positionStrategy:S="absolute",middlewares:E,delayShow:g=0,delayHide:_=0,float:O=!1,hidden:T=!1,noArrow:k=!1,clickable:C=!1,closeOnEsc:L=!1,closeOnScroll:R=!1,closeOnResize:x=!1,openEvents:N,closeEvents:$,globalCloseEvents:j,imperativeModeOnly:B=!1,style:z,position:H,isOpen:M,defaultIsOpen:W=!1,disableStyleInjection:P=!1,border:V,opacity:F,arrowColor:K,setIsOpen:U,afterShow:X,afterHide:Y,role:G="tooltip"},Z)=>{const[J,Q]=(0,react.useState)(c),[ee,te]=(0,react.useState)(i),[oe,re]=(0,react.useState)(v),[le,ne]=(0,react.useState)(p),[ce,ie]=(0,react.useState)(m),[se,ae]=(0,react.useState)(g),[ue,de]=(0,react.useState)(_),[pe,ve]=(0,react.useState)(O),[me,fe]=(0,react.useState)(T),[ye,he]=(0,react.useState)(f),[we,be]=(0,react.useState)(w),[Se,Ee]=(0,react.useState)(S),[ge,Ae]=(0,react.useState)(null),[_e,Oe]=(0,react.useState)(null),Te=(0,react.useRef)(P),{anchorRefs:ke,activeAnchor:Ce}=I(t),Le=e=>null==e?void 0:e.getAttributeNames().reduce(((t,o)=>{var r;if(o.startsWith("data-tooltip-")){t[o.replace(/^data-tooltip-/,"")]=null!==(r=null==e?void 0:e.getAttribute(o))&&void 0!==r?r:null}return t}),{}),Re=e=>{const t={place:e=>{var t;re(null!==(t=e)&&void 0!==t?t:v)},content:e=>{Q(null!=e?e:c)},html:e=>{te(null!=e?e:i)},variant:e=>{var t;ne(null!==(t=e)&&void 0!==t?t:p)},offset:e=>{ie(null===e?m:Number(e))},wrapper:e=>{var t;he(null!==(t=e)&&void 0!==t?t:f)},events:e=>{const t=null==e?void 0:e.split(" ");be(null!=t?t:w)},"position-strategy":e=>{var t;Ee(null!==(t=e)&&void 0!==t?t:S)},"delay-show":e=>{ae(null===e?g:Number(e))},"delay-hide":e=>{de(null===e?_:Number(e))},float:e=>{ve(null===e?O:"true"===e)},hidden:e=>{fe(null===e?T:"true"===e)},"class-name":e=>{Ae(e)}};Object.values(t).forEach((e=>e(null))),Object.entries(e).forEach((([e,o])=>{var r;null===(r=t[e])||void 0===r||r.call(t,o)}))};(0,react.useEffect)((()=>{Q(c)}),[c]),(0,react.useEffect)((()=>{te(i)}),[i]),(0,react.useEffect)((()=>{re(v)}),[v]),(0,react.useEffect)((()=>{ne(p)}),[p]),(0,react.useEffect)((()=>{ie(m)}),[m]),(0,react.useEffect)((()=>{ae(g)}),[g]),(0,react.useEffect)((()=>{de(_)}),[_]),(0,react.useEffect)((()=>{ve(O)}),[O]),(0,react.useEffect)((()=>{fe(T)}),[T]),(0,react.useEffect)((()=>{Ee(S)}),[S]),(0,react.useEffect)((()=>{Te.current!==P&&react_tooltip_min_console.warn("[react-tooltip] Do not change `disableStyleInjection` dynamically.")}),[P]),(0,react.useEffect)((()=>{"undefined"!=typeof window&&window.dispatchEvent(new CustomEvent("react-tooltip-inject-styles",{detail:{disableCore:"core"===P,disableBase:P}}))}),[]),(0,react.useEffect)((()=>{var e;const o=new Set(ke);let l=n;if(!l&&t&&(l=`[data-tooltip-id='${t}']`),l)try{document.querySelectorAll(l).forEach((e=>{o.add({current:e})}))}catch(e){react_tooltip_min_console.warn(`[react-tooltip] "${l}" is not a valid CSS selector`)}const c=document.querySelector(`[id='${r}']`);if(c&&o.add({current:c}),!o.size)return()=>null;const i=null!==(e=null!=_e?_e:c)&&void 0!==e?e:Ce.current,s=new MutationObserver((e=>{e.forEach((e=>{var t;if(!i||"attributes"!==e.type||!(null===(t=e.attributeName)||void 0===t?void 0:t.startsWith("data-tooltip-")))return;const o=Le(i);Re(o)}))})),a={attributes:!0,childList:!1,subtree:!1};if(i){const e=Le(i);Re(e),s.observe(i,a)}return()=>{s.disconnect()}}),[ke,Ce,_e,r,n]),(0,react.useEffect)((()=>{(null==z?void 0:z.border)&&react_tooltip_min_console.warn("[react-tooltip] Do not set `style.border`. Use `border` prop instead."),V&&!A("border",`${V}`)&&react_tooltip_min_console.warn(`[react-tooltip] "${V}" is not a valid \`border\`.`),(null==z?void 0:z.opacity)&&react_tooltip_min_console.warn("[react-tooltip] Do not set `style.opacity`. Use `opacity` prop instead."),F&&!A("opacity",`${F}`)&&react_tooltip_min_console.warn(`[react-tooltip] "${F}" is not a valid \`opacity\`.`)}),[]);let xe=h;const Ne=(0,react.useRef)(null);if(a){const t=a({content:(null==_e?void 0:_e.getAttribute("data-tooltip-content"))||J||null,activeAnchor:_e});xe=t?react.createElement("div",{ref:Ne,className:"react-tooltip-content-wrapper"},t):null}else J&&(xe=J);ee&&(xe=react.createElement(q,{content:ee}));const $e={forwardRef:Z,id:t,anchorId:r,anchorSelect:n,className:classnames(u,ge),classNameArrow:d,content:xe,contentWrapperRef:Ne,place:oe,variant:le,offset:ce,wrapper:ye,events:we,openOnClick:b,positionStrategy:Se,middlewares:E,delayShow:se,delayHide:ue,float:pe,hidden:me,noArrow:k,clickable:C,closeOnEsc:L,closeOnScroll:R,closeOnResize:x,openEvents:N,closeEvents:$,globalCloseEvents:j,imperativeModeOnly:B,style:z,position:H,isOpen:M,defaultIsOpen:W,border:V,opacity:F,arrowColor:K,setIsOpen:U,afterShow:X,afterHide:Y,activeAnchor:_e,setActiveAnchor:e=>Oe(e),role:G};return react.createElement(D,{...$e})}));"undefined"!=typeof window&&window.addEventListener("react-tooltip-inject-styles",(e=>{e.detail.disableCore||react_tooltip_min_S({css:`:root{--rt-color-white:#fff;--rt-color-dark:#222;--rt-color-success:#8dc572;--rt-color-error:#be6464;--rt-color-warning:#f0ad4e;--rt-color-info:#337ab7;--rt-opacity:0.9;--rt-transition-show-delay:0.15s;--rt-transition-closing-delay:0.15s}.core-styles-module_tooltip__3vRRp{position:absolute;top:0;left:0;pointer-events:none;opacity:0;will-change:opacity}.core-styles-module_fixed__pcSol{position:fixed}.core-styles-module_arrow__cvMwQ{position:absolute;background:inherit}.core-styles-module_noArrow__xock6{display:none}.core-styles-module_clickable__ZuTTB{pointer-events:auto}.core-styles-module_show__Nt9eE{opacity:var(--rt-opacity);transition:opacity var(--rt-transition-show-delay)ease-out}.core-styles-module_closing__sGnxF{opacity:0;transition:opacity var(--rt-transition-closing-delay)ease-in}`,type:"core"}),e.detail.disableBase||react_tooltip_min_S({css:`
+const h="react-tooltip-core-styles",w="react-tooltip-base-styles",react_tooltip_min_b={core:!1,base:!1};function react_tooltip_min_S({css:e,id:t=w,type:o="base",ref:r}){var l,n;if(!e||"undefined"==typeof document||react_tooltip_min_b[o])return;if("core"===o&&"undefined"!=typeof process&&(null===(l=null===process||void 0===process?void 0:({"NODE_ENV":"production","PUBLIC_URL":"","APP_MANIFEST":{"name":"Ambire","slug":"ambire-mobile-wallet","version":"6.21.3","runtimeVersion":"11","jsEngine":"hermes","updates":{"enabled":false,"fallbackToCacheTimeout":45000},"extra":{"eas":{"projectId":"e6f855d0-5ac3-40e0-8127-740906e7a593"}},"sdkVersion":"54.0.0","platforms":["ios","android","web"],"androidStatusBar":{"backgroundColor":"#FFFFFF"},"web":{}},"EXPO_DEBUG":false,"PLATFORM":"web","WDS_SOCKET_PATH":"/_expo/ws","CI":"true"}))||void 0===l?void 0:l.REACT_TOOLTIP_DISABLE_CORE_STYLES))return;if("base"!==o&&"undefined"!=typeof process&&(null===(n=null===process||void 0===process?void 0:({"NODE_ENV":"production","PUBLIC_URL":"","APP_MANIFEST":{"name":"Ambire","slug":"ambire-mobile-wallet","version":"6.21.3","runtimeVersion":"11","jsEngine":"hermes","updates":{"enabled":false,"fallbackToCacheTimeout":45000},"extra":{"eas":{"projectId":"e6f855d0-5ac3-40e0-8127-740906e7a593"}},"sdkVersion":"54.0.0","platforms":["ios","android","web"],"androidStatusBar":{"backgroundColor":"#FFFFFF"},"web":{}},"EXPO_DEBUG":false,"PLATFORM":"web","WDS_SOCKET_PATH":"/_expo/ws","CI":"true"}))||void 0===n?void 0:n.REACT_TOOLTIP_DISABLE_BASE_STYLES))return;"core"===o&&(t=h),r||(r={});const{insertAt:c}=r;if(document.getElementById(t))return void react_tooltip_min_console.warn(`[react-tooltip] Element with id '${t}' already exists. Call \`removeStyle()\` first`);const i=document.head||document.getElementsByTagName("head")[0],s=document.createElement("style");s.id=t,s.type="text/css","top"===c&&i.firstChild?i.insertBefore(s,i.firstChild):i.appendChild(s),s.styleSheet?s.styleSheet.cssText=e:s.appendChild(document.createTextNode(e)),react_tooltip_min_b[o]=!0}function E({type:e="base",id:t=w}={}){if(!react_tooltip_min_b[e])return;"core"===e&&(t=h);const o=document.getElementById(t);"style"===(null==o?void 0:o.tagName)?null==o||o.remove():react_tooltip_min_console.warn(`[react-tooltip] Failed to remove 'style' element with id '${t}'. Call \`injectStyle()\` first`),react_tooltip_min_b[e]=!1}const g=async({elementReference:e=null,tooltipReference:t=null,tooltipArrowReference:o=null,place:r="top",offset:l=10,strategy:n="absolute",middlewares:c=[offset(Number(l)),floating_ui_dom_flip({fallbackAxisSideDirection:"start"}),floating_ui_dom_shift({padding:5})],border:i})=>{if(!e)return{tooltipStyles:{},tooltipArrowStyles:{},place:r};if(null===t)return{tooltipStyles:{},tooltipArrowStyles:{},place:r};const s=c;return o?(s.push(floating_ui_dom_arrow({element:o,padding:5})),floating_ui_dom_computePosition(e,t,{placement:r,strategy:n,middleware:s}).then((({x:e,y:t,placement:o,middlewareData:r})=>{var l,n;const c={left:`${e}px`,top:`${t}px`,border:i},{x:s,y:a}=null!==(l=r.arrow)&&void 0!==l?l:{x:0,y:0},u=null!==(n={top:"bottom",right:"left",bottom:"top",left:"right"}[o.split("-")[0]])&&void 0!==n?n:"bottom",d=i&&{borderBottom:i,borderRight:i};let p=0;if(i){const e=`${i}`.match(/(\d+)px/);p=(null==e?void 0:e[1])?Number(e[1]):1}return{tooltipStyles:c,tooltipArrowStyles:{left:null!=s?`${s}px`:"",top:null!=a?`${a}px`:"",right:"",bottom:"",...d,[u]:`-${4+p}px`},place:o}}))):floating_ui_dom_computePosition(e,t,{placement:"bottom",strategy:n,middleware:s}).then((({x:e,y:t,placement:o})=>({tooltipStyles:{left:`${e}px`,top:`${t}px`},tooltipArrowStyles:{},place:o})))},A=(e,t)=>!("CSS"in window&&"supports"in window.CSS)||window.CSS.supports(e,t),_=(e,t,o)=>{let r=null;const l=function(...l){const n=()=>{r=null,o||e.apply(this,l)};o&&!r&&(e.apply(this,l),r=setTimeout(n,t)),o||(r&&clearTimeout(r),r=setTimeout(n,t))};return l.cancel=()=>{r&&(clearTimeout(r),r=null)},l},O=e=>null!==e&&!Array.isArray(e)&&"object"==typeof e,T=(e,t)=>{if(e===t)return!0;if(Array.isArray(e)&&Array.isArray(t))return e.length===t.length&&e.every(((e,o)=>T(e,t[o])));if(Array.isArray(e)!==Array.isArray(t))return!1;if(!O(e)||!O(t))return e===t;const o=Object.keys(e),r=Object.keys(t);return o.length===r.length&&o.every((o=>T(e[o],t[o])))},k=e=>{if(!(e instanceof HTMLElement||e instanceof SVGElement))return!1;const t=getComputedStyle(e);return["overflow","overflow-x","overflow-y"].some((e=>{const o=t.getPropertyValue(e);return"auto"===o||"scroll"===o}))},C=e=>{if(!e)return null;let t=e.parentElement;for(;t;){if(k(t))return t;t=t.parentElement}return document.scrollingElement||document.documentElement},L="undefined"!=typeof window?react.useLayoutEffect:react.useEffect,R="DEFAULT_TOOLTIP_ID",x={anchorRefs:new Set,activeAnchor:{current:null},attach:()=>{},detach:()=>{},setActiveAnchor:()=>{}},react_tooltip_min_N=(0,react.createContext)({getTooltipData:()=>x}),$=({children:t})=>{const[o,r]=l({[R]:new Set}),[i,s]=l({[R]:{current:null}}),a=(e,...t)=>{r((o=>{var r;const l=null!==(r=o[e])&&void 0!==r?r:new Set;return t.forEach((e=>l.add(e))),{...o,[e]:new Set(l)}}))},u=(e,...t)=>{r((o=>{const r=o[e];return r?(t.forEach((e=>r.delete(e))),{...o}):o}))},d=n(((e=R)=>{var t,r;return{anchorRefs:null!==(t=o[e])&&void 0!==t?t:new Set,activeAnchor:null!==(r=i[e])&&void 0!==r?r:{current:null},attach:(...t)=>a(e,...t),detach:(...t)=>u(e,...t),setActiveAnchor:t=>((e,t)=>{s((o=>{var r;return(null===(r=o[e])||void 0===r?void 0:r.current)===t.current?o:{...o,[e]:t}}))})(e,t)}}),[o,i,a,u]),p=c((()=>({getTooltipData:d})),[d]);return e.createElement(react_tooltip_min_N.Provider,{value:p},t)};function I(e=R){return (0,react.useContext)(react_tooltip_min_N).getTooltipData(e)}const j=({tooltipId:t,children:r,className:l,place:n,content:c,html:i,variant:a,offset:u,wrapper:d,events:p,positionStrategy:v,delayShow:m,delayHide:f})=>{const{attach:h,detach:w}=I(t),b=s(null);return o((()=>(h(b),()=>{w(b)})),[]),e.createElement("span",{ref:b,className:y("react-tooltip-wrapper",l),"data-tooltip-place":n,"data-tooltip-content":c,"data-tooltip-html":i,"data-tooltip-variant":a,"data-tooltip-offset":u,"data-tooltip-wrapper":d,"data-tooltip-events":p,"data-tooltip-position-strategy":v,"data-tooltip-delay-show":m,"data-tooltip-delay-hide":f},r)};var B={tooltip:"core-styles-module_tooltip__3vRRp",fixed:"core-styles-module_fixed__pcSol",arrow:"core-styles-module_arrow__cvMwQ",noArrow:"core-styles-module_noArrow__xock6",clickable:"core-styles-module_clickable__ZuTTB",show:"core-styles-module_show__Nt9eE",closing:"core-styles-module_closing__sGnxF"},z={tooltip:"styles-module_tooltip__mnnfp",arrow:"styles-module_arrow__K0L3T",dark:"styles-module_dark__xNqje",light:"styles-module_light__Z6W-X",success:"styles-module_success__A2AKt",warning:"styles-module_warning__SCK0X",error:"styles-module_error__JvumD",info:"styles-module_info__BWdHW"};const D=({forwardRef:t,id:r,className:c,classNameArrow:i,variant:u="dark",anchorId:d,anchorSelect:p,place:v="top",offset:m=10,events:h=["hover"],openOnClick:w=!1,positionStrategy:b="absolute",middlewares:S,wrapper:E,delayShow:A=0,delayHide:O=0,float:k=!1,hidden:R=!1,noArrow:x=!1,clickable:N=!1,closeOnEsc:$=!1,closeOnScroll:j=!1,closeOnResize:D=!1,openEvents:q,closeEvents:H,globalCloseEvents:M,imperativeModeOnly:W,style:P,position:V,afterShow:F,afterHide:K,content:U,contentWrapperRef:X,isOpen:Y,defaultIsOpen:G=!1,setIsOpen:Z,activeAnchor:J,setActiveAnchor:Q,border:ee,opacity:te,arrowColor:oe,role:re="tooltip"})=>{var le;const ne=(0,react.useRef)(null),ce=(0,react.useRef)(null),ie=(0,react.useRef)(null),se=(0,react.useRef)(null),ae=(0,react.useRef)(null),[ue,de]=(0,react.useState)({tooltipStyles:{},tooltipArrowStyles:{},place:v}),[pe,ve]=(0,react.useState)(!1),[me,fe]=(0,react.useState)(!1),[ye,he]=(0,react.useState)(null),we=(0,react.useRef)(!1),be=(0,react.useRef)(null),{anchorRefs:Se,setActiveAnchor:Ee}=I(r),ge=(0,react.useRef)(!1),[Ae,_e]=(0,react.useState)([]),Oe=(0,react.useRef)(!1),Te=w||h.includes("click"),ke=Te||(null==q?void 0:q.click)||(null==q?void 0:q.dblclick)||(null==q?void 0:q.mousedown),Ce=q?{...q}:{mouseenter:!0,focus:!0,click:!1,dblclick:!1,mousedown:!1};!q&&Te&&Object.assign(Ce,{mouseenter:!1,focus:!1,click:!0});const Le=H?{...H}:{mouseleave:!0,blur:!0,click:!1,dblclick:!1,mouseup:!1};!H&&Te&&Object.assign(Le,{mouseleave:!1,blur:!1});const Re=M?{...M}:{escape:$||!1,scroll:j||!1,resize:D||!1,clickOutsideAnchor:ke||!1};W&&(Object.assign(Ce,{mouseenter:!1,focus:!1,click:!1,dblclick:!1,mousedown:!1}),Object.assign(Le,{mouseleave:!1,blur:!1,click:!1,dblclick:!1,mouseup:!1}),Object.assign(Re,{escape:!1,scroll:!1,resize:!1,clickOutsideAnchor:!1})),L((()=>(Oe.current=!0,()=>{Oe.current=!1})),[]);const xe=e=>{Oe.current&&(e&&fe(!0),setTimeout((()=>{Oe.current&&(null==Z||Z(e),void 0===Y&&ve(e))}),10))};(0,react.useEffect)((()=>{if(void 0===Y)return()=>null;Y&&fe(!0);const e=setTimeout((()=>{ve(Y)}),10);return()=>{clearTimeout(e)}}),[Y]),(0,react.useEffect)((()=>{if(pe!==we.current)if(ae.current&&clearTimeout(ae.current),we.current=pe,pe)null==F||F();else{const e=(e=>{const t=e.match(/^([\d.]+)(ms|s)$/);if(!t)return 0;const[,o,r]=t;return Number(o)*("ms"===r?1:1e3)})(getComputedStyle(document.body).getPropertyValue("--rt-transition-show-delay"));ae.current=setTimeout((()=>{fe(!1),he(null),null==K||K()}),e+25)}}),[pe]);const Ne=e=>{de((t=>T(t,e)?t:e))},$e=(e=A)=>{ie.current&&clearTimeout(ie.current),me?xe(!0):ie.current=setTimeout((()=>{xe(!0)}),e)},Ie=(e=O)=>{se.current&&clearTimeout(se.current),se.current=setTimeout((()=>{ge.current||xe(!1)}),e)},je=e=>{var t;if(!e)return;const o=null!==(t=e.currentTarget)&&void 0!==t?t:e.target;if(!(null==o?void 0:o.isConnected))return Q(null),void Ee({current:null});A?$e():xe(!0),Q(o),Ee({current:o}),se.current&&clearTimeout(se.current)},Be=()=>{N?Ie(O||100):O?Ie():xe(!1),ie.current&&clearTimeout(ie.current)},ze=({x:e,y:t})=>{var o;const r={getBoundingClientRect:()=>({x:e,y:t,width:0,height:0,top:t,left:e,right:e,bottom:t})};g({place:null!==(o=null==ye?void 0:ye.place)&&void 0!==o?o:v,offset:m,elementReference:r,tooltipReference:ne.current,tooltipArrowReference:ce.current,strategy:b,middlewares:S,border:ee}).then((e=>{Ne(e)}))},De=e=>{if(!e)return;const t=e,o={x:t.clientX,y:t.clientY};ze(o),be.current=o},qe=e=>{var t;if(!pe)return;const o=e.target;if(!o.isConnected)return;if(null===(t=ne.current)||void 0===t?void 0:t.contains(o))return;[document.querySelector(`[id='${d}']`),...Ae].some((e=>null==e?void 0:e.contains(o)))||(xe(!1),ie.current&&clearTimeout(ie.current))},He=_(je,50,!0),Me=_(Be,50,!0),We=e=>{Me.cancel(),He(e)},Pe=()=>{He.cancel(),Me()},Ve=(0,react.useCallback)((()=>{var e,t;const o=null!==(e=null==ye?void 0:ye.position)&&void 0!==e?e:V;o?ze(o):k?be.current&&ze(be.current):(null==J?void 0:J.isConnected)&&g({place:null!==(t=null==ye?void 0:ye.place)&&void 0!==t?t:v,offset:m,elementReference:J,tooltipReference:ne.current,tooltipArrowReference:ce.current,strategy:b,middlewares:S,border:ee}).then((e=>{Oe.current&&Ne(e)}))}),[pe,J,U,P,v,null==ye?void 0:ye.place,m,b,V,null==ye?void 0:ye.position,k]);(0,react.useEffect)((()=>{var e,t;const o=new Set(Se);Ae.forEach((e=>{o.add({current:e})}));const r=document.querySelector(`[id='${d}']`);r&&o.add({current:r});const l=()=>{xe(!1)},n=C(J),c=C(ne.current);Re.scroll&&(window.addEventListener("scroll",l),null==n||n.addEventListener("scroll",l),null==c||c.addEventListener("scroll",l));let i=null;Re.resize?window.addEventListener("resize",l):J&&ne.current&&(i=autoUpdate(J,ne.current,Ve,{ancestorResize:!0,elementResize:!0,layoutShift:!0}));const s=e=>{"Escape"===e.key&&xe(!1)};Re.escape&&window.addEventListener("keydown",s),Re.clickOutsideAnchor&&window.addEventListener("click",qe);const a=[],u=e=>{pe&&(null==e?void 0:e.target)===J||je(e)},p=e=>{pe&&(null==e?void 0:e.target)===J&&Be()},v=["mouseenter","mouseleave","focus","blur"],m=["click","dblclick","mousedown","mouseup"];Object.entries(Ce).forEach((([e,t])=>{t&&(v.includes(e)?a.push({event:e,listener:We}):m.includes(e)&&a.push({event:e,listener:u}))})),Object.entries(Le).forEach((([e,t])=>{t&&(v.includes(e)?a.push({event:e,listener:Pe}):m.includes(e)&&a.push({event:e,listener:p}))})),k&&a.push({event:"pointermove",listener:De});const y=()=>{ge.current=!0},h=()=>{ge.current=!1,Be()};return N&&!ke&&(null===(e=ne.current)||void 0===e||e.addEventListener("mouseenter",y),null===(t=ne.current)||void 0===t||t.addEventListener("mouseleave",h)),a.forEach((({event:e,listener:t})=>{o.forEach((o=>{var r;null===(r=o.current)||void 0===r||r.addEventListener(e,t)}))})),()=>{var e,t;Re.scroll&&(window.removeEventListener("scroll",l),null==n||n.removeEventListener("scroll",l),null==c||c.removeEventListener("scroll",l)),Re.resize?window.removeEventListener("resize",l):null==i||i(),Re.clickOutsideAnchor&&window.removeEventListener("click",qe),Re.escape&&window.removeEventListener("keydown",s),N&&!ke&&(null===(e=ne.current)||void 0===e||e.removeEventListener("mouseenter",y),null===(t=ne.current)||void 0===t||t.removeEventListener("mouseleave",h)),a.forEach((({event:e,listener:t})=>{o.forEach((o=>{var r;null===(r=o.current)||void 0===r||r.removeEventListener(e,t)}))}))}}),[J,Ve,me,Se,Ae,q,H,M,Te,A,O]),(0,react.useEffect)((()=>{var e,t;let o=null!==(t=null!==(e=null==ye?void 0:ye.anchorSelect)&&void 0!==e?e:p)&&void 0!==t?t:"";!o&&r&&(o=`[data-tooltip-id='${r}']`);const l=new MutationObserver((e=>{const t=[],l=[];e.forEach((e=>{if("attributes"===e.type&&"data-tooltip-id"===e.attributeName){e.target.getAttribute("data-tooltip-id")===r?t.push(e.target):e.oldValue===r&&l.push(e.target)}if("childList"===e.type){if(J){const t=[...e.removedNodes].filter((e=>1===e.nodeType));if(o)try{l.push(...t.filter((e=>e.matches(o)))),l.push(...t.flatMap((e=>[...e.querySelectorAll(o)])))}catch(e){}t.some((e=>{var t;return!!(null===(t=null==e?void 0:e.contains)||void 0===t?void 0:t.call(e,J))&&(fe(!1),xe(!1),Q(null),ie.current&&clearTimeout(ie.current),se.current&&clearTimeout(se.current),!0)}))}if(o)try{const r=[...e.addedNodes].filter((e=>1===e.nodeType));t.push(...r.filter((e=>e.matches(o)))),t.push(...r.flatMap((e=>[...e.querySelectorAll(o)])))}catch(e){}}})),(t.length||l.length)&&_e((e=>[...e.filter((e=>!l.includes(e))),...t]))}));return l.observe(document.body,{childList:!0,subtree:!0,attributes:!0,attributeFilter:["data-tooltip-id"],attributeOldValue:!0}),()=>{l.disconnect()}}),[r,p,null==ye?void 0:ye.anchorSelect,J]),(0,react.useEffect)((()=>{Ve()}),[Ve]),(0,react.useEffect)((()=>{if(!(null==X?void 0:X.current))return()=>null;const e=new ResizeObserver((()=>{setTimeout((()=>Ve()))}));return e.observe(X.current),()=>{e.disconnect()}}),[U,null==X?void 0:X.current]),(0,react.useEffect)((()=>{var e;const t=document.querySelector(`[id='${d}']`),o=[...Ae,t];J&&o.includes(J)||Q(null!==(e=Ae[0])&&void 0!==e?e:t)}),[d,Ae,J]),(0,react.useEffect)((()=>(G&&xe(!0),()=>{ie.current&&clearTimeout(ie.current),se.current&&clearTimeout(se.current)})),[]),(0,react.useEffect)((()=>{var e;let t=null!==(e=null==ye?void 0:ye.anchorSelect)&&void 0!==e?e:p;if(!t&&r&&(t=`[data-tooltip-id='${r}']`),t)try{const e=Array.from(document.querySelectorAll(t));_e(e)}catch(e){_e([])}}),[r,p,null==ye?void 0:ye.anchorSelect]),(0,react.useEffect)((()=>{ie.current&&(clearTimeout(ie.current),$e(A))}),[A]);const Fe=null!==(le=null==ye?void 0:ye.content)&&void 0!==le?le:U,Ke=pe&&Object.keys(ue.tooltipStyles).length>0;return (0,react.useImperativeHandle)(t,(()=>({open:e=>{if(null==e?void 0:e.anchorSelect)try{document.querySelector(e.anchorSelect)}catch(t){return void react_tooltip_min_console.warn(`[react-tooltip] "${e.anchorSelect}" is not a valid CSS selector`)}he(null!=e?e:null),(null==e?void 0:e.delay)?$e(e.delay):xe(!0)},close:e=>{(null==e?void 0:e.delay)?Ie(e.delay):xe(!1)},activeAnchor:J,place:ue.place,isOpen:Boolean(me&&!R&&Fe&&Ke)}))),me&&!R&&Fe?react.createElement(E,{id:r,role:re,className:classnames("react-tooltip",B.tooltip,z.tooltip,z[u],c,`react-tooltip__place-${ue.place}`,B[Ke?"show":"closing"],Ke?"react-tooltip__show":"react-tooltip__closing","fixed"===b&&B.fixed,N&&B.clickable),onTransitionEnd:e=>{ae.current&&clearTimeout(ae.current),pe||"opacity"!==e.propertyName||(fe(!1),he(null),null==K||K())},style:{...P,...ue.tooltipStyles,opacity:void 0!==te&&Ke?te:void 0},ref:ne},Fe,react.createElement(E,{className:classnames("react-tooltip-arrow",B.arrow,z.arrow,i,x&&B.noArrow),style:{...ue.tooltipArrowStyles,background:oe?`linear-gradient(to right bottom, transparent 50%, ${oe} 50%)`:void 0},ref:ce})):null},q=({content:t})=>react.createElement("span",{dangerouslySetInnerHTML:{__html:t}}),H=react.forwardRef((({id:t,anchorId:r,anchorSelect:n,content:c,html:i,render:a,className:u,classNameArrow:d,variant:p="dark",place:v="top",offset:m=10,wrapper:f="div",children:h=null,events:w=["hover"],openOnClick:b=!1,positionStrategy:S="absolute",middlewares:E,delayShow:g=0,delayHide:_=0,float:O=!1,hidden:T=!1,noArrow:k=!1,clickable:C=!1,closeOnEsc:L=!1,closeOnScroll:R=!1,closeOnResize:x=!1,openEvents:N,closeEvents:$,globalCloseEvents:j,imperativeModeOnly:B=!1,style:z,position:H,isOpen:M,defaultIsOpen:W=!1,disableStyleInjection:P=!1,border:V,opacity:F,arrowColor:K,setIsOpen:U,afterShow:X,afterHide:Y,role:G="tooltip"},Z)=>{const[J,Q]=(0,react.useState)(c),[ee,te]=(0,react.useState)(i),[oe,re]=(0,react.useState)(v),[le,ne]=(0,react.useState)(p),[ce,ie]=(0,react.useState)(m),[se,ae]=(0,react.useState)(g),[ue,de]=(0,react.useState)(_),[pe,ve]=(0,react.useState)(O),[me,fe]=(0,react.useState)(T),[ye,he]=(0,react.useState)(f),[we,be]=(0,react.useState)(w),[Se,Ee]=(0,react.useState)(S),[ge,Ae]=(0,react.useState)(null),[_e,Oe]=(0,react.useState)(null),Te=(0,react.useRef)(P),{anchorRefs:ke,activeAnchor:Ce}=I(t),Le=e=>null==e?void 0:e.getAttributeNames().reduce(((t,o)=>{var r;if(o.startsWith("data-tooltip-")){t[o.replace(/^data-tooltip-/,"")]=null!==(r=null==e?void 0:e.getAttribute(o))&&void 0!==r?r:null}return t}),{}),Re=e=>{const t={place:e=>{var t;re(null!==(t=e)&&void 0!==t?t:v)},content:e=>{Q(null!=e?e:c)},html:e=>{te(null!=e?e:i)},variant:e=>{var t;ne(null!==(t=e)&&void 0!==t?t:p)},offset:e=>{ie(null===e?m:Number(e))},wrapper:e=>{var t;he(null!==(t=e)&&void 0!==t?t:f)},events:e=>{const t=null==e?void 0:e.split(" ");be(null!=t?t:w)},"position-strategy":e=>{var t;Ee(null!==(t=e)&&void 0!==t?t:S)},"delay-show":e=>{ae(null===e?g:Number(e))},"delay-hide":e=>{de(null===e?_:Number(e))},float:e=>{ve(null===e?O:"true"===e)},hidden:e=>{fe(null===e?T:"true"===e)},"class-name":e=>{Ae(e)}};Object.values(t).forEach((e=>e(null))),Object.entries(e).forEach((([e,o])=>{var r;null===(r=t[e])||void 0===r||r.call(t,o)}))};(0,react.useEffect)((()=>{Q(c)}),[c]),(0,react.useEffect)((()=>{te(i)}),[i]),(0,react.useEffect)((()=>{re(v)}),[v]),(0,react.useEffect)((()=>{ne(p)}),[p]),(0,react.useEffect)((()=>{ie(m)}),[m]),(0,react.useEffect)((()=>{ae(g)}),[g]),(0,react.useEffect)((()=>{de(_)}),[_]),(0,react.useEffect)((()=>{ve(O)}),[O]),(0,react.useEffect)((()=>{fe(T)}),[T]),(0,react.useEffect)((()=>{Ee(S)}),[S]),(0,react.useEffect)((()=>{Te.current!==P&&react_tooltip_min_console.warn("[react-tooltip] Do not change `disableStyleInjection` dynamically.")}),[P]),(0,react.useEffect)((()=>{"undefined"!=typeof window&&window.dispatchEvent(new CustomEvent("react-tooltip-inject-styles",{detail:{disableCore:"core"===P,disableBase:P}}))}),[]),(0,react.useEffect)((()=>{var e;const o=new Set(ke);let l=n;if(!l&&t&&(l=`[data-tooltip-id='${t}']`),l)try{document.querySelectorAll(l).forEach((e=>{o.add({current:e})}))}catch(e){react_tooltip_min_console.warn(`[react-tooltip] "${l}" is not a valid CSS selector`)}const c=document.querySelector(`[id='${r}']`);if(c&&o.add({current:c}),!o.size)return()=>null;const i=null!==(e=null!=_e?_e:c)&&void 0!==e?e:Ce.current,s=new MutationObserver((e=>{e.forEach((e=>{var t;if(!i||"attributes"!==e.type||!(null===(t=e.attributeName)||void 0===t?void 0:t.startsWith("data-tooltip-")))return;const o=Le(i);Re(o)}))})),a={attributes:!0,childList:!1,subtree:!1};if(i){const e=Le(i);Re(e),s.observe(i,a)}return()=>{s.disconnect()}}),[ke,Ce,_e,r,n]),(0,react.useEffect)((()=>{(null==z?void 0:z.border)&&react_tooltip_min_console.warn("[react-tooltip] Do not set `style.border`. Use `border` prop instead."),V&&!A("border",`${V}`)&&react_tooltip_min_console.warn(`[react-tooltip] "${V}" is not a valid \`border\`.`),(null==z?void 0:z.opacity)&&react_tooltip_min_console.warn("[react-tooltip] Do not set `style.opacity`. Use `opacity` prop instead."),F&&!A("opacity",`${F}`)&&react_tooltip_min_console.warn(`[react-tooltip] "${F}" is not a valid \`opacity\`.`)}),[]);let xe=h;const Ne=(0,react.useRef)(null);if(a){const t=a({content:(null==_e?void 0:_e.getAttribute("data-tooltip-content"))||J||null,activeAnchor:_e});xe=t?react.createElement("div",{ref:Ne,className:"react-tooltip-content-wrapper"},t):null}else J&&(xe=J);ee&&(xe=react.createElement(q,{content:ee}));const $e={forwardRef:Z,id:t,anchorId:r,anchorSelect:n,className:classnames(u,ge),classNameArrow:d,content:xe,contentWrapperRef:Ne,place:oe,variant:le,offset:ce,wrapper:ye,events:we,openOnClick:b,positionStrategy:Se,middlewares:E,delayShow:se,delayHide:ue,float:pe,hidden:me,noArrow:k,clickable:C,closeOnEsc:L,closeOnScroll:R,closeOnResize:x,openEvents:N,closeEvents:$,globalCloseEvents:j,imperativeModeOnly:B,style:z,position:H,isOpen:M,defaultIsOpen:W,border:V,opacity:F,arrowColor:K,setIsOpen:U,afterShow:X,afterHide:Y,activeAnchor:_e,setActiveAnchor:e=>Oe(e),role:G};return react.createElement(D,{...$e})}));"undefined"!=typeof window&&window.addEventListener("react-tooltip-inject-styles",(e=>{e.detail.disableCore||react_tooltip_min_S({css:`:root{--rt-color-white:#fff;--rt-color-dark:#222;--rt-color-success:#8dc572;--rt-color-error:#be6464;--rt-color-warning:#f0ad4e;--rt-color-info:#337ab7;--rt-opacity:0.9;--rt-transition-show-delay:0.15s;--rt-transition-closing-delay:0.15s}.core-styles-module_tooltip__3vRRp{position:absolute;top:0;left:0;pointer-events:none;opacity:0;will-change:opacity}.core-styles-module_fixed__pcSol{position:fixed}.core-styles-module_arrow__cvMwQ{position:absolute;background:inherit}.core-styles-module_noArrow__xock6{display:none}.core-styles-module_clickable__ZuTTB{pointer-events:auto}.core-styles-module_show__Nt9eE{opacity:var(--rt-opacity);transition:opacity var(--rt-transition-show-delay)ease-out}.core-styles-module_closing__sGnxF{opacity:0;transition:opacity var(--rt-transition-closing-delay)ease-in}`,type:"core"}),e.detail.disableBase||react_tooltip_min_S({css:`
 .styles-module_tooltip__mnnfp{padding:8px 16px;border-radius:3px;font-size:90%;width:max-content}.styles-module_arrow__K0L3T{width:8px;height:8px}[class*='react-tooltip__place-top']>.styles-module_arrow__K0L3T{transform:rotate(45deg)}[class*='react-tooltip__place-right']>.styles-module_arrow__K0L3T{transform:rotate(135deg)}[class*='react-tooltip__place-bottom']>.styles-module_arrow__K0L3T{transform:rotate(225deg)}[class*='react-tooltip__place-left']>.styles-module_arrow__K0L3T{transform:rotate(315deg)}.styles-module_dark__xNqje{background:var(--rt-color-dark);color:var(--rt-color-white)}.styles-module_light__Z6W-X{background-color:var(--rt-color-white);color:var(--rt-color-dark)}.styles-module_success__A2AKt{background-color:var(--rt-color-success);color:var(--rt-color-white)}.styles-module_warning__SCK0X{background-color:var(--rt-color-warning);color:var(--rt-color-white)}.styles-module_error__JvumD{background-color:var(--rt-color-error);color:var(--rt-color-white)}.styles-module_info__BWdHW{background-color:var(--rt-color-info);color:var(--rt-color-white)}`,type:"base"})}));
 
 ;// CONCATENATED MODULE: ./node_modules/@gorhom/portal/node_modules/nanoid/non-secure/index.js
@@ -128073,9 +129881,9 @@ const useNavigation_web_titleChangeEventStream=new Subject();const useNavigation
 ;// CONCATENATED MODULE: ./src/common/hooks/useNavigation/index.ts
 /* harmony default export */ const hooks_useNavigation = (useNavigation_web);
 ;// CONCATENATED MODULE: ./src/common/modules/router/constants/common.ts
-const COMMON_ROUTES={keyStoreUnlock:'unlock',dashboard:'dashboard',getStarted:'get-started',sidePanelNoAccounts:'side-panel-no-accounts',networksConfiguration:'networks-configuration',privacyOptOutsConfiguration:'privacy-opt-outs-configuration',importPrivateKey:'import-private-key',importSmartAccountJson:'import-smart-account-json',importSeedPhrase:'import-recovery-phrase',importExistingAccount:'import-existing-account',ledgerConnect:'ledger-connect',trezorConnect:'trezor-connect',keyStoreSetup:'set-extension-password',accountPersonalize:'account-personalize',accountPicker:'account-picker',onboardingCompleted:'wallet-setup-completed',viewOnlyAccountAdder:'view-only-account-adder',safeImport:'safe-import',safeImportAddress:'safe-import-address',safeImportByOwner:'safe-import-by-owner',qrConnect:'qr-connect',transfer:'transfer',topUpGasTank:'top-up-gas-tank',tokenDetails:'token-details',trendingTokens:'trending-tokens',trendingTokenDetails:'trending-token-details',accountSelect:'account-select',receive:'receive',signAccountOp:'sign-account-op',benzin:'benzin',networks:'networks',swapAndBridge:'swap-and-bridge',menu:'menu',generalSettings:'settings/general',accountsSettings:'settings/accounts',networksSettings:'settings/networks',settingsAbout:'settings/about',settingsTerms:'settings/terms',explore:'explore',exploreSection:'explore/section',signMessage:'sign-message',addChain:'add-chain',watchAsset:'watch-asset',switchAccount:'switch-account',getEncryptionPublicKeyRequest:'get-encryption-public-key-request',decryptRequest:'decryptRequest'};const common_MOBILE_ROUTES=Object.assign({},COMMON_ROUTES,{dappWebView:'explore/webview',qrReader:'qr-reader',migrationOnboarding:'migration-onboarding',importAccountsFromExtension:'import-accounts-from-extension'});const common_WEB_ROUTES=Object.assign({},COMMON_ROUTES,{rewards:'rewards',earn:'earn',transactions:'transactions',signedMessages:'signed-messages',swap:'swap',noConnection:'no-connection',accounts:'accounts',keyStoreEmailRecovery:'extension-password-email-recovery',keyStoreEmailRecoverySetNewPassword:'set-new-extension-password',dappConnectRequest:'dapp-connect-request',authEmailAccount:'auth-email-account',authEmailLogin:'auth-email-login',authEmailRegister:'auth-email-register',devicePasswordSet:'settings/device-password-set',devicePasswordChange:'settings/device-password-change',devicePasswordRecovery:'settings/device-password-recovery',addressBook:'settings/address-book',manageTokens:'settings/manage-tokens',recoveryPhrasesSettings:'settings/recovery-phrases',safeImport:'safe-import',optOuts:'settings/opt-outs',survey:'survey',qrPermission:'qr-permission',exportAccountsToMobile:'export-accounts-to-mobile',importAccountsFromMobile:'import-accounts-from-mobile',internalLogs:'internal/logs'});const ROUTES=Object.assign({},common_MOBILE_ROUTES,common_WEB_ROUTES);const MOBILE_ROOT_ROUTE_PATHS=['/',`/${COMMON_ROUTES.dashboard}`,`/${COMMON_ROUTES.keyStoreUnlock}`,`/${COMMON_ROUTES.getStarted}`];const common_BACK_NAVIGATION_STATE={navDirection:'back'};const FORWARD_NAVIGATION_STATE={navDirection:'forward'};const MOBILE_BACKWARDS_ROUTE_PATHS=[`/${COMMON_ROUTES.keyStoreUnlock}`,`/${COMMON_ROUTES.getStarted}`];const common_ONBOARDING_WEB_ROUTES=[COMMON_ROUTES.getStarted,COMMON_ROUTES.importExistingAccount,COMMON_ROUTES.importPrivateKey,COMMON_ROUTES.importSeedPhrase,COMMON_ROUTES.importSmartAccountJson,COMMON_ROUTES.viewOnlyAccountAdder,COMMON_ROUTES.ledgerConnect,COMMON_ROUTES.trezorConnect,COMMON_ROUTES.keyStoreSetup,COMMON_ROUTES.accountPersonalize,COMMON_ROUTES.accountPicker,COMMON_ROUTES.onboardingCompleted,COMMON_ROUTES.safeImport,COMMON_ROUTES.safeImportAddress,COMMON_ROUTES.safeImportByOwner,COMMON_ROUTES.qrConnect,common_WEB_ROUTES.importAccountsFromMobile,common_MOBILE_ROUTES.importAccountsFromExtension];
+const COMMON_ROUTES={keyStoreUnlock:'unlock',dashboard:'dashboard',getStarted:'get-started',sidePanelNoAccounts:'side-panel-no-accounts',networksConfiguration:'networks-configuration',privacyOptOutsConfiguration:'privacy-opt-outs-configuration',importPrivateKey:'import-private-key',importSmartAccountJson:'import-smart-account-json',importSeedPhrase:'import-recovery-phrase',importExistingAccount:'import-existing-account',ledgerConnect:'ledger-connect',trezorConnect:'trezor-connect',keyStoreSetup:'set-extension-password',accountPersonalize:'account-personalize',accountPicker:'account-picker',onboardingCompleted:'wallet-setup-completed',viewOnlyAccountAdder:'view-only-account-adder',safeImport:'safe-import',safeImportAddress:'safe-import-address',safeImportByOwner:'safe-import-by-owner',qrConnect:'qr-connect',transfer:'transfer',topUpGasTank:'top-up-gas-tank',tokenDetails:'token-details',trendingTokens:'trending-tokens',trendingTokenDetails:'trending-token-details',accountSelect:'account-select',receive:'receive',signAccountOp:'sign-account-op',benzin:'benzin',networks:'networks',swapAndBridge:'swap-and-bridge',menu:'menu',generalSettings:'settings/general',accountsSettings:'settings/accounts',networksSettings:'settings/networks',settingsAbout:'settings/about',settingsTerms:'settings/terms',explore:'explore',exploreSection:'explore/section',walletStaking:'explore/wallet-staking',signMessage:'sign-message',addChain:'add-chain',watchAsset:'watch-asset',switchAccount:'switch-account',getEncryptionPublicKeyRequest:'get-encryption-public-key-request',decryptRequest:'decryptRequest'};const common_MOBILE_ROUTES=Object.assign({},COMMON_ROUTES,{dappWebView:'explore/webview',qrReader:'qr-reader',migrationOnboarding:'migration-onboarding',importAccountsFromExtension:'import-accounts-from-extension'});const common_WEB_ROUTES=Object.assign({},COMMON_ROUTES,{rewards:'rewards',earn:'earn',transactions:'transactions',signedMessages:'signed-messages',swap:'swap',noConnection:'no-connection',accounts:'accounts',keyStoreEmailRecovery:'extension-password-email-recovery',keyStoreEmailRecoverySetNewPassword:'set-new-extension-password',dappConnectRequest:'dapp-connect-request',authEmailAccount:'auth-email-account',authEmailLogin:'auth-email-login',authEmailRegister:'auth-email-register',devicePasswordSet:'settings/device-password-set',devicePasswordChange:'settings/device-password-change',devicePasswordRecovery:'settings/device-password-recovery',addressBook:'settings/address-book',manageTokens:'settings/manage-tokens',recoveryPhrasesSettings:'settings/recovery-phrases',safeImport:'safe-import',optOuts:'settings/opt-outs',survey:'survey',qrPermission:'qr-permission',exportAccountsToMobile:'export-accounts-to-mobile',importAccountsFromMobile:'import-accounts-from-mobile',internalLogs:'internal/logs'});const ROUTES=Object.assign({},common_MOBILE_ROUTES,common_WEB_ROUTES);const MOBILE_ROOT_ROUTE_PATHS=['/',`/${COMMON_ROUTES.dashboard}`,`/${COMMON_ROUTES.keyStoreUnlock}`,`/${COMMON_ROUTES.getStarted}`];const common_BACK_NAVIGATION_STATE={navDirection:'back'};const FORWARD_NAVIGATION_STATE={navDirection:'forward'};const MOBILE_BACKWARDS_ROUTE_PATHS=[`/${COMMON_ROUTES.keyStoreUnlock}`,`/${COMMON_ROUTES.getStarted}`];const common_ONBOARDING_WEB_ROUTES=[COMMON_ROUTES.getStarted,COMMON_ROUTES.importExistingAccount,COMMON_ROUTES.importPrivateKey,COMMON_ROUTES.importSeedPhrase,COMMON_ROUTES.importSmartAccountJson,COMMON_ROUTES.viewOnlyAccountAdder,COMMON_ROUTES.ledgerConnect,COMMON_ROUTES.trezorConnect,COMMON_ROUTES.keyStoreSetup,COMMON_ROUTES.accountPersonalize,COMMON_ROUTES.accountPicker,COMMON_ROUTES.onboardingCompleted,COMMON_ROUTES.safeImport,COMMON_ROUTES.safeImportAddress,COMMON_ROUTES.safeImportByOwner,COMMON_ROUTES.qrConnect,common_WEB_ROUTES.importAccountsFromMobile,common_MOBILE_ROUTES.importAccountsFromExtension];
 ;// CONCATENATED MODULE: ./src/common/components/AccountAddress/AccountAddress.tsx
-const{isSidePanel: AccountAddress_isSidePanel}=uiType_web_getUiType();const ReceiveButton=(0,react.memo)(function ReceiveButton({address,fontSize}){const[bindAnim,animStyle]=useHover_useHover({preset:'opacityInverted'});const{navigate}=hooks_useNavigation();const handleReceive=(0,react.useCallback)(async()=>{navigate(common_WEB_ROUTES.receive,{state:{address}});},[navigate,address]);const size=(0,react.useMemo)(()=>fontSize+8,[fontSize]);return (0,jsx_runtime.jsx)(AnimatedPressable,Object.assign({onPress:handleReceive,style:[styles_spacings.mlTy,animStyle]},bindAnim,{children:(0,jsx_runtime.jsx)(svg_ReceiveIcon,{width:size,height:size,strokeWidth:size<24?'1.5':'1.2'})}));});const AccountAddress=({isLoading,name,type,updatedAt,isFetched,address,plainAddressMaxLength=42,addressHighlight,withCopy=true,fontSize=12,containerStyle={},withReceive=false,withWrap=false,withUpdateEnsInTooltip=false})=>{const{t}=useTranslation();const{theme}=hooks_useTheme();const effectiveIsLoading=isLoading&&!addressHighlight;const showResolvedName=!!name&&!addressHighlight;const showNoEnsData=isFetched===false&&!effectiveIsLoading&&!addressHighlight;const isEnsOlderThanOneDay=updatedAt?Date.now()-updatedAt>24*60*60*1000:false;const shouldShowFullAddressOnWeb=!AccountAddress_isSidePanel&&env_isWeb&&plainAddressMaxLength>=42&&!showResolvedName&&!effectiveIsLoading&&!showNoEnsData;const nameTooltipContent=(0,react.useMemo)(()=>{if(!name)return'';if(!updatedAt)return name;return`${name} (${t('Updated {{timeAgo}}',{timeAgo:getTimeAgo(new Date(updatedAt))})})`;},[name,updatedAt,t]);const getWithCopyMaxLength=()=>{if(addressHighlight||withWrap)return 42;if(!env_isMobile)return 16;return showResolvedName?13:42;};return (0,jsx_runtime.jsx)(exports_View/* default */.Z,{style:[{flexShrink:1,minWidth:0,maxWidth:'100%'},shouldShowFullAddressOnWeb&&{width:'100%',alignSelf:'stretch'},containerStyle],testID:"address",children:showResolvedName||effectiveIsLoading||showNoEnsData?(0,jsx_runtime.jsxs)(exports_View/* default */.Z,{style:[utils_flexbox.directionRow,utils_flexbox.alignCenter,withWrap?utils_flexbox.wrap:{flexShrink:1,minWidth:0,maxWidth:'100%'}],children:[showResolvedName?(0,jsx_runtime.jsxs)(jsx_runtime.Fragment,{children:[(0,jsx_runtime.jsx)(Avatar_DomainBadge,{name:name,type:type,color:isEnsOlderThanOneDay?theme.iconPrimary:undefined}),(0,jsx_runtime.jsx)(components_Text,{fontSize:fontSize,weight:"semiBold",appearance:isEnsOlderThanOneDay?'secondaryText':'primary',numberOfLines:1,style:[styles_spacings.mrMi,{flexShrink:1,minWidth:0}],dataSet:createGlobalTooltipDataSet({id:`account-address-resolved-name-${address}`,content:nameTooltipContent}),children:name})]}):effectiveIsLoading?(0,jsx_runtime.jsx)(components_Text,{fontSize:12,appearance:"secondaryText",children:t('Resolving domain...')}):showNoEnsData?(0,jsx_runtime.jsx)(exports_View/* default */.Z,{style:Object.assign({zIndex:2},styles_spacings.mrMi),dataSet:createGlobalTooltipDataSet({id:`account-address-no-ens-${address}`,content:t(`No ENS data.${withUpdateEnsInTooltip?' Select the account to update':''}`)}),children:(0,jsx_runtime.jsx)(svg_EnsIcon,{width:16,height:16,color:theme.iconPrimary,state:"none"})}):null,withCopy?(0,jsx_runtime.jsx)(jsx_runtime.Fragment,{children:(0,jsx_runtime.jsx)(AccountAddress_PlainAddressWithCopy,{maxLength:getWithCopyMaxLength(),address:address,fontSize:fontSize,withWrap:withWrap,highlight:addressHighlight,children:withReceive&&(0,jsx_runtime.jsx)(ReceiveButton,{address:address,fontSize:fontSize})})}):(0,jsx_runtime.jsxs)(jsx_runtime.Fragment,{children:[(0,jsx_runtime.jsx)(AccountAddress_PlainAddress,{maxLength:env_isMobile?13:16,address:address,style:Object.assign({},styles_spacings.mlMi,AccountAddress_isSidePanel?{flexShrink:0}:{}),fontSize:fontSize,withWrap:withWrap,highlight:addressHighlight}),withReceive&&(0,jsx_runtime.jsx)(ReceiveButton,{address:address,fontSize:fontSize})]})]}):withCopy?(0,jsx_runtime.jsx)(jsx_runtime.Fragment,{children:(0,jsx_runtime.jsx)(AccountAddress_PlainAddressWithCopy,{maxLength:plainAddressMaxLength,address:address,hideParentheses:true,fontSize:fontSize,withWrap:withWrap,highlight:addressHighlight,children:withReceive&&(0,jsx_runtime.jsx)(ReceiveButton,{address:address,fontSize:fontSize})})}):(0,jsx_runtime.jsxs)(exports_View/* default */.Z,{style:[utils_flexbox.directionRow],children:[(0,jsx_runtime.jsx)(AccountAddress_PlainAddress,{maxLength:plainAddressMaxLength,address:address,hideParentheses:true,fontSize:fontSize,withWrap:withWrap,highlight:addressHighlight}),withReceive&&(0,jsx_runtime.jsx)(ReceiveButton,{address:address,fontSize:fontSize})]})});};/* harmony default export */ const AccountAddress_AccountAddress = ((0,react.memo)(AccountAddress));
+const{isSidePanel: AccountAddress_isSidePanel}=uiType_web_getUiType();const ReceiveButton=(0,react.memo)(function ReceiveButton({address,fontSize}){const[bindAnim,animStyle]=useHover_useHover({preset:'opacityInverted'});const{navigate}=hooks_useNavigation();const handleReceive=(0,react.useCallback)(async()=>{navigate(common_WEB_ROUTES.receive,{state:{address}});},[navigate,address]);const size=(0,react.useMemo)(()=>fontSize+8,[fontSize]);return (0,jsx_runtime.jsx)(AnimatedPressable,Object.assign({onPress:handleReceive,style:[styles_spacings.mlTy,animStyle]},bindAnim,{children:(0,jsx_runtime.jsx)(svg_ReceiveIcon,{width:size,height:size,strokeWidth:size<24?'1.5':'1.2'})}));});const AccountAddress=({isLoading,name,type,updatedAt,isFetched,address,plainAddressMaxLength=42,addressHighlight,withCopy=true,fontSize=12,containerStyle={},withReceive=false,withWrap=false,withUpdateEnsInTooltip=false})=>{const{t}=useTranslation();const{theme}=hooks_useTheme();const effectiveIsLoading=isLoading&&!addressHighlight;const showResolvedName=!!name&&!addressHighlight;const showNoEnsData=isFetched===false&&!effectiveIsLoading&&!addressHighlight;const isEnsOlderThanOneDay=updatedAt?Date.now()-updatedAt>24*60*60*1000:false;const shouldShowFullAddressOnWeb=!AccountAddress_isSidePanel&&env_isWeb&&plainAddressMaxLength>=42&&!showResolvedName&&!effectiveIsLoading&&!showNoEnsData;const nameTooltipContent=(0,react.useMemo)(()=>{if(!name)return'';if(!updatedAt)return name;return`${name} (${t('Updated {{timeAgo}}',{timeAgo:getTimeAgo(new Date(updatedAt))})})`;},[name,updatedAt,t]);const getWithCopyMaxLength=()=>{if(addressHighlight||withWrap)return 42;if(!env_isMobile)return showResolvedName&&AccountAddress_isSidePanel?10:16;return showResolvedName?13:42;};return (0,jsx_runtime.jsx)(exports_View/* default */.Z,{style:[{flexShrink:1,minWidth:0,maxWidth:'100%'},shouldShowFullAddressOnWeb&&{width:'100%',alignSelf:'stretch'},containerStyle],testID:"address",children:showResolvedName||effectiveIsLoading||showNoEnsData?(0,jsx_runtime.jsxs)(exports_View/* default */.Z,{style:[utils_flexbox.directionRow,utils_flexbox.alignCenter,withWrap?utils_flexbox.wrap:{flexShrink:1,minWidth:0,maxWidth:'100%'}],children:[showResolvedName?(0,jsx_runtime.jsxs)(jsx_runtime.Fragment,{children:[(0,jsx_runtime.jsx)(Avatar_DomainBadge,{name:name,type:type,color:isEnsOlderThanOneDay?theme.iconPrimary:undefined}),(0,jsx_runtime.jsx)(components_Text,{fontSize:fontSize,weight:"semiBold",appearance:isEnsOlderThanOneDay?'secondaryText':'primary',numberOfLines:1,style:[styles_spacings.mrMi,{flexShrink:1,minWidth:0}],dataSet:createGlobalTooltipDataSet({id:`account-address-resolved-name-${address}`,content:nameTooltipContent}),children:name})]}):effectiveIsLoading?(0,jsx_runtime.jsx)(components_Text,{fontSize:12,appearance:"secondaryText",children:t('Resolving domain...')}):showNoEnsData?(0,jsx_runtime.jsx)(exports_View/* default */.Z,{style:Object.assign({zIndex:2},styles_spacings.mrMi),dataSet:createGlobalTooltipDataSet({id:`account-address-no-ens-${address}`,content:t(`No ENS data.${withUpdateEnsInTooltip?' Select the account to update':''}`)}),children:(0,jsx_runtime.jsx)(svg_EnsIcon,{width:16,height:16,color:theme.iconPrimary,state:"none"})}):null,withCopy?(0,jsx_runtime.jsx)(jsx_runtime.Fragment,{children:(0,jsx_runtime.jsx)(AccountAddress_PlainAddressWithCopy,{maxLength:getWithCopyMaxLength(),address:address,fontSize:fontSize,withWrap:withWrap,highlight:addressHighlight,children:withReceive&&(0,jsx_runtime.jsx)(ReceiveButton,{address:address,fontSize:fontSize})})}):(0,jsx_runtime.jsxs)(jsx_runtime.Fragment,{children:[(0,jsx_runtime.jsx)(AccountAddress_PlainAddress,{maxLength:env_isMobile?13:16,address:address,style:Object.assign({},styles_spacings.mlMi,AccountAddress_isSidePanel?{flexShrink:0}:{}),fontSize:fontSize,withWrap:withWrap,highlight:addressHighlight}),withReceive&&(0,jsx_runtime.jsx)(ReceiveButton,{address:address,fontSize:fontSize})]})]}):withCopy?(0,jsx_runtime.jsx)(jsx_runtime.Fragment,{children:(0,jsx_runtime.jsx)(AccountAddress_PlainAddressWithCopy,{maxLength:plainAddressMaxLength,address:address,hideParentheses:true,fontSize:fontSize,withWrap:withWrap,highlight:addressHighlight,children:withReceive&&(0,jsx_runtime.jsx)(ReceiveButton,{address:address,fontSize:fontSize})})}):(0,jsx_runtime.jsxs)(exports_View/* default */.Z,{style:[utils_flexbox.directionRow],children:[(0,jsx_runtime.jsx)(AccountAddress_PlainAddress,{maxLength:plainAddressMaxLength,address:address,hideParentheses:true,fontSize:fontSize,withWrap:withWrap,highlight:addressHighlight}),withReceive&&(0,jsx_runtime.jsx)(ReceiveButton,{address:address,fontSize:fontSize})]})});};/* harmony default export */ const AccountAddress_AccountAddress = ((0,react.memo)(AccountAddress));
 ;// CONCATENATED MODULE: ./src/common/components/AccountAddress/index.ts
 /* harmony default export */ const components_AccountAddress = (AccountAddress_AccountAddress);
 ;// CONCATENATED MODULE: ./src/common/assets/svg/Metamask/MetamaskIcon.tsx
@@ -131102,7 +132910,7 @@ var selectOrdinal = function selectOrdinal() {
 ;// CONCATENATED MODULE: ./src/common/config/localization/localization.ts
 i18next.use(initReactI18next).init({compatibilityJSON:'v3',lng:Locale.EN,fallbackLng:Locale.EN,supportedLngs:Object.values(Locale),defaultNS:'app',resources:{[Locale.EN]:{app:en_namespaceObject},[Locale.BG]:{app:bg_namespaceObject}},interpolation:{escapeValue:false}});const localization_changeLanguage=locale=>i18n.changeLanguage(locale);/* harmony default export */ const localization_localization = (i18next);
 ;// CONCATENATED MODULE: ./src/common/modules/router/config/routesConfig/routesConfig.ts
-const routesConfig_routesConfig={[ROUTES.keyStoreUnlock]:{route:ROUTES.keyStoreUnlock,title:localization_localization.t('Welcome Back'),name:localization_localization.t('Welcome Back')},[ROUTES.noConnection]:{route:ROUTES.noConnection,title:localization_localization.t('No Connection'),name:localization_localization.t('No Connection')},[ROUTES.getStarted]:{route:ROUTES.getStarted,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Onboarding')},[ROUTES.sidePanelNoAccounts]:{route:ROUTES.sidePanelNoAccounts,title:localization_localization.t('No accounts'),name:localization_localization.t('No accounts')},[ROUTES.importExistingAccount]:{route:ROUTES.importExistingAccount,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Select Import Method')},[ROUTES.ledgerConnect]:{route:ROUTES.ledgerConnect,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Connect Ledger')},[ROUTES.trezorConnect]:{route:ROUTES.trezorConnect,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Connect Trezor')},[ROUTES.authEmailAccount]:{route:ROUTES.authEmailAccount,title:localization_localization.t('Email Account'),name:localization_localization.t('Email Account')},[ROUTES.authEmailLogin]:{route:ROUTES.authEmailLogin,title:localization_localization.t('Email Login'),name:localization_localization.t('Email Login')},[ROUTES.authEmailRegister]:{route:ROUTES.authEmailRegister,title:localization_localization.t('Email Register'),name:localization_localization.t('Email Register')},[ROUTES.keyStoreSetup]:{route:ROUTES.keyStoreSetup,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Extension Password Setup')},[ROUTES.keyStoreEmailRecovery]:{route:ROUTES.keyStoreEmailRecovery,title:localization_localization.t('Restore Extension Password'),name:localization_localization.t('Restore Extension Password')},[ROUTES.keyStoreEmailRecoverySetNewPassword]:{route:ROUTES.keyStoreEmailRecoverySetNewPassword,title:localization_localization.t('Set New Extension Password'),name:localization_localization.t('Set New Extension Password')},[ROUTES.accountPicker]:{route:ROUTES.accountPicker,title:localization_localization.t('Add Account'),name:localization_localization.t('Add Account')},[ROUTES.accountPersonalize]:{route:ROUTES.accountPersonalize,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Account Personalization')},[ROUTES.viewOnlyAccountAdder]:{route:ROUTES.viewOnlyAccountAdder,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Watch an address')},[ROUTES.dashboard]:{route:ROUTES.dashboard,title:localization_localization.t('Dashboard'),name:localization_localization.t('Dashboard')},[ROUTES.signAccountOp]:{route:ROUTES.signAccountOp,title:localization_localization.t('Transaction Builder'),name:localization_localization.t('Transaction Builder')},[ROUTES.transfer]:{route:ROUTES.transfer,title:localization_localization.t('Send'),name:localization_localization.t('Send'),withTitlePrefix:false},[ROUTES.transactions]:{route:ROUTES.transactions,title:localization_localization.t('Transaction History'),name:localization_localization.t('Transaction History')},[ROUTES.signMessage]:{route:ROUTES.signMessage,title:localization_localization.t('Sign Message'),name:localization_localization.t('Sign Message')},[ROUTES.dappConnectRequest]:{route:ROUTES.dappConnectRequest,title:localization_localization.t('Webpage Wants to Connect'),name:localization_localization.t('Webpage Wants to Connect')},[ROUTES.explore]:{route:ROUTES.explore,title:localization_localization.t('Explore'),name:localization_localization.t('Explore')},[ROUTES.exploreSection]:{route:ROUTES.exploreSection,title:localization_localization.t('Explore'),name:localization_localization.t('Explore')},[ROUTES.watchAsset]:{route:ROUTES.watchAsset,title:localization_localization.t('Webpage Wants to Add Token'),name:localization_localization.t('Webpage Wants to Add Token')},[ROUTES.menu]:{route:ROUTES.menu,title:localization_localization.t('Menu'),name:localization_localization.t('Menu')},[ROUTES.getEncryptionPublicKeyRequest]:{route:ROUTES.getEncryptionPublicKeyRequest,title:localization_localization.t('Get Encryption Public Key Request'),name:localization_localization.t('Get Encryption Public Key Request')},[ROUTES.decryptRequest]:{route:ROUTES.getEncryptionPublicKeyRequest,title:localization_localization.t('Decrypt Request'),name:localization_localization.t('Decrypt Request')},[ROUTES.swap]:{route:ROUTES.swap,title:localization_localization.t('Swap'),name:localization_localization.t('Swap')},[ROUTES.accountSelect]:{route:ROUTES.accountSelect,title:localization_localization.t('Accounts'),name:localization_localization.t('Accounts')},[ROUTES.importPrivateKey]:{route:ROUTES.importPrivateKey,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Import Private Key')},[ROUTES.importSeedPhrase]:{route:ROUTES.importSeedPhrase,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Import Recovery Phrase')},[ROUTES.importSmartAccountJson]:{route:ROUTES.importSmartAccountJson,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Import Smart Account JSON')},[ROUTES.onboardingCompleted]:{route:ROUTES.onboardingCompleted,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Ready To Use')},[ROUTES.topUpGasTank]:{route:ROUTES.topUpGasTank,title:localization_localization.t('Top Up Gas Tank'),name:localization_localization.t('Top Up Gas Tank')},[ROUTES.swapAndBridge]:{route:ROUTES.swapAndBridge,title:localization_localization.t('Swap and Bridge'),name:localization_localization.t('Swap and Bridge'),withTitlePrefix:false},[ROUTES.generalSettings]:{route:ROUTES.generalSettings,title:localization_localization.t('General Settings'),name:localization_localization.t('General Settings')},[ROUTES.internalLogs]:{route:ROUTES.internalLogs,title:localization_localization.t('Debug Logs'),name:localization_localization.t('Debug Logs')},[ROUTES.accountsSettings]:{route:ROUTES.accountsSettings,title:localization_localization.t('Accounts Settings'),name:localization_localization.t('Accounts Settings')},[ROUTES.networksSettings]:{route:ROUTES.networksSettings,title:localization_localization.t('Networks'),name:localization_localization.t('Networks')},[ROUTES.signedMessages]:{route:ROUTES.signedMessages,title:localization_localization.t('Signed Messages History'),name:localization_localization.t('Signed Messages History')},[ROUTES.devicePasswordSet]:{route:ROUTES.devicePasswordSet,title:localization_localization.t('Set Extension Password'),name:localization_localization.t('Set Extension Password')},[ROUTES.devicePasswordChange]:{route:ROUTES.devicePasswordChange,title:localization_localization.t('Change Extension Password'),name:localization_localization.t('Change Extension Password')},[ROUTES.devicePasswordRecovery]:{route:ROUTES.devicePasswordRecovery,title:localization_localization.t('Recover Extension Password'),name:localization_localization.t('Recover Extension Password')},[ROUTES.manageTokens]:{route:ROUTES.manageTokens,title:localization_localization.t('Manage Tokens'),name:localization_localization.t('Manage Tokens')},[ROUTES.addressBook]:{route:ROUTES.addressBook,title:localization_localization.t('Address Book'),name:localization_localization.t('Address Book')},[ROUTES.settingsTerms]:{route:ROUTES.settingsTerms,title:localization_localization.t('Terms of Service'),name:localization_localization.t('Terms of Service')},[ROUTES.settingsAbout]:{route:ROUTES.settingsAbout,title:localization_localization.t('About'),name:localization_localization.t('About')},[ROUTES.benzin]:{route:ROUTES.benzin,title:localization_localization.t('Explorer'),name:localization_localization.t('Explorer')},[ROUTES.switchAccount]:{route:ROUTES.switchAccount,title:localization_localization.t('Switch Account'),name:localization_localization.t('Switch Account')},[ROUTES.dappConnectRequest]:{route:ROUTES.dappConnectRequest,title:localization_localization.t('App Connect Request'),name:localization_localization.t('App Connect Request')},[ROUTES.addChain]:{route:ROUTES.addChain,title:localization_localization.t('Add Chain'),name:localization_localization.t('Add Chain')},[ROUTES.networks]:{route:ROUTES.networks,title:localization_localization.t('Networks'),name:localization_localization.t('Networks')},[ROUTES.rewards]:{route:ROUTES.rewards,title:localization_localization.t('Ambire Rewards'),name:localization_localization.t('Ambire Rewards')},[ROUTES.receive]:{route:ROUTES.receive,title:localization_localization.t('Receive assets'),name:localization_localization.t('Receive assets')},[ROUTES.qrConnect]:{route:ROUTES.qrConnect,title:localization_localization.t('Connect QR wallet'),name:localization_localization.t('Connect QR wallet')},[ROUTES.qrPermission]:{route:ROUTES.qrPermission,title:localization_localization.t('Camera permission'),name:localization_localization.t('Camera permission')},[ROUTES.exportAccountsToMobile]:{route:ROUTES.exportAccountsToMobile,title:localization_localization.t('Export accounts to mobile'),name:localization_localization.t('Export accounts to mobile')},[ROUTES.importAccountsFromMobile]:{route:ROUTES.importAccountsFromMobile,title:localization_localization.t('Import from mobile'),name:localization_localization.t('Import from mobile')},[ROUTES.importAccountsFromExtension]:{route:ROUTES.importAccountsFromExtension,title:localization_localization.t('Import from extension'),name:localization_localization.t('Import from extension')}};/* harmony default export */ const config_routesConfig_routesConfig = ((/* unused pure expression or super */ null && (routesConfig_routesConfig)));
+const routesConfig_routesConfig={[ROUTES.keyStoreUnlock]:{route:ROUTES.keyStoreUnlock,title:localization_localization.t('Welcome Back'),name:localization_localization.t('Welcome Back')},[ROUTES.noConnection]:{route:ROUTES.noConnection,title:localization_localization.t('No Connection'),name:localization_localization.t('No Connection')},[ROUTES.getStarted]:{route:ROUTES.getStarted,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Onboarding')},[ROUTES.sidePanelNoAccounts]:{route:ROUTES.sidePanelNoAccounts,title:localization_localization.t('No accounts'),name:localization_localization.t('No accounts')},[ROUTES.importExistingAccount]:{route:ROUTES.importExistingAccount,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Select Import Method')},[ROUTES.ledgerConnect]:{route:ROUTES.ledgerConnect,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Connect Ledger')},[ROUTES.trezorConnect]:{route:ROUTES.trezorConnect,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Connect Trezor')},[ROUTES.authEmailAccount]:{route:ROUTES.authEmailAccount,title:localization_localization.t('Email Account'),name:localization_localization.t('Email Account')},[ROUTES.authEmailLogin]:{route:ROUTES.authEmailLogin,title:localization_localization.t('Email Login'),name:localization_localization.t('Email Login')},[ROUTES.authEmailRegister]:{route:ROUTES.authEmailRegister,title:localization_localization.t('Email Register'),name:localization_localization.t('Email Register')},[ROUTES.keyStoreSetup]:{route:ROUTES.keyStoreSetup,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Extension Password Setup')},[ROUTES.keyStoreEmailRecovery]:{route:ROUTES.keyStoreEmailRecovery,title:localization_localization.t('Restore Extension Password'),name:localization_localization.t('Restore Extension Password')},[ROUTES.keyStoreEmailRecoverySetNewPassword]:{route:ROUTES.keyStoreEmailRecoverySetNewPassword,title:localization_localization.t('Set New Extension Password'),name:localization_localization.t('Set New Extension Password')},[ROUTES.accountPicker]:{route:ROUTES.accountPicker,title:localization_localization.t('Add Account'),name:localization_localization.t('Add Account')},[ROUTES.accountPersonalize]:{route:ROUTES.accountPersonalize,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Account Personalization')},[ROUTES.viewOnlyAccountAdder]:{route:ROUTES.viewOnlyAccountAdder,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Watch an address')},[ROUTES.dashboard]:{route:ROUTES.dashboard,title:localization_localization.t('Dashboard'),name:localization_localization.t('Dashboard')},[ROUTES.signAccountOp]:{route:ROUTES.signAccountOp,title:localization_localization.t('Transaction Builder'),name:localization_localization.t('Transaction Builder')},[ROUTES.transfer]:{route:ROUTES.transfer,title:localization_localization.t('Send'),name:localization_localization.t('Send'),withTitlePrefix:false},[ROUTES.transactions]:{route:ROUTES.transactions,title:localization_localization.t('Transaction History'),name:localization_localization.t('Transaction History')},[ROUTES.signMessage]:{route:ROUTES.signMessage,title:localization_localization.t('Sign Message'),name:localization_localization.t('Sign Message')},[ROUTES.dappConnectRequest]:{route:ROUTES.dappConnectRequest,title:localization_localization.t('Webpage Wants to Connect'),name:localization_localization.t('Webpage Wants to Connect')},[ROUTES.explore]:{route:ROUTES.explore,title:localization_localization.t('Explore'),name:localization_localization.t('Explore')},[ROUTES.exploreSection]:{route:ROUTES.exploreSection,title:localization_localization.t('Explore'),name:localization_localization.t('Explore')},[ROUTES.walletStaking]:{route:ROUTES.walletStaking,title:localization_localization.t('$WALLET Staking'),name:localization_localization.t('$WALLET Staking'),withTitlePrefix:false},[ROUTES.watchAsset]:{route:ROUTES.watchAsset,title:localization_localization.t('Webpage Wants to Add Token'),name:localization_localization.t('Webpage Wants to Add Token')},[ROUTES.menu]:{route:ROUTES.menu,title:localization_localization.t('Menu'),name:localization_localization.t('Menu')},[ROUTES.getEncryptionPublicKeyRequest]:{route:ROUTES.getEncryptionPublicKeyRequest,title:localization_localization.t('Get Encryption Public Key Request'),name:localization_localization.t('Get Encryption Public Key Request')},[ROUTES.decryptRequest]:{route:ROUTES.getEncryptionPublicKeyRequest,title:localization_localization.t('Decrypt Request'),name:localization_localization.t('Decrypt Request')},[ROUTES.swap]:{route:ROUTES.swap,title:localization_localization.t('Swap'),name:localization_localization.t('Swap')},[ROUTES.accountSelect]:{route:ROUTES.accountSelect,title:localization_localization.t('Accounts'),name:localization_localization.t('Accounts')},[ROUTES.importPrivateKey]:{route:ROUTES.importPrivateKey,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Import Private Key')},[ROUTES.importSeedPhrase]:{route:ROUTES.importSeedPhrase,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Import Recovery Phrase')},[ROUTES.importSmartAccountJson]:{route:ROUTES.importSmartAccountJson,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Import Smart Account JSON')},[ROUTES.onboardingCompleted]:{route:ROUTES.onboardingCompleted,title:localization_localization.t('Welcome to Ambire Wallet'),name:localization_localization.t('Ready To Use')},[ROUTES.topUpGasTank]:{route:ROUTES.topUpGasTank,title:localization_localization.t('Top Up Gas Tank'),name:localization_localization.t('Top Up Gas Tank')},[ROUTES.swapAndBridge]:{route:ROUTES.swapAndBridge,title:localization_localization.t('Swap and Bridge'),name:localization_localization.t('Swap and Bridge'),withTitlePrefix:false},[ROUTES.generalSettings]:{route:ROUTES.generalSettings,title:localization_localization.t('General Settings'),name:localization_localization.t('General Settings')},[ROUTES.internalLogs]:{route:ROUTES.internalLogs,title:localization_localization.t('Debug Logs'),name:localization_localization.t('Debug Logs')},[ROUTES.accountsSettings]:{route:ROUTES.accountsSettings,title:localization_localization.t('Accounts Settings'),name:localization_localization.t('Accounts Settings')},[ROUTES.networksSettings]:{route:ROUTES.networksSettings,title:localization_localization.t('Networks'),name:localization_localization.t('Networks')},[ROUTES.signedMessages]:{route:ROUTES.signedMessages,title:localization_localization.t('Signed Messages History'),name:localization_localization.t('Signed Messages History')},[ROUTES.devicePasswordSet]:{route:ROUTES.devicePasswordSet,title:localization_localization.t('Set Extension Password'),name:localization_localization.t('Set Extension Password')},[ROUTES.devicePasswordChange]:{route:ROUTES.devicePasswordChange,title:localization_localization.t('Change Extension Password'),name:localization_localization.t('Change Extension Password')},[ROUTES.devicePasswordRecovery]:{route:ROUTES.devicePasswordRecovery,title:localization_localization.t('Recover Extension Password'),name:localization_localization.t('Recover Extension Password')},[ROUTES.manageTokens]:{route:ROUTES.manageTokens,title:localization_localization.t('Manage Tokens'),name:localization_localization.t('Manage Tokens')},[ROUTES.addressBook]:{route:ROUTES.addressBook,title:localization_localization.t('Address Book'),name:localization_localization.t('Address Book')},[ROUTES.settingsTerms]:{route:ROUTES.settingsTerms,title:localization_localization.t('Terms of Service'),name:localization_localization.t('Terms of Service')},[ROUTES.settingsAbout]:{route:ROUTES.settingsAbout,title:localization_localization.t('About'),name:localization_localization.t('About')},[ROUTES.benzin]:{route:ROUTES.benzin,title:localization_localization.t('Explorer'),name:localization_localization.t('Explorer')},[ROUTES.switchAccount]:{route:ROUTES.switchAccount,title:localization_localization.t('Switch Account'),name:localization_localization.t('Switch Account')},[ROUTES.dappConnectRequest]:{route:ROUTES.dappConnectRequest,title:localization_localization.t('App Connect Request'),name:localization_localization.t('App Connect Request')},[ROUTES.addChain]:{route:ROUTES.addChain,title:localization_localization.t('Add Chain'),name:localization_localization.t('Add Chain')},[ROUTES.networks]:{route:ROUTES.networks,title:localization_localization.t('Networks'),name:localization_localization.t('Networks')},[ROUTES.rewards]:{route:ROUTES.rewards,title:localization_localization.t('Ambire Rewards'),name:localization_localization.t('Ambire Rewards')},[ROUTES.receive]:{route:ROUTES.receive,title:localization_localization.t('Receive assets'),name:localization_localization.t('Receive assets')},[ROUTES.qrConnect]:{route:ROUTES.qrConnect,title:localization_localization.t('Connect QR wallet'),name:localization_localization.t('Connect QR wallet')},[ROUTES.qrPermission]:{route:ROUTES.qrPermission,title:localization_localization.t('Camera permission'),name:localization_localization.t('Camera permission')},[ROUTES.exportAccountsToMobile]:{route:ROUTES.exportAccountsToMobile,title:localization_localization.t('Export accounts to mobile'),name:localization_localization.t('Export accounts to mobile')},[ROUTES.importAccountsFromMobile]:{route:ROUTES.importAccountsFromMobile,title:localization_localization.t('Import from mobile'),name:localization_localization.t('Import from mobile')},[ROUTES.importAccountsFromExtension]:{route:ROUTES.importAccountsFromExtension,title:localization_localization.t('Import from extension'),name:localization_localization.t('Import from extension')}};/* harmony default export */ const config_routesConfig_routesConfig = ((/* unused pure expression or super */ null && (routesConfig_routesConfig)));
 ;// CONCATENATED MODULE: ./src/common/modules/router/config/routesConfig/index.ts
 /* harmony default export */ const config_routesConfig = ((/* unused pure expression or super */ null && (routesConfig)));
 // EXTERNAL MODULE: ./node_modules/react-native-web/dist/exports/FlatList/index.js + 3 modules
@@ -136565,7 +138373,7 @@ const{max: helpers_web_max,min: helpers_web_min,abs,sqrt,round: helpers_web_roun
     </g>
 </svg>`);
 ;// CONCATENATED MODULE: ./src/common/components/GlassView/GlassView.web.tsx
-const GlassView_web_GlassView=({children,cssStyle,testID,tintColor1,tintColor2,shineColor,borderRadius=BORDER_RADIUS_PRIMARY,blurAmount=4,isSimpleBlur=true})=>{const{themeType}=hooks_useTheme();const divRef=(0,react.useRef)(null);const specularRef=(0,react.useRef)(null);const shineBase=shineColor||(themeType===types_THEME_TYPES.LIGHT?'#ffffff':'#96A1B1');const customProperties=(0,react.useMemo)(()=>Object.assign({'--glass-tint-color-1':tintColor1||hexToRgba('#96A1B1',0.16),'--glass-tint-color-2':tintColor2||hexToRgba('#96A1B1',0.06),'--glass-blur-amount':`${blurAmount}px`,fontSize:`${borderRadius}px`,borderRadius},cssStyle),[tintColor1,tintColor2,blurAmount,borderRadius,cssStyle]);(0,react.useLayoutEffect)(()=>{const el=divRef.current;if(!el)return;const buildSpecularOpts=(w,h)=>({width:w,height:h,radius:borderRadius,bezelWidth:7,lightAngleDeg:225,strength:shineColor?1:themeType===types_THEME_TYPES.DARK?1.25:2.5,tintHex:shineBase});const applyBackdropFilter=displacementUrl=>{let filter;if(engine!=='webkit'||isSimpleBlur||!displacementUrl){filter=`blur(${blurAmount}px)`;}else{const brightness=themeType===types_THEME_TYPES.DARK?1.1:1;const saturate=themeType===types_THEME_TYPES.DARK?1.5:1;filter=`blur(${blurAmount/2}px) url('${displacementUrl}') blur(${blurAmount}px) brightness(${brightness}) saturate(${saturate})`;}el.style.backdropFilter=filter;};const computeDisplacementUrl=(w,h)=>{if(engine!=='webkit'||isSimpleBlur)return null;return getCachedDisplacementFilter({width:w,height:h,radius:borderRadius,depth:2,strength:themeType===types_THEME_TYPES.DARK?100:25,chromaticAberration:3});};const applySpecular=(w,h)=>{const opts=buildSpecularOpts(w,h);const cached=getCachedSpecularMap(opts);const dataUrl=cached??generateSpecularMap(opts);if(!cached)setCachedSpecularMap(opts,dataUrl);if(specularRef.current)specularRef.current.style.backgroundImage=`url(${dataUrl})`;};const w0=el.offsetWidth;const h0=el.offsetHeight;if(w0&&h0){applySpecular(w0,h0);applyBackdropFilter(computeDisplacementUrl(w0,h0));}const observer=new ResizeObserver(entries=>{const entry=entries[0];if(!entry)return;const{width,height}=entry.contentRect;if(width&&height){applySpecular(width,height);applyBackdropFilter(computeDisplacementUrl(width,height));}});observer.observe(el);return()=>{observer.disconnect();};},[borderRadius,themeType,shineBase,shineColor,isSimpleBlur,blurAmount]);return (0,jsx_runtime.jsxs)("div",{ref:divRef,className:"liquidGlass",style:customProperties,"data-testid":testID,children:[children,(0,jsx_runtime.jsx)("div",{ref:specularRef,className:"specular-shine"})]});};/* harmony default export */ const GlassView_web = (GlassView_web_GlassView);
+const GlassView_web_GlassView=({children,cssStyle,testID,tintColor1,tintColor2,shineColor,borderRadius=BORDER_RADIUS_PRIMARY,blurAmount=4,isSimpleBlur=true})=>{const{themeType}=hooks_useTheme();const divRef=(0,react.useRef)(null);const specularRef=(0,react.useRef)(null);const shineBase=shineColor||(themeType===types_THEME_TYPES.LIGHT?'#ffffff':'#96A1B1');const customProperties=(0,react.useMemo)(()=>Object.assign({'--glass-tint-color-1':tintColor1||hexToRgba('#96A1B1',0.16),'--glass-tint-color-2':tintColor2||hexToRgba('#96A1B1',0.06),'--glass-blur-amount':`${blurAmount}px`,fontSize:`${borderRadius}px`,borderRadius},cssStyle),[tintColor1,tintColor2,blurAmount,borderRadius,cssStyle]);(0,react.useLayoutEffect)(()=>{const el=divRef.current;if(!el)return;const buildSpecularOpts=(w,h)=>({width:w,height:h,radius:borderRadius,bezelWidth:7,lightAngleDeg:225,strength:shineColor?1:themeType===types_THEME_TYPES.DARK?1.25:2.5,tintHex:shineBase});const applyBackdropFilter=displacementUrl=>{let filter;if(engine!=='webkit'||isSimpleBlur||!displacementUrl){filter=`blur(${blurAmount}px)`;}else{const brightness=themeType===types_THEME_TYPES.DARK?1.1:1;const saturate=themeType===types_THEME_TYPES.DARK?1.5:1;filter=`blur(${blurAmount/2}px) url('${displacementUrl}') blur(${blurAmount}px) brightness(${brightness}) saturate(${saturate})`;}el.style.backdropFilter=filter;};const computeDisplacementUrl=(w,h)=>{if(engine!=='webkit'||isSimpleBlur)return null;return getCachedDisplacementFilter({width:w,height:h,radius:borderRadius,depth:2,strength:themeType===types_THEME_TYPES.DARK?100:25,chromaticAberration:3});};const applySpecular=(w,h)=>{const opts=buildSpecularOpts(w,h);const cached=getCachedSpecularMap(opts);const dataUrl=cached??generateSpecularMap(opts);if(!cached)setCachedSpecularMap(opts,dataUrl);if(specularRef.current)specularRef.current.style.backgroundImage=`url(${dataUrl})`;};const w0=el.offsetWidth;const h0=el.offsetHeight;if(w0&&h0){applySpecular(w0,h0);applyBackdropFilter(computeDisplacementUrl(w0,h0));}const observer=new ResizeObserver(entries=>{const entry=entries[0];if(!entry)return;const borderBox=entry.borderBoxSize?.[0];const width=borderBox?.inlineSize??el.offsetWidth;const height=borderBox?.blockSize??el.offsetHeight;if(width&&height){applySpecular(width,height);applyBackdropFilter(computeDisplacementUrl(width,height));}});observer.observe(el);return()=>{observer.disconnect();};},[borderRadius,themeType,shineBase,shineColor,isSimpleBlur,blurAmount]);return (0,jsx_runtime.jsxs)("div",{ref:divRef,className:"liquidGlass",style:customProperties,"data-testid":testID,children:[children,(0,jsx_runtime.jsx)("div",{ref:specularRef,className:"specular-shine"})]});};/* harmony default export */ const GlassView_web = (GlassView_web_GlassView);
 ;// CONCATENATED MODULE: ./src/common/components/GlassView/index.ts
 /* harmony default export */ const components_GlassView = (GlassView_web);
 ;// CONCATENATED MODULE: ./src/common/components/FooterGlassView/FooterGlassView.tsx
@@ -136605,7 +138413,7 @@ const Header_Header_Header=({activeStep,network,topContent})=>{const{styles}=hoo
 // EXTERNAL MODULE: ./node_modules/react-native-web/dist/exports/useWindowDimensions/index.js
 var useWindowDimensions = __webpack_require__(578);
 ;// CONCATENATED MODULE: ./src/ambire-common/src/services/socket/constants.ts
-const ZERO_ADDRESS='0x0000000000000000000000000000000000000000';const NULL_ADDRESS='0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee';const ETH_ON_OPTIMISM_LEGACY_ADDRESS='0xdeaddeaddeaddeaddeaddeaddeaddeaddead0000';const FEE_PERCENT=0.5;const AMBIRE_FEE_TAKER_ADDRESSES={143:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',324:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',480:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',1101:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',5000:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',34443:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',43114:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',59144:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',534352:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',1313161554:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',81457:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',1:'0xDCe4f65Aa650B3FaFEa9892E807C1770d6e9c618',10:'0xDA1c734b7843f18E9B1A25Bb997A45975315C001',137:'0xDA1c734b7843f18E9B1A25Bb997A45975315C001',8453:'0xDA1c734b7843f18E9B1A25Bb997A45975315C001',56:'0xDA1c734b7843f18E9B1A25Bb997A45975315C001',42161:'0xDA1c734b7843f18E9B1A25Bb997A45975315C001',100:'0xDA1c734b7843f18E9B1A25Bb997A45975315C001',7777777:'0xDA1c734b7843f18E9B1A25Bb997A45975315C001',4326:'0x942f9CE5D9a33a82F88D233AEb3292E680230348'};const PROTOCOLS_WITH_CONTRACT_FEE_IN_NATIVE=(/* unused pure expression or super */ null && (['stargate','stargate-v2','arbitrum-bridge','zksync-native','Stargate V2','Stargate']));
+const ZERO_ADDRESS='0x0000000000000000000000000000000000000000';const NULL_ADDRESS='0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee';const ETH_ON_OPTIMISM_LEGACY_ADDRESS='0xdeaddeaddeaddeaddeaddeaddeaddeaddead0000';const AMBIRE_FEE_TAKER_ADDRESSES={143:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',324:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',480:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',1101:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',5000:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',34443:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',43114:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',59144:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',534352:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',1313161554:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',81457:'0x942f9CE5D9a33a82F88D233AEb3292E680230348',1:'0xDCe4f65Aa650B3FaFEa9892E807C1770d6e9c618',10:'0xDA1c734b7843f18E9B1A25Bb997A45975315C001',137:'0xDA1c734b7843f18E9B1A25Bb997A45975315C001',8453:'0xDA1c734b7843f18E9B1A25Bb997A45975315C001',56:'0xDA1c734b7843f18E9B1A25Bb997A45975315C001',42161:'0xDA1c734b7843f18E9B1A25Bb997A45975315C001',100:'0xDA1c734b7843f18E9B1A25Bb997A45975315C001',7777777:'0xDA1c734b7843f18E9B1A25Bb997A45975315C001',4326:'0x942f9CE5D9a33a82F88D233AEb3292E680230348'};const PROTOCOLS_WITH_CONTRACT_FEE_IN_NATIVE=(/* unused pure expression or super */ null && (['stargate','stargate-v2','arbitrum-bridge','zksync-native','Stargate V2','Stargate']));
 ;// CONCATENATED MODULE: ./src/common/components/Spinner/spinner-animation.json
 const spinner_animation_namespaceObject = JSON.parse('{"nm":"loader for public","ddd":0,"h":246,"w":246,"meta":{"g":"LottieFiles AE 0.1.21"},"layers":[{"ty":4,"nm":"Shape Layer 1","sr":1,"st":0,"op":300,"ip":0,"hd":false,"ddd":0,"bm":0,"hasMask":false,"td":1,"ao":0,"ks":{"a":{"a":0,"k":[3.002,-217.775,0],"ix":1},"s":{"a":0,"k":[100,100,100],"ix":6},"sk":{"a":0,"k":0},"p":{"a":0,"k":[3.002,-217.775,0],"ix":2},"r":{"a":1,"k":[{"o":{"x":0.167,"y":0.167},"i":{"x":0.833,"y":0.833},"s":[0],"t":0},{"s":[360],"t":90}],"ix":10},"sa":{"a":0,"k":0},"o":{"a":0,"k":100,"ix":11}},"ef":[],"shapes":[{"ty":"gr","bm":0,"hd":false,"mn":"ADBE Vector Group","nm":"Ellipse 1","ix":1,"cix":2,"np":3,"it":[{"ty":"el","bm":0,"hd":false,"mn":"ADBE Vector Shape - Ellipse","nm":"Ellipse Path 1","d":1,"p":{"a":0,"k":[0,0],"ix":3},"s":{"a":0,"k":[239.598,239.598],"ix":2}},{"ty":"st","bm":0,"hd":false,"mn":"ADBE Vector Graphic - Stroke","nm":"Stroke 1","lc":2,"lj":1,"ml":4,"o":{"a":0,"k":100,"ix":4},"w":{"a":0,"k":28,"ix":5},"c":{"a":0,"k":[1,1,1],"ix":3}},{"ty":"tr","a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"sk":{"a":0,"k":0,"ix":4},"p":{"a":0,"k":[3.002,-217.775],"ix":2},"r":{"a":0,"k":0,"ix":6},"sa":{"a":0,"k":0,"ix":5},"o":{"a":0,"k":100,"ix":7}}]},{"ty":"tm","bm":0,"hd":false,"mn":"ADBE Vector Filter - Trim","nm":"Trim Paths 1","ix":2,"e":{"a":1,"k":[{"o":{"x":0.333,"y":0},"i":{"x":0.667,"y":1},"s":[10],"t":0},{"s":[70],"t":44.25}],"ix":2},"o":{"a":1,"k":[{"o":{"x":0.167,"y":0.167},"i":{"x":0.833,"y":0.833},"s":[0],"t":0},{"s":[144],"t":90}],"ix":3},"s":{"a":1,"k":[{"o":{"x":0.333,"y":0},"i":{"x":0.667,"y":1},"s":[0],"t":44.25},{"s":[60],"t":90}],"ix":1},"m":1}],"ind":1,"parent":2},{"ty":4,"nm":"color","sr":1,"st":0,"op":300,"ip":0,"hd":false,"ddd":0,"bm":0,"tt":1,"hasMask":false,"ao":0,"ks":{"a":{"a":0,"k":[3.002,-217.775,0],"ix":1},"s":{"a":0,"k":[89.983,89.983,100],"ix":6},"sk":{"a":0,"k":0},"p":{"a":0,"k":[123,123,0],"ix":2},"r":{"a":0,"k":360,"ix":10},"sa":{"a":0,"k":0},"o":{"a":0,"k":100,"ix":11}},"ef":[],"shapes":[{"ty":"gr","bm":0,"hd":false,"mn":"ADBE Vector Group","nm":"Ellipse 1","ix":1,"cix":2,"np":3,"it":[{"ty":"el","bm":0,"hd":false,"mn":"ADBE Vector Shape - Ellipse","nm":"Ellipse Path 1","d":1,"p":{"a":0,"k":[0,0],"ix":3},"s":{"a":0,"k":[239.598,239.598],"ix":2}},{"ty":"gs","bm":0,"hd":false,"mn":"ADBE Vector Graphic - G-Stroke","nm":"Gradient Stroke 1","e":{"a":0,"k":[122.126,120.78],"ix":5},"g":{"p":3,"k":{"a":0,"k":[0,0.15294117647058825,0.9098039215686274,0.6549019607843137,0.5,0.3764705882352941,0,1,1,0.6392156862745098,0.41568627450980394,0.9725490196078431],"ix":8}},"t":1,"a":{"a":0,"k":0},"h":{"a":0,"k":0},"s":{"a":0,"k":[-118.969,-118.703],"ix":4},"lc":2,"lj":1,"ml":4,"o":{"a":0,"k":100,"ix":9},"w":{"a":0,"k":32,"ix":10}},{"ty":"tr","a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"sk":{"a":0,"k":0,"ix":4},"p":{"a":0,"k":[3.002,-217.775],"ix":2},"r":{"a":0,"k":0,"ix":6},"sa":{"a":0,"k":0,"ix":5},"o":{"a":0,"k":100,"ix":7}}]},{"ty":"tm","bm":0,"hd":false,"mn":"ADBE Vector Filter - Trim","nm":"Trim Paths 1","ix":2,"e":{"a":0,"k":100,"ix":2},"o":{"a":0,"k":0,"ix":3},"s":{"a":0,"k":0,"ix":1},"m":1}],"ind":2}],"v":"5.5.7","fr":60,"op":90,"ip":0,"assets":[]}');
 ;// CONCATENATED MODULE: ./src/common/components/Spinner/spinner-black-animation.json
@@ -137247,8 +139055,6 @@ function parseEther(ether) {
     return units_parseUnits(ether, 18);
 }
 
-;// CONCATENATED MODULE: ./src/ambire-common/src/utils/formatDecimals/formatDecimals.ts
-const DECIMAL_RULES={value:{min:2,max:2},price:{min:2,max:2},amount:{min:0,max:2},default:{min:0,max:2},precise:{min:0,max:8},noDecimal:{min:0,max:0}};const TYPES_WITH_DOLLAR_PREFIX=['value','price'];const MAX_SUPPORTED_DECIMALS_BY_FORMATTER=20;const cacheForNumberFormatters={};const getIndexOfFirstNonZeroInDecimals=(value,type)=>{const decimalValue=value.toFixed(value<1?16:2);const valueString=decimalValue.toString();const indexOfDot=valueString.indexOf('.');if(indexOfDot===-1)return 0;const decimals=valueString.slice(indexOfDot+1);const indexOfFirstNonZero=decimals.split('').findIndex(char=>char!=='0');return indexOfFirstNonZero===-1?DECIMAL_RULES[type].min:indexOfFirstNonZero;};const getPrefix=widthDollarPrefix=>widthDollarPrefix?'$':'';const formatDecimals_formatNumber=(value,withDollarPrefix,maxDecimals,sign,type)=>{const minimumFractionDigits=Math.min(DECIMAL_RULES[type].min,maxDecimals);const maximumFractionDigits=Math.min(Math.max(minimumFractionDigits,maxDecimals),MAX_SUPPORTED_DECIMALS_BY_FORMATTER);let keyForCache=`${minimumFractionDigits}:${maximumFractionDigits}`;if(!cacheForNumberFormatters[keyForCache])cacheForNumberFormatters[keyForCache]=new Intl.NumberFormat('en-US',{minimumFractionDigits,maximumFractionDigits,roundingMode:'trunc'});const formatter=cacheForNumberFormatters[keyForCache];const reconstructedStringValue=formatter.format(value);return`${sign}${getPrefix(withDollarPrefix)}${reconstructedStringValue}`;};const formatDecimals_formatDecimals=(value=undefined,type='default')=>{const withDollarPrefix=TYPES_WITH_DOLLAR_PREFIX.includes(type||'');if(value===0){if(type==='amount'||type==='noDecimal')return`${getPrefix(withDollarPrefix)}0`;return`${getPrefix(withDollarPrefix)}0.00`;}if(!value||Number.isNaN(value))return`${getPrefix(withDollarPrefix)}-`;const absoluteValue=Math.abs(value);const sign=value<0?'-':'';if(type==='value'){let decimals=DECIMAL_RULES[type].max;if(absoluteValue<0.01){return`${sign}<$0.01`;}if(absoluteValue>10000){decimals=0;}return formatDecimals_formatNumber(absoluteValue,withDollarPrefix,decimals,sign,type);}if(type==='amount'){if(absoluteValue<0.00001){return`${sign}<0.00001`;}}const indexOfFirstNonZero=getIndexOfFirstNonZeroInDecimals(value,type);const decimals=indexOfFirstNonZero+DECIMAL_RULES[type].max;return formatDecimals_formatNumber(absoluteValue,withDollarPrefix,decimals,sign,type);};/* harmony default export */ const utils_formatDecimals_formatDecimals = (formatDecimals_formatDecimals);
 ;// CONCATENATED MODULE: ./src/common/utils/bigint.ts
 class BigIntMath{static abs(x){return x<0?-x:x;}}
 ;// CONCATENATED MODULE: ./src/common/utils/token.ts
@@ -137484,9 +139290,9 @@ var BehaviorSubject = (function (_super) {
 ;// CONCATENATED MODULE: ./src/common/components/BottomSheet/bottomSheetEventStream.ts
 const bottomSheetCloseEventStream=new Subject();const openBottomSheetsCount=new BehaviorSubject(0);const useOpenBottomSheetsCount=()=>useSyncExternalStore(onChange=>{const subscription=openBottomSheetsCount.subscribe(onChange);return()=>subscription.unsubscribe();},()=>openBottomSheetsCount.value);
 ;// CONCATENATED MODULE: ./src/common/components/BottomSheet/useBottomSheetInternal.ts
-const useBottomSheetInternal_ANIMATION_DURATION=250;const{isPopup: useBottomSheetInternal_isPopup,isMobileApp,isSidePanel: useBottomSheetInternal_isSidePanel}=uiType_web_getUiType();const useBottomSheetInternal=props=>{const{id:_id,type:_type,sheetRef,autoOpen=false,customZIndex}=props;const{closeBottomSheet:_closeBottomSheet=()=>{}}=props;const closeBottomSheet=(0,react.useCallback)(_closeBottomSheet,[_closeBottomSheet]);const{isNarrowSidePanel,isCompactLayout}=useCompactActionRequestLayout_useCompactActionRequestLayout();const defaultType=useBottomSheetInternal_isPopup||isMobileApp||isNarrowSidePanel?'bottom-sheet':'modal';const resolvedType=_type||defaultType;const type=(()=>{if(isNarrowSidePanel&&resolvedType==='modal')return'bottom-sheet';if(useBottomSheetInternal_isSidePanel&&!isCompactLayout&&resolvedType==='bottom-sheet')return'modal';return resolvedType;})();const isModal=type==='modal';const[isOpen,setIsOpen]=(0,react.useState)(false);const prevIsOpen=hooks_usePrevious(isOpen);const[isBackdropVisible,setIsBackdropVisible]=(0,react.useState)(false);const[openCountAtOpenTime,setOpenCountAtOpenTime]=(0,react.useState)(0);const{top}=SafeAreaContext_useSafeAreaInsets();const id=(0,react.useMemo)(()=>`${_id||'bottom-sheet'}-${nanoid(6)}`,[_id]);const autoOpened=(0,react.useRef)(false);const setRef=(0,react.useCallback)(node=>{sheetRef.current=node;if(autoOpen&&sheetRef.current&&!autoOpened.current){sheetRef.current.open();autoOpened.current=!autoOpened.current;}},[autoOpen]);const isOpenRef=(0,react.useRef)(isOpen);(0,react.useEffect)(()=>{isOpenRef.current=isOpen;if(prevIsOpen&&!isOpen){setTimeout(()=>{setIsBackdropVisible(false);},useBottomSheetInternal_ANIMATION_DURATION);}if(isOpen&&!prevIsOpen){setOpenCountAtOpenTime(openBottomSheetsCount.value+1);openBottomSheetsCount.next(openBottomSheetsCount.value+1);}else if(!isOpen&&prevIsOpen){openBottomSheetsCount.next(Math.max(0,openBottomSheetsCount.value-1));}},[id,isOpen,prevIsOpen]);(0,react.useEffect)(()=>{return()=>{if(isOpenRef.current){openBottomSheetsCount.next(Math.max(0,openBottomSheetsCount.value-1));}};},[id]);(0,react.useEffect)(()=>{if(!isOpen)return;const subscription=bottomSheetCloseEventStream.subscribe(()=>{if(isOpen){closeBottomSheet();}});return()=>{subscription.unsubscribe();};},[closeBottomSheet,isOpen]);const modalTopOffset=(0,react.useMemo)(()=>{if(useBottomSheetInternal_isPopup&&isModal)return 0;if(isNarrowSidePanel)return 0;if(env_isWeb)return HEADER_HEIGHT-20;const topOffset=top-spacings_SPACING_SM;return topOffset;},[isModal,isNarrowSidePanel,top]);const computedZIndex=(0,react.useMemo)(()=>{if(customZIndex)return customZIndex;return BOTTOM_SHEET_Z_INDEX+(openCountAtOpenTime-1)*2;},[customZIndex,openCountAtOpenTime]);return{modalTopOffset,setRef,type,isModal,isOpen,setIsOpen,isBackdropVisible,setIsBackdropVisible,id,computedZIndex};};/* harmony default export */ const BottomSheet_useBottomSheetInternal = (useBottomSheetInternal);
+const useBottomSheetInternal_ANIMATION_DURATION=250;const{isPopup: useBottomSheetInternal_isPopup,isMobileApp,isSidePanel: useBottomSheetInternal_isSidePanel}=uiType_web_getUiType();const useBottomSheetInternal=props=>{const{id:_id,type:_type,sheetRef,autoOpen=false,customZIndex,modalTopOffset:customModalTopOffset}=props;const{closeBottomSheet:_closeBottomSheet=()=>{}}=props;const closeBottomSheet=(0,react.useCallback)(_closeBottomSheet,[_closeBottomSheet]);const{isNarrowSidePanel,isCompactLayout}=useCompactActionRequestLayout_useCompactActionRequestLayout();const defaultType=useBottomSheetInternal_isPopup||isMobileApp||isNarrowSidePanel?'bottom-sheet':'modal';const resolvedType=_type||defaultType;const type=(()=>{if(isNarrowSidePanel&&resolvedType==='modal')return'bottom-sheet';if(useBottomSheetInternal_isSidePanel&&!isCompactLayout&&resolvedType==='bottom-sheet')return'modal';return resolvedType;})();const isModal=type==='modal';const[isOpen,setIsOpen]=(0,react.useState)(false);const prevIsOpen=hooks_usePrevious(isOpen);const[isBackdropVisible,setIsBackdropVisible]=(0,react.useState)(false);const[openCountAtOpenTime,setOpenCountAtOpenTime]=(0,react.useState)(0);const{top}=SafeAreaContext_useSafeAreaInsets();const id=(0,react.useMemo)(()=>`${_id||'bottom-sheet'}-${nanoid(6)}`,[_id]);const autoOpened=(0,react.useRef)(false);const setRef=(0,react.useCallback)(node=>{sheetRef.current=node;if(autoOpen&&sheetRef.current&&!autoOpened.current){sheetRef.current.open();autoOpened.current=!autoOpened.current;}},[autoOpen]);const isOpenRef=(0,react.useRef)(isOpen);(0,react.useEffect)(()=>{isOpenRef.current=isOpen;if(prevIsOpen&&!isOpen){setTimeout(()=>{setIsBackdropVisible(false);},useBottomSheetInternal_ANIMATION_DURATION);}if(isOpen&&!prevIsOpen){setOpenCountAtOpenTime(openBottomSheetsCount.value+1);openBottomSheetsCount.next(openBottomSheetsCount.value+1);}else if(!isOpen&&prevIsOpen){openBottomSheetsCount.next(Math.max(0,openBottomSheetsCount.value-1));}},[id,isOpen,prevIsOpen]);(0,react.useEffect)(()=>{return()=>{if(isOpenRef.current){openBottomSheetsCount.next(Math.max(0,openBottomSheetsCount.value-1));}};},[id]);(0,react.useEffect)(()=>{if(!isOpen)return;const subscription=bottomSheetCloseEventStream.subscribe(()=>{if(isOpen){closeBottomSheet();}});return()=>{subscription.unsubscribe();};},[closeBottomSheet,isOpen]);const modalTopOffset=(0,react.useMemo)(()=>{if(customModalTopOffset!==undefined)return customModalTopOffset;if(useBottomSheetInternal_isPopup&&isModal)return 0;if(isNarrowSidePanel)return 0;if(env_isWeb)return HEADER_HEIGHT-20;const topOffset=top-spacings_SPACING_SM;return topOffset;},[customModalTopOffset,isModal,isNarrowSidePanel,top]);const computedZIndex=(0,react.useMemo)(()=>{if(customZIndex)return customZIndex;return BOTTOM_SHEET_Z_INDEX+(openCountAtOpenTime-1)*2;},[customZIndex,openCountAtOpenTime]);return{modalTopOffset,setRef,type,isModal,isOpen,setIsOpen,isBackdropVisible,setIsBackdropVisible,id,computedZIndex};};/* harmony default export */ const BottomSheet_useBottomSheetInternal = (useBottomSheetInternal);
 ;// CONCATENATED MODULE: ./src/common/components/BottomSheet/BottomSheet.web.tsx
-const DEFAULT_ANIMATION_DURATION=250;const{isPopup: BottomSheet_web_isPopup}=uiType_web_getUiType();const BottomSheet=props=>{const{id:_id,type:_type,scrollViewRef:externalScrollViewRef,children,closeBottomSheet:_closeBottomSheet=()=>{},adjustToContentHeight=true,modalHeight,style={},containerInnerWrapperStyles={},onClosed,onOpen,onBackdropPress,HeaderComponent,FooterComponent,flatListProps,sectionListProps,scrollViewProps,animationDuration=DEFAULT_ANIMATION_DURATION,backgroundColor='primaryBackground',autoWidth=false,shouldBeClosableOnDrag=true,withBackdropBlur,customRenderer,customZIndex,isScrollEnabled=true,reserveScrollPadding=false}=props;const{styles,theme}=hooks_useTheme(BottomSheet_styles);const{isScrollable,checkIsScrollable,scrollViewRef:internalScrollViewRef}=hooks_useIsScrollable();const closeBottomSheet=(0,react.useCallback)(_closeBottomSheet,[_closeBottomSheet]);const scrollViewRef=externalScrollViewRef||internalScrollViewRef;const{modalTopOffset,setRef,isModal,isOpen,setIsOpen,isBackdropVisible,setIsBackdropVisible,id,computedZIndex}=BottomSheet_useBottomSheetInternal(props);const shouldUseScrollPadding=isScrollEnabled&&(isScrollable||reserveScrollPadding);const renderContent=(0,react.useCallback)(()=>{if(customRenderer)return null;if(flatListProps){return (0,jsx_runtime.jsx)(exports_View/* default */.Z,{testID:isOpen?'bottom-sheet':undefined,style:[shouldUseScrollPadding?styles_spacings.prTy:{},common.fullWidth,containerInnerWrapperStyles],children:(0,jsx_runtime.jsx)(exports_FlatList/* default */.Z,Object.assign({bounces:false,keyboardShouldPersistTaps:"handled"},flatListProps))});}if(sectionListProps){return (0,jsx_runtime.jsx)(exports_View/* default */.Z,{testID:isOpen?'bottom-sheet':undefined,style:[shouldUseScrollPadding?styles_spacings.prTy:{},common.fullWidth,containerInnerWrapperStyles],children:(0,jsx_runtime.jsx)(exports_SectionList/* default */.Z,Object.assign({bounces:false,keyboardShouldPersistTaps:"handled"},sectionListProps))});}return (0,jsx_runtime.jsx)(exports_View/* default */.Z,{testID:isOpen?'bottom-sheet':undefined,style:[shouldUseScrollPadding?styles_spacings.prTy:{},common.fullWidth,containerInnerWrapperStyles],children:children});},[children,containerInnerWrapperStyles,customRenderer,flatListProps,isOpen,sectionListProps,shouldUseScrollPadding]);return (0,jsx_runtime.jsx)(Portal,{hostName:"global",children:(0,jsx_runtime.jsx)(BottomSheetContext.Provider,{value:true,children:(0,jsx_runtime.jsxs)(exports_View/* default */.Z,{style:[styles.portalHost,{zIndex:computedZIndex}],children:[!!isBackdropVisible&&(0,jsx_runtime.jsx)(BottomSheet_Backdrop,{isVisible:isBackdropVisible,isBottomSheetVisible:isOpen,customZIndex:computedZIndex?computedZIndex-1:undefined,onPress:()=>{closeBottomSheet();!!onBackdropPress&&onBackdropPress();},withBlur:withBackdropBlur}),(0,jsx_runtime.jsx)(react_native_modalize_lib.Modalize,Object.assign({ref:setRef,contentRef:scrollViewRef,modalStyle:[styles.bottomSheet,isModal?Object.assign({},styles.modal,autoWidth?{maxWidth:null,width:'auto'}:{}):{},{paddingHorizontal:env_isWeb?isModal?spacings_SPACING_MD:spacings_SPACING_SM:SPACING,backgroundColor:theme[backgroundColor]},style],rootStyle:[BottomSheet_web_isPopup&&isModal?styles_spacings.phSm:{}],handleStyle:[styles.dragger,isModal?{display:'none'}:{}],handlePosition:"inside",useNativeDriver:false,avoidKeyboardLikeIOS:true,modalTopOffset:modalTopOffset,modalHeight:modalHeight,threshold:90,HeaderComponent:HeaderComponent,FooterComponent:FooterComponent,adjustToContentHeight:customRenderer?false:adjustToContentHeight,disableScrollIfPossible:false,withOverlay:false,onBackButtonPress:()=>{closeBottomSheet();return true;},panGestureEnabled:shouldBeClosableOnDrag},!flatListProps&&!sectionListProps?{scrollViewProps:Object.assign({bounces:false,keyboardShouldPersistTaps:'handled'},!isScrollEnabled&&{scrollEnabled:false,nestedScrollEnabled:true,contentContainerStyle:{flex:1}},scrollViewProps||{})}:{},{openAnimationConfig:{timing:{duration:animationDuration,delay:0}},closeAnimationConfig:{timing:{duration:animationDuration,delay:0}},onLayout:checkIsScrollable,onOpen:()=>{setIsOpen(true);setIsBackdropVisible(true);!!onOpen&&onOpen();},onClose:()=>setIsOpen(false),onClosed:()=>!!onClosed&&onClosed(),customRenderer:customRenderer?(0,jsx_runtime.jsx)(exports_View/* default */.Z,{testID:isOpen?'bottom-sheet':undefined,style:[shouldUseScrollPadding?styles_spacings.prTy:{},common.fullWidth,{flex:1},containerInnerWrapperStyles],children:customRenderer}):undefined,children:renderContent()}),id)]},`portal-host-${id}`)})});};/* harmony default export */ const BottomSheet_web = (react.memo(BottomSheet));
+const DEFAULT_ANIMATION_DURATION=250;const{isPopup: BottomSheet_web_isPopup}=uiType_web_getUiType();const BottomSheet=props=>{const{id:_id,type:_type,scrollViewRef:externalScrollViewRef,children,closeBottomSheet:_closeBottomSheet=()=>{},adjustToContentHeight=true,modalHeight,style={},containerInnerWrapperStyles={},onClosed,onOpen,onBackdropPress,HeaderComponent,FooterComponent,flatListProps,sectionListProps,scrollViewProps,animationDuration=DEFAULT_ANIMATION_DURATION,backgroundColor='primaryBackground',autoWidth=false,shouldBeClosableOnDrag=true,withBackdropBlur,customRenderer,customZIndex,isScrollEnabled=true,reserveScrollPadding=false}=props;const{styles,theme}=hooks_useTheme(BottomSheet_styles);const{isScrollable,checkIsScrollable,scrollViewRef:internalScrollViewRef}=hooks_useIsScrollable();const closeBottomSheet=(0,react.useCallback)(_closeBottomSheet,[_closeBottomSheet]);const scrollViewRef=externalScrollViewRef||internalScrollViewRef;const{modalTopOffset,setRef,isModal,isOpen,setIsOpen,isBackdropVisible,setIsBackdropVisible,id,computedZIndex}=BottomSheet_useBottomSheetInternal(props);const shouldUseScrollPadding=isScrollEnabled&&(isScrollable||reserveScrollPadding);const renderContent=(0,react.useCallback)(()=>{if(customRenderer)return null;if(flatListProps){return (0,jsx_runtime.jsx)(exports_View/* default */.Z,{testID:isOpen?'bottom-sheet':undefined,style:[shouldUseScrollPadding?styles_spacings.prTy:{},common.fullWidth,containerInnerWrapperStyles],children:(0,jsx_runtime.jsx)(exports_FlatList/* default */.Z,Object.assign({bounces:false,keyboardShouldPersistTaps:"handled"},flatListProps))});}if(sectionListProps){return (0,jsx_runtime.jsx)(exports_View/* default */.Z,{testID:isOpen?'bottom-sheet':undefined,style:[shouldUseScrollPadding?styles_spacings.prTy:{},common.fullWidth,containerInnerWrapperStyles],children:(0,jsx_runtime.jsx)(exports_SectionList/* default */.Z,Object.assign({bounces:false,keyboardShouldPersistTaps:"handled"},sectionListProps))});}return (0,jsx_runtime.jsx)(exports_View/* default */.Z,{testID:isOpen?'bottom-sheet':undefined,style:[shouldUseScrollPadding?styles_spacings.prTy:{},common.fullWidth,containerInnerWrapperStyles],children:children});},[children,containerInnerWrapperStyles,customRenderer,flatListProps,isOpen,sectionListProps,shouldUseScrollPadding]);return (0,jsx_runtime.jsx)(Portal,{hostName:"global",children:(0,jsx_runtime.jsx)(BottomSheetContext.Provider,{value:true,children:(0,jsx_runtime.jsxs)(exports_View/* default */.Z,{style:[styles.portalHost,{zIndex:computedZIndex}],children:[!!isBackdropVisible&&(0,jsx_runtime.jsx)(BottomSheet_Backdrop,{isVisible:isBackdropVisible,isBottomSheetVisible:isOpen,customZIndex:computedZIndex?computedZIndex-1:undefined,onPress:()=>{closeBottomSheet();!!onBackdropPress&&onBackdropPress();},withBlur:withBackdropBlur}),(0,jsx_runtime.jsx)(react_native_modalize_lib.Modalize,Object.assign({ref:setRef,contentRef:scrollViewRef,modalStyle:[styles.bottomSheet,isModal?Object.assign({},styles.modal,autoWidth?{maxWidth:null,width:'auto'}:{}):{},{paddingHorizontal:env_isWeb?isModal?spacings_SPACING_MD:spacings_SPACING_SM:SPACING,backgroundColor:theme[backgroundColor]},style],rootStyle:[BottomSheet_web_isPopup&&isModal?styles_spacings.phSm:{}],handleStyle:[styles.dragger,isModal?{display:'none'}:{}],handlePosition:"inside",useNativeDriver:false,avoidKeyboardLikeIOS:true,modalTopOffset:modalTopOffset,modalHeight:modalHeight,threshold:90,HeaderComponent:HeaderComponent,FooterComponent:FooterComponent,adjustToContentHeight:customRenderer?false:adjustToContentHeight,disableScrollIfPossible:false,withOverlay:false,onBackButtonPress:()=>{closeBottomSheet();return true;},panGestureEnabled:shouldBeClosableOnDrag},!flatListProps&&!sectionListProps?{scrollViewProps:Object.assign({bounces:false,keyboardShouldPersistTaps:'handled'},!isScrollEnabled&&{scrollEnabled:false,nestedScrollEnabled:true,contentContainerStyle:{flex:1}},scrollViewProps||{})}:{},{openAnimationConfig:{timing:{duration:animationDuration,delay:0}},closeAnimationConfig:{timing:{duration:animationDuration,delay:0}},onLayout:checkIsScrollable,onOpen:()=>{setIsOpen(true);setIsBackdropVisible(true);!!onOpen&&onOpen();},onClose:()=>setIsOpen(false),onClosed:()=>!!onClosed&&onClosed(),customRenderer:customRenderer?(0,jsx_runtime.jsx)(exports_View/* default */.Z,{testID:isOpen?'bottom-sheet':undefined,style:[shouldUseScrollPadding?styles_spacings.prTy:{},common.fullWidth,{flex:1},containerInnerWrapperStyles],children:customRenderer}):undefined,children:renderContent()}),id)]},`portal-host-${id}`)},id)});};/* harmony default export */ const BottomSheet_web = (react.memo(BottomSheet));
 ;// CONCATENATED MODULE: ./src/common/components/BottomSheet/index.tsx
 /* harmony default export */ const components_BottomSheet = (BottomSheet_web);
 ;// CONCATENATED MODULE: ./src/common/modules/header/components/Header/index.ts
@@ -137584,7 +139390,7 @@ const numbers_N = BigInt("0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd2
  *
  *  (**i.e.** ``1000000000000000000n``)
  */
-const WeiPerEther = BigInt("1000000000000000000");
+const numbers_WeiPerEther = BigInt("1000000000000000000");
 /**
  *  A constant for the maximum value for a ``uint256``.
  *
