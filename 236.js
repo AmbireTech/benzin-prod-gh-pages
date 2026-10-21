@@ -36,7 +36,7 @@ class OffchainLookupError extends base/* BaseError */.G {
                 'Offchain Gateway Call:',
                 urls && [
                     '  Gateway URL(s):',
-                    ...urls.map((url) => `    ${(0,utils/* getUrl */.G)(url)}`),
+                    ...urls.map((url) => `    ${(0,utils/* getUrl */.Gr)(url)}`),
                 ],
                 `  Sender: ${sender}`,
                 `  Data: ${data}`,
@@ -51,7 +51,7 @@ class OffchainLookupResponseMalformedError extends base/* BaseError */.G {
     constructor({ result, url }) {
         super('Offchain gateway response is malformed. Response data must be a hex value.', {
             metaMessages: [
-                `Gateway URL: ${(0,utils/* getUrl */.G)(url)}`,
+                `Gateway URL: ${(0,utils/* getUrl */.Gr)(url)}`,
                 `Response: ${(0,stringify/* stringify */.P)(result)}`,
             ],
             name: 'OffchainLookupResponseMalformedError',
@@ -95,6 +95,7 @@ var localBatchGatewayRequest = __webpack_require__(3544);
 
 
 
+
 const offchainLookupSignature = '0x556f1830';
 const offchainLookupAbiItem = {
     name: 'OffchainLookup',
@@ -122,7 +123,7 @@ const offchainLookupAbiItem = {
         },
     ],
 };
-async function offchainLookup(client, { blockNumber, blockTag, data, to, }) {
+async function offchainLookup(client, { blockNumber, blockTag, data, requestOptions, to, }) {
     const { args } = (0,decodeErrorResult/* decodeErrorResult */.p)({
         data,
         abi: [offchainLookupAbiItem],
@@ -138,9 +139,9 @@ async function offchainLookup(client, { blockNumber, blockTag, data, to, }) {
         const result = urls.includes(localBatchGatewayRequest/* localBatchGatewayUrl */.M)
             ? await (0,localBatchGatewayRequest/* localBatchGatewayRequest */.w)({
                 data: callData,
-                ccipRequest: ccipRequest_,
+                ccipRequest: (parameters) => ccipRequest_({ ...parameters, requestOptions }),
             })
-            : await ccipRequest_({ data: callData, sender, urls });
+            : await ccipRequest_({ data: callData, requestOptions, sender, urls });
         const { data: data_ } = await (0,call/* call */.R)(client, {
             blockNumber,
             blockTag,
@@ -148,11 +149,16 @@ async function offchainLookup(client, { blockNumber, blockTag, data, to, }) {
                 callbackSelector,
                 (0,encodeAbiParameters/* encodeAbiParameters */.E)([{ type: 'bytes' }, { type: 'bytes' }], [result, extraData]),
             ]),
+            requestOptions,
             to,
         });
         return data_;
     }
     catch (err) {
+        if (requestOptions?.signal?.aborted)
+            throw (0,utils/* getAbortError */.lR)(requestOptions.signal);
+        if ((0,utils/* isAbortError */.D_)(err))
+            throw err;
         throw new OffchainLookupError({
             callbackSelector,
             cause: err,
@@ -163,9 +169,11 @@ async function offchainLookup(client, { blockNumber, blockTag, data, to, }) {
         });
     }
 }
-async function ccipRequest({ data, sender, urls, }) {
+async function ccipRequest({ data, requestOptions, sender, urls, }) {
     let error = new Error('An unknown error occurred.');
     for (let i = 0; i < urls.length; i++) {
+        if (requestOptions?.signal?.aborted)
+            throw (0,utils/* getAbortError */.lR)(requestOptions.signal);
         const url = urls[i];
         const method = url.includes('{data}') ? 'GET' : 'POST';
         const body = method === 'POST' ? { data, sender } : undefined;
@@ -175,6 +183,7 @@ async function ccipRequest({ data, sender, urls, }) {
                 body: JSON.stringify(body),
                 headers,
                 method,
+                ...(requestOptions?.signal ? { signal: requestOptions.signal } : {}),
             });
             let result;
             if (response.headers.get('Content-Type')?.startsWith('application/json')) {
@@ -205,6 +214,10 @@ async function ccipRequest({ data, sender, urls, }) {
             return result;
         }
         catch (err) {
+            if (requestOptions?.signal?.aborted)
+                throw (0,utils/* getAbortError */.lR)(requestOptions.signal);
+            if ((0,utils/* isAbortError */.D_)(err))
+                throw err;
             error = new request/* HttpRequestError */.Gg({
                 body,
                 details: err.message,
