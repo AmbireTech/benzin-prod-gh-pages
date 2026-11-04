@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.1d1290fa.css",
+    "main.css": "/static/css/main.e19a7ceb.css",
     "main.js": "/main.js",
     "236.js": "/236.js",
     "gradient-2560.png": "/gradient-2560-13fdde60.png",
@@ -83,12 +83,12 @@
     "robots.txt": "/robots.txt",
     "main.css.map": "/main.css.map",
     "main.js.map": "/main.js.map",
-    "main.1d1290fa.css.map": "/static/css/main.1d1290fa.css.map",
+    "main.e19a7ceb.css.map": "/static/css/main.e19a7ceb.css.map",
     "236.js.map": "/236.js.map"
   },
   "entrypoints": [
     "main.css",
     "main.js",
-    "static/css/main.1d1290fa.css"
+    "static/css/main.e19a7ceb.css"
   ]
 }
